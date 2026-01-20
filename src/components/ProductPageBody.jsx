@@ -155,7 +155,6 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
     setCategories(uniqueCategories);
   }, [catagoryProducts.products, products?.products]);
 
-
   const handleSortChange = (event) => {
     const selectedSort = event.target.value;
     setSortOption(selectedSort);
@@ -181,18 +180,13 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
     { value: "priceLowToHigh", label: "Price: Low to High" },
     { value: "priceHighToLow", label: "Price: High to Low" }
   ];
-
   const selectedLabel = sortOptions.find(option => option.value === sortOption)?.label;
-
-
   useEffect(() => {
     filterColor();
     filterSizes();
     filterBrands();
     filterCategory();
   }, [filterColor, filterSizes, filterBrands, filterCategory]);
-
-
 
   const formattedCategory = categorySlug
     ? catagoryProducts.category_data?.category_name
@@ -249,9 +243,9 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
 
             <div
               className={`${!openFilter ? 'hidden' : 'fixed'} filterOptions md:flex 
-            flex-col gap-4 h-[65vh] md:h-[80vh] overflow-scroll z-[80] md:z-0 bg-white w-full 
-            md:w-auto left-0 rounded-ss-3xl rounded-se-2xl md:rounded-none bottom-0
-             scrollbar-none pt-4 p-10 md:px-0 md:pb-0`}>
+                flex-col gap-4 h-[65vh] md:h-[80vh] overflow-scroll z-[80] md:z-0 bg-white w-full 
+                md:w-auto left-0 rounded-ss-3xl rounded-se-2xl md:rounded-none bottom-0
+                scrollbar-none pt-4 p-10 md:px-0 md:pb-0`}>
               <div className="flex justify-between items-center md:hidden my-3">
                 <div
                   className="filterTitle text-lg text-black 
@@ -287,7 +281,6 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                   </div>
                 </div>
               )}
-
               <hr />
               {sizes && (
                 <div>
@@ -395,7 +388,6 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
 
             </div>
           </div>
-
 
           {/* Product Listing */}
 

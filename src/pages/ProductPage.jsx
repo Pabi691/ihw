@@ -50,13 +50,19 @@ function ProductPage({ showAll }) {
     fetchProducts();
   }, [fetchProducts]);
 
+  const safeTitle =
+  showAll
+    ? 'All Products'
+    : typeof categorySlug === 'object'
+      ? categorySlug?.title
+      : categorySlug;
+
   // Show a loading indicator before the data is available
   if (loading) {
     return (
       <TryAgainButton />
     );
   }
-
   if (!products) {
     return (
       <NotFound />
@@ -73,7 +79,7 @@ function ProductPage({ showAll }) {
         </MainLayOut>
       </div>
       <div className='md:hidden'>
-        <MobileMainLayout ProductsCount={`${productLength} products`} title={showAll ? 'All Products' : categorySlug}>
+        <MobileMainLayout ProductsCount={`${productLength} products`} title={safeTitle}>
           {(catagoryProducts || products) && (
             <ProductPageBody products={products} catagoryProducts={catagoryProducts} categorySlug={showAll ? null : categorySlug} />
           )}

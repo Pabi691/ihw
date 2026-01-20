@@ -5,7 +5,7 @@ import { useAuth } from '../../user/AuthContext';
 import { useGlobal } from '../../../global/GlobalContext';
 import { BiChevronLeft } from 'react-icons/bi';
 
-const MobileHeader = ({title, ProductsCount, link}) => {
+const MobileHeader = ({ title, ProductsCount, link }) => {
   const { userToken, logout } = useAuth();
   const { cart, wishlist } = useGlobal();
   const navigate = useNavigate();
@@ -23,18 +23,24 @@ const MobileHeader = ({title, ProductsCount, link}) => {
             <button className='text-xl z-40' onClick={() => navigate(-1)}>
               <BiChevronLeft />
             </button>
-              <div className='text-xs font-medium flex flex-col gap-1 title_top'>
-                  
-                  {link?(<Link to={link}>{title}</Link>):{title}}
-                  {ProductsCount && (
-                    <span className='text-[10px] font-light'>{ProductsCount}</span>
-                  )}
-                  
-              </div>
+            <div className='text-xs font-medium flex flex-col gap-1 title_top'>
+
+              {link ? (
+                <Link to={link}>
+                  {typeof title === 'object' ? title?.title : title}
+                </Link>
+              ) : (
+                typeof title === 'object' ? title?.title : title
+              )}
+              {ProductsCount && (
+                <span className='text-[10px] font-light'>{ProductsCount}</span>
+              )}
+
+            </div>
           </div>
-          
+
           {/* mobile end */}
- 
+
           <div className="flex items-center gap-5">
             <div className="hidden md:flex">
               {userToken ? (
@@ -42,17 +48,17 @@ const MobileHeader = ({title, ProductsCount, link}) => {
                   <div className="relative font-bold text-gray-800 group">
                     <Link to={'/myaccount'}>
                       <FaUser />
-                    </Link>                    
-                    
+                    </Link>
+
                     <span className="hidden group-hover:block top-full left-0 border bg-white absolute p-2">
                       <Link className="text-black text-sm font-light text-nowrap" to={'/myaccount'}>My Account</Link>
-                        <button
-                          onClick={logout}
-                          className="text-black text-sm font-light"
-                        >
-                          Logout
-                        </button>
-                    </span>                  
+                      <button
+                        onClick={logout}
+                        className="text-black text-sm font-light"
+                      >
+                        Logout
+                      </button>
+                    </span>
                   </div>
                 </div>
               ) : (
@@ -70,7 +76,7 @@ const MobileHeader = ({title, ProductsCount, link}) => {
             </Link>
 
             <Link to="/cart" className="relative">
-              <FaBagShopping className='text-black'  />
+              <FaBagShopping className='text-black' />
               {cartCount > 0 && (
                 <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-xs text-black border bg-white rounded-full w-4 h-4 flex items-center justify-center">
                   {cartCount}
@@ -78,7 +84,7 @@ const MobileHeader = ({title, ProductsCount, link}) => {
               )}
             </Link>
           </div>
-          
+
         </div>
       </header>
     </>

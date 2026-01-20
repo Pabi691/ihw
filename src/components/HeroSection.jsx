@@ -9,7 +9,6 @@ import { ImageService } from "../content/image-service";
 import { toast } from "react-toastify";
 
 const HeroSection = () => {
-
   const [bannerImages, setBannerImages] = useState([]);
   // const [imageLoading, setImageLoading] = useState(false);
 
@@ -25,7 +24,7 @@ const HeroSection = () => {
       toast.error('Failed to load images.');
     }
     // setImageLoading(false);
-  }, []);
+  }, [setBannerImages]);
 
   useEffect(() => {
     fetchBannerImages();
