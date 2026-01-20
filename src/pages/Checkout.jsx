@@ -416,26 +416,24 @@ const Checkout = () => {
       modal: {
         escape: true,
         ondismiss: async function () {
-          // Send payment cancelled status to backend
-          try {
-            const res = await axios.post(
-              `${process.env.REACT_APP_API_URL}/api/v1/add_order_payment`,
-              {
-                order_id: orderId,
-                payment_method: "razorpay",
-                payment_status: "cancelled",
-                payment_amount: amount,
-                payment_reference: null,
-                payment_details: JSON.stringify({ message: "Payment was cancelled or dismissed by user" }),
-              },
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            );
-            // console.log('Cancelled payment logged:', res.data);
-          } catch (err) {
-            console.error("Failed to notify server about cancellation:", err);
-          }
+          // try {
+          //   const res = await axios.post(
+          //     `${process.env.REACT_APP_API_URL}/api/v1/add_order_payment`,
+          //     {
+          //       order_id: orderId,
+          //       payment_method: "razorpay",
+          //       payment_status: "cancelled",
+          //       payment_amount: amount,
+          //       payment_reference: null,
+          //       payment_details: JSON.stringify({ message: "Payment was cancelled or dismissed by user" }),
+          //     },
+          //     {
+          //       headers: { Authorization: `Bearer ${token}` },
+          //     }
+          //   );
+          // } catch (err) {
+          //   console.error("Failed to notify server about cancellation:", err);
+          // }
 
           Swal.fire({
             title: "Payment Cancelled!",

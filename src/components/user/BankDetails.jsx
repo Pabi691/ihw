@@ -5,7 +5,7 @@ import BankAccountForm from './BankAccountForm';
 function BankDetails({ order, token }) {
   const [bankDetails, setBankDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchBank = async () => {
@@ -25,11 +25,11 @@ function BankDetails({ order, token }) {
           setBankDetails(response.data.bankAccounts[0]);
         } else {
           setBankDetails(null);
-          setMessage('No bank account found.');
+          // setMessage('No bank account found.');
         }
       } catch (error) {
         console.error('Error fetching bank details:', error);
-        setMessage('Failed to load bank details.');
+        // setMessage('Failed to load bank details.');
         setBankDetails(null);
       } finally {
         setLoading(false);

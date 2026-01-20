@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import axios from "axios";

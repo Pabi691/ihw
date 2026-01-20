@@ -11,10 +11,10 @@ import { toast } from "react-toastify";
 const HeroSection = () => {
 
   const [bannerImages, setBannerImages] = useState([]);
-  const [imageLoading, setImageLoading] = useState(false);
+  // const [imageLoading, setImageLoading] = useState(false);
 
   const fetchBannerImages = useCallback(async () => {
-    setImageLoading(true);
+    // setImageLoading(true);
     try {
       const res = await ImageService.getAll();
 
@@ -24,7 +24,7 @@ const HeroSection = () => {
     } catch (err) {
       toast.error('Failed to load images.');
     }
-    setImageLoading(false);
+    // setImageLoading(false);
   }, []);
 
   useEffect(() => {

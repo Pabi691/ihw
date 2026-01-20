@@ -41,12 +41,11 @@ const MyOrders = () => {
     if (!orderToCancel) return;
     setLoading(true);
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/order_cancel_by_customer/${orderToCancel}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      // console.log(response.data);
+      // const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/order_cancel_by_customer/${orderToCancel}`, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // });
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order.id === orderToCancel ? { ...order, shipping_status: 'Order Cancelled ' } : order

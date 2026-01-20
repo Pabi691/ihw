@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BiNotepad } from 'react-icons/bi';
 import { FaExchangeAlt } from 'react-icons/fa';
-import { FaStackExchange } from 'react-icons/fa6';
 
 const ProductDetailsAccordian = ({ productdetails }) => {
   const [activeIndex, setActiveIndex] = useState(null);

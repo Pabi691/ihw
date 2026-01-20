@@ -7,7 +7,7 @@ const MyProfile = () => {
   const { token } = useGlobal();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedProfile, setUpdatedProfile] = useState({});
 
@@ -26,8 +26,6 @@ const MyProfile = () => {
           setProfile(response.data.customer_data);
           setUpdatedProfile(response.data.customer_data);
         }
-      } catch (error) {
-        setError(error);
       } finally {
         setLoading(false);
       }
@@ -42,14 +40,12 @@ const MyProfile = () => {
 
   const handleUpdate = async () => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/update_customer_profile`, updatedProfile, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      // console.log('res', res);
-      // console.log('updatedProfile', updatedProfile);
+      // const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/update_customer_profile`, updatedProfile, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
       setProfile(updatedProfile);
       setIsEditing(false);
     } catch (error) {

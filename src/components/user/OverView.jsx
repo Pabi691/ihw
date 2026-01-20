@@ -9,11 +9,11 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 
 const OverView = () => {
   const { token } = useGlobal();
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
   const [limitOrders, setLimitOrders] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const OverView = () => {
         setCustomers(data.customer_data);
         setLoading(false);
       } catch (error) {
-        setError(error);
+        // setError(error);
         setLoading(false);
       }
     };
@@ -49,9 +49,8 @@ const OverView = () => {
         });
         const data = res.data;
         if (data.status) {
-          setOrders(data);
+          // setOrders(data);
           setLimitOrders(data.orders.slice(0, 5));
-          // console.log('test', data.orders.slice(0, 5));
         }
       } catch (error) {
         console.error("Error fetching orders:", error);

@@ -27,40 +27,47 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // const location = useLocation();
-  const [activeFilter, setActiveFilter] = useState(null);
+  // const [activeFilter, setActiveFilter] = useState(null);
   const [showAllSizes, setShowAllSizes] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [showAllColors, setShowAllColors] = useState(false);
   const [showAllCategories, setShowAllCategories] = useState(false);
 
-
   useEffect(() => {
+    setLoading(true);
 
-    let filtered = [];
-    // Use category products if available, otherwise use all products
-    const sourceProducts = catagoryProducts.products?.length > 0 ? catagoryProducts.products : products?.products;
+    const timer = setTimeout(() => {
+      let filtered = [];
 
-    if (Array.isArray(sourceProducts)) {
-      filtered = sourceProducts.filter((product) => {
-        const matchesSize =
-          !filters.size.length ||
-          product.product_variations?.some((v) => filters.size.includes(v.size));
+      const sourceProducts =
+        catagoryProducts.products?.length > 0
+          ? catagoryProducts.products
+          : products?.products;
 
-        const matchesBrand =
-          !filters.brand.length || filters.brand.includes(product.brand_details?.brand_name);
+      if (Array.isArray(sourceProducts)) {
+        filtered = sourceProducts.filter((product) => {
+          const matchesSize =
+            !filters.size.length ||
+            product.product_variations?.some((v) => filters.size.includes(v.size));
 
-        const matchesColor =
-          !filters.color_id.length || (product.color_id && filters.color_id.includes(product.color_id));
+          const matchesBrand =
+            !filters.brand.length || filters.brand.includes(product.brand_details?.brand_name);
 
-        const matchesCategory =
-          !filters.category.length || // No filter applied → show all
-          product.product_categories?.some((v) => filters.category.includes(v.category_name));
-        return matchesSize && matchesBrand && matchesColor && matchesCategory;
-      });
-    }
+          const matchesColor =
+            !filters.color_id.length || (product.color_id && filters.color_id.includes(product.color_id));
 
-    // // console.log('filtered', filtered);
-    setFilteredProducts(filtered);
+          const matchesCategory =
+            !filters.category.length || // No filter applied → show all
+            product.product_categories?.some((v) => filters.category.includes(v.category_name));
+          return matchesSize && matchesBrand && matchesColor && matchesCategory;
+        });
+      }
+
+      setFilteredProducts(filtered);
+      setLoading(false);
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [filters, products, catagoryProducts]);
 
   const filterColor = useCallback(async () => {
@@ -146,7 +153,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
     const uniqueCategories = Array.from(uniqueCategoryMap.values());
     // console.log("Extracted Categories:", uniqueCategories); // Ensure colors are being set correctly
     setCategories(uniqueCategories);
-  }, [ catagoryProducts.products, products?.products]);
+  }, [catagoryProducts.products, products?.products]);
 
 
   const handleSortChange = (event) => {
@@ -165,7 +172,6 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
     } else if (selectedSort === "priceHighToLow") {
       sortedProducts.sort((a, b) => parseFloat(b.sale_price) - parseFloat(a.sale_price));
     }
-
     setFilteredProducts(sortedProducts); // Update state once, no loop
   };
 
@@ -205,10 +211,9 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
     });
   };
 
-  const toggleFilterMenu = (filterType) => {
-    setActiveFilter(activeFilter === filterType ? null : filterType);
-  };
-
+  // const toggleFilterMenu = (filterType) => {
+  //   setActiveFilter(activeFilter === filterType ? null : filterType);
+  // };
 
   if (!products) {
     return <NotFound />;
@@ -228,34 +233,34 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
           {/* Filter Sidebar */}
           <div className="filter sticky w-1/5 top-0 h-fit border-none p-0 md:p-4 border-gray-200 z-[60] md:z-0">
             <div
-            className="filterTitle mb-6 text-lg text-black 
+              className="filterTitle mb-6 text-lg text-black 
             font-medium hidden md:block">
               Filters
             </div>
-            <button onClick={()=>setOpenFilter(true)}
+            <button onClick={() => setOpenFilter(true)}
               className="filterTitle text-lg text-black flex items-center gap-3 justify-center py-1 border-r border-black
               font-medium fixed bottom-0 left-0 bg-white w-1/2 text-center md:hidden z-[70] md:z-0">
-            <BiSortAZ />  Filters
+              <BiSortAZ />  Filters
             </button>
             <hr />
             {openFilter && (
               <div className='fixed w-full left-0 top-0 h-screen bg-[#0000003c] z-[75]'></div>
             )}
-            
-            <div 
-            className={`${!openFilter?'hidden':'fixed'} filterOptions md:flex 
+
+            <div
+              className={`${!openFilter ? 'hidden' : 'fixed'} filterOptions md:flex 
             flex-col gap-4 h-[65vh] md:h-[80vh] overflow-scroll z-[80] md:z-0 bg-white w-full 
             md:w-auto left-0 rounded-ss-3xl rounded-se-2xl md:rounded-none bottom-0
              scrollbar-none pt-4 p-10 md:px-0 md:pb-0`}>
               <div className="flex justify-between items-center md:hidden my-3">
-              <div
-              className="filterTitle text-lg text-black 
+                <div
+                  className="filterTitle text-lg text-black 
               font-medium">
-                Filters
+                  Filters
+                </div>
+                <button className="font-semibold text-xs bg-[#203466] text-white w-6 h-6 rounded-full" onClick={() => setOpenFilter(false)}>✕</button>
               </div>
-              <button className="font-semibold text-xs bg-[#203466] text-white w-6 h-6 rounded-full" onClick={()=>setOpenFilter(false)}>✕</button>
-              </div>
-              
+
               {/* Category Filter */}
               {categories && (
                 <div className="hidden md:block">
@@ -388,10 +393,10 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                 </div>
               )}
 
-            </div>  
+            </div>
           </div>
 
-          
+
           {/* Product Listing */}
 
           <div className="all_products w-full md:w-4/5">
@@ -401,7 +406,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                 <span className="text-gray-400 text-base hidden md:block"> ({filteredProducts.length} Products)</span>
               </div>
               {/* filter start */}
-              <div className={`fixed right-0 bottom-0 md:relative mr-0 md:mr-5 ${openFilter?'z-0':'z-[60]'} md:z-10`}>
+              <div className={`fixed right-0 bottom-0 md:relative mr-0 md:mr-5 ${openFilter ? 'z-0' : 'z-[60]'} md:z-10`}>
                 {/* Selected filter displayed */}
                 <div
                   className="flex items-center p-1 md:p-2 border-none md:border border-gray-300 rounded-none 
@@ -418,12 +423,12 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                 {isOpen && (
                   <div className='fixed w-full left-0 top-0 h-screen bg-[#0000003c] z-[70] md:hidden'></div>
                 )}
-            
+
                 {/* Popup with all sorting options */}
                 {isOpen && (
                   <div className="fixed w-full bottom-0 md:bottom-auto md:absolute right-0 mt-2 bg-white 
                   shadow-md rounded-2xl md:rounded-md border border-gray-300 p-2 md:w-48 z-[75]">
-                    <button className="font-semibold text-xs bg-[#203466] float-right text-white w-6 h-6 rounded-full" onClick={()=>setIsOpen(false)}>✕</button>
+                    <button className="font-semibold text-xs bg-[#203466] float-right text-white w-6 h-6 rounded-full" onClick={() => setIsOpen(false)}>✕</button>
                     {sortOptions.map((option) => (
                       <label key={option.value} className="flex items-center gap-2 cursor-pointer p-1 hover:bg-gray-100">
                         <input
@@ -441,9 +446,9 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
               </div>
               {/* end of filter */}
             </div>
-              {catagoryProducts.category_data?.cat_banner && (
-                <img className="w-[99%] my-3 hidden md:block" loading="lazy" alt="cat-banner" src={catagoryProducts.category_data.cat_banner} />
-              )}
+            {catagoryProducts.category_data?.cat_banner && (
+              <img className="w-[99%] my-3 hidden md:block" loading="lazy" alt="cat-banner" src={catagoryProducts.category_data.cat_banner} />
+            )}
             <div className="flex flex-wrap gap-4">
               {filteredProducts.map((product) => (
                 <div
@@ -457,7 +462,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                         className="w-[47%] md:w-[32%]" />
                     ) : (
                       <>
-                        <Link to={`/product/${product.slug }`} className="relative w-full h-[70%]">
+                        <Link to={`/product/${product.slug}`} className="relative w-full h-[70%]">
                           <img
                             src={compressImage(product.primary_img, 400, 70, 'webp')}
                             alt={product.prod_name}
@@ -506,14 +511,14 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
 
                           <div className='flex gap-2 mt-3'>
                             {(product.product_tag && product.product_tag !== 'null') && (
-                            <span className='border px-2 py-1 bg-green-400 text-white font-medium uppercase text-[10px] md:text-xs'>
-                              {product.product_tag}
-                            </span>
+                              <span className='border px-2 py-1 bg-green-400 text-white font-medium uppercase text-[10px] md:text-xs'>
+                                {product.product_tag}
+                              </span>
                             )}
                             {(product.product_quality && product.product_quality !== 'null') && (
-                            <span className='border px-2 py-1 bg-gray-400 text-white font-medium uppercase text-[10px] md:text-xs'>
-                              {product.product_quality}
-                            </span>
+                              <span className='border px-2 py-1 bg-gray-400 text-white font-medium uppercase text-[10px] md:text-xs'>
+                                {product.product_quality}
+                              </span>
                             )}
                           </div>
                         </div>
