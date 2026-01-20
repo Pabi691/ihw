@@ -44,7 +44,7 @@ function ProductPage({ showAll }) {
       setProducts(response.data);
     }
     setLoading(false);
-  }, [categorySlug, token, setCatagoryProducts, setProducts]);
+  }, [categorySlug, token, setCatagoryProducts, setProducts, navigate]);
 
   useEffect(() => {
     fetchProducts();

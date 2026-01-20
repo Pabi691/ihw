@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MainLayOut from '../layout/MainLayOut';
-import API_BASE_URL from '../global/apiConfig';
 import { useGlobal } from '../global/GlobalContext';
 
 

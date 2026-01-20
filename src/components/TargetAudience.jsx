@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import 'swiper/swiper-bundle.css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { FaTag } from 'react-icons/fa6';
-import API_BASE_URL from '../global/apiConfig';
+// import { FaTag } from 'react-icons/fa6';
+// import API_BASE_URL from '../global/apiConfig';
 import axios from 'axios';
-import WishlistButton from './WishlistButton';
+// import WishlistButton from './WishlistButton';
 import { useGlobal } from '../global/GlobalContext';
 import Skeleton from 'react-loading-skeleton';
 

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useGlobal } from '../../global/GlobalContext';
-import API_BASE_URL from '../../global/apiConfig';
+// import API_BASE_URL from '../../global/apiConfig';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { Truck, Clock, Headphones, Package, MapPin, User, HelpCircle, Info, Book, SignalHigh } from "lucide-react";
-import { MdGraphicEq } from 'react-icons/md';
-import { SiStoryblok } from 'react-icons/si';
+import { Package, MapPin, User, HelpCircle, SignalHigh } from "lucide-react";
 import Skeleton from 'react-loading-skeleton';
 import { Icon } from '@iconify/react/dist/iconify.js';
 
@@ -203,7 +200,7 @@ const OverView = () => {
           </Link>
 
           <Link
-            to="../about-us"
+            to="../about"
             className="bg-white p-6 rounded-xl border-none md:border text-center flex flex-col items-center gap-3"
           >
             <SignalHigh className="w-8 h-8 text-gray-700" />

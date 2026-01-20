@@ -6,7 +6,7 @@ import MetaContentConfig from '../content/MetaContentConfig';
 
 // Inside MetaData.jsx
 const routeToPageMap = {
-    'about-us': 'about',
+    'about': 'about',
     'contact-us': 'contact',
     'home': 'home',
     '': 'home',

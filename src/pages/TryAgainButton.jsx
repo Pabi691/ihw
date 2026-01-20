@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export default function TryAgainButton() {
   const [letterIndex, setLetterIndex] = useState(0);
   const [showRetry, setShowRetry] = useState(false);
-  const letters = ["M", "P", "I"];
+  const letters = ["I", "H", "W"];
 
   useEffect(() => {
     const letterInterval = setInterval(() => {

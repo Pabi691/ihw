@@ -182,7 +182,7 @@ const NavTop = () => {
 
                       <p className='text-gray-600 text-[11px] my-1 font-medium'>ABOUT US</p>
 
-                      <Link className='text-xs font-medium' to={'/about-us'}>Our Story</Link>
+                      <Link className='text-xs font-medium' to={'/about'}>Our Story</Link>
                       {userToken && (
                       <button
                         onClick={logout}

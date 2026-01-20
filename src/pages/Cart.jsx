@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGlobal } from '../global/GlobalContext';
@@ -151,11 +151,11 @@ const Cart = () => {
     }
 
     fetchCoupon();
-  }, [])
+  }, [token])
 
 
   const handleApplyCoupon = async (e) => {
-    if(!couponCode) return ;
+    if (!couponCode) return;
     e.preventDefault();
     setLoading(true);
     setStatus(null);
@@ -163,9 +163,9 @@ const Cart = () => {
     try {
       // console.log('validate_coupon token', token);
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/v1/validate_coupon`,{
-          'coupon_code': couponCode,
-        } ,{
+        `${process.env.REACT_APP_API_URL}/api/v1/validate_coupon`, {
+        'coupon_code': couponCode,
+      }, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -233,7 +233,7 @@ const Cart = () => {
                     />
                   ) : (
                     <p className="border mb-3 p-3 rounded-lg flex gap-3 items-center font-medium">
-                      <img className='w-6' loading="lazy" src='images/percentage.gif' />
+                      <img className='w-6' alt='percentage-image' loading="lazy" src='images/percentage.gif' />
                       You are saving ₹{savings} on this order
                     </p>
                   )}
@@ -250,11 +250,11 @@ const Cart = () => {
                         ) : (
                           <div className="w-1/4 h-24 md:h-48 mr-4">
                             <Link to={`/product/${item.slug ? item.slug : item.product.slug}`}>
-                                <img
-                                  src={compressImage(item.primary_img, 400, 70, 'webp')}
-                                  alt={item.prod_name}
-                                  className="w-full h-full object-cover object-top rounded-lg"
-                                />
+                              <img
+                                src={compressImage(item.primary_img, 400, 70, 'webp')}
+                                alt={item.prod_name}
+                                className="w-full h-full object-cover object-top rounded-lg"
+                              />
                             </Link>
                           </div>
                         )}
@@ -375,7 +375,10 @@ const Cart = () => {
                       {/* Submit and Close Buttons */}
                       <div className="flex justify-end space-x-2">
                         <button
-                          onClick={() => (setIsPopupOpen(false), setSelectedQuantity(null))} // Close the popup
+                          onClick={() => {
+                            setIsPopupOpen(false);
+                            setSelectedQuantity(null);
+                          }}
                           className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
                         >
                           Cancel
@@ -437,7 +440,7 @@ const Cart = () => {
                       <h4 className='font-medium'>Coupons & Offers</h4>
                       <div className='flex justify-between items-center text-sm'>
                         <div className='flex items-center gap-3 mt-3'>
-                          <img className='w-6' src='images/percentage.png' loading="lazy" />
+                          <img className='w-6' alt='percentage' src='images/percentage.png' loading="lazy" />
                           <div className='text-sm'>
                             <p className='font-semibold'>Apply Coupon / Gift Card</p>
                             <p className='text-gray-500 font-medium'>Crazy deals and other amazing offers</p>
@@ -450,7 +453,7 @@ const Cart = () => {
                       <div className="rounded-md my-4 border flex justify-between items-center relative border-green-200 bg-gradient-to-b from-green-200 to-transparent p-3">
                         <span className='absolute top-[-12px] left-[30%] rounded-full px-2 py-1 font-semibold text-[10px] bg-[#ef7f1a]'>Best offer applied</span>
                         <div className='flex items-center gap-3'>
-                          <img className='w-6' src='images/percentage.png' loading="lazy" />
+                          <img className='w-6' alt='percentage-icon' src='images/percentage.png' loading="lazy" />
                           <p>
                             <span className='text-sm font-semibold mb-2'>{couponData.coupon_code}</span> | <span className='text-sm'>{couponData.coupon_code}</span>
                             <span className='block text-xs text-gray-400'> (-₹ {discount.toFixed(2)}) discount has been applied.</span>

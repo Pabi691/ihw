@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useGlobal } from "../../global/GlobalContext";
 import Skeleton from "react-loading-skeleton";
 import compressImage from "../../utils/compressImage";
 import { cacheManager } from "../../utils/cacheManager";
@@ -11,7 +10,6 @@ function ProductCategory({ title }) {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { token } = useGlobal();
 
   const fetchProductCategory = useCallback(async () => {
     setLoading(true);
@@ -43,7 +41,7 @@ function ProductCategory({ title }) {
     } finally {
       setLoading(false);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     fetchProductCategory();

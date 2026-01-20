@@ -69,7 +69,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       console.error("Fetch cart error:", err);
     }
-  }, [mergeLocalCartWithServer]);
+  }, [mergeLocalCartWithServer, token]);
 
   // 💖 Fetch Wishlist
   const fetchWishlist = useCallback(async () => {
@@ -87,7 +87,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       console.error("Fetch wishlist error:", err);
     }
-  }, [token]);
+  }, [token, webToken]);
 
   // 🛍️ Fetch Products
   const fetchProducts = useCallback(async () => {
@@ -157,7 +157,7 @@ export const GlobalProvider = ({ children }) => {
       localStorage.setItem("localCart", JSON.stringify(updatedCart));
       setCart(updatedCart);
     }
-  }, [cart, fetchCart]);
+  }, [ fetchCart ]);
 
   // 💘 Add/Remove Wishlist
   const addToWishlist = useCallback(async (product) => {
@@ -223,7 +223,7 @@ export const GlobalProvider = ({ children }) => {
 
   // for footer categories
 
-  const fetchAllCategories = async () => {
+  const fetchAllCategories = useCallback(async () => {
     if (!token) return;
 
     setLoadingCategories(true);
@@ -272,15 +272,13 @@ export const GlobalProvider = ({ children }) => {
     } finally {
       setLoadingCategories(false);
     }
-  };
+  }, [token]);
 
   // Load categories when token is available
   useEffect(() => {
     if (token) fetchAllCategories();
-  }, [token]);
+  }, [token, fetchAllCategories]);
   
-  
-
   // 🔐 Logout
   const logout = () => {
     setToken(webToken);

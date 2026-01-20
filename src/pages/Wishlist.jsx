@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import MainLayOut from '../layout/MainLayOut';
+// import MainLayOut from '../layout/MainLayOut';
 import { useGlobal } from '../global/GlobalContext';
 import { FaTrashCan } from 'react-icons/fa6';
 import { Link, useNavigate } from 'react-router-dom';

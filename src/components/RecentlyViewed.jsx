@@ -8,7 +8,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 
 const RecentlyViewed = () => {
   const [recentProduct, setRecentProduct] = useState([]);
-  const { token, wishlist, setWishlist, products  } = useGlobal();
+  const { token, wishlist, setWishlist  } = useGlobal();
 
   useEffect(() => {
     const fetchProductDetails = async () => {

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { useGlobal } from "../global/GlobalContext";
 import API_BASE_URL from "../global/apiConfig";
 import WishlistButton from "./WishlistButton";
 import NotFound from "../pages/NotFound";
 import { BiChevronRight, BiSortAZ } from "react-icons/bi";
-import { CheckIcon, SortAsc, SortDescIcon } from "lucide-react";
+import { CheckIcon, SortDescIcon } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import compressImage from "../utils/compressImage";
 
@@ -26,7 +26,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
   const [filters, setFilters] = useState({ size: [], brand: [], color_id: [], category: [] });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const [activeFilter, setActiveFilter] = useState(null);
   const [showAllSizes, setShowAllSizes] = useState(false);
   const [showAllBrands, setShowAllBrands] = useState(false);

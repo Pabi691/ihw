@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import NavTop from '../components/layoutParts/NavTop';
 import Footer from '../components/layoutParts/Footer';
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
@@ -6,9 +6,8 @@ import { useGlobal } from "../global/GlobalContext";
 
 const MainLayOut = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { accessoriesCat, planters, container, loadingCategories, token } = useGlobal();
-
+  // const [loading, setLoading] = useState(true);
+  const { accessoriesCat, planters, container, loadingCategories } = useGlobal();
 
   return (
     <>

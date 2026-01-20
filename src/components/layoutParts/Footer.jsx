@@ -1,17 +1,12 @@
-import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
-import { FaFacebook, FaInstagram, FaPinterest, FaSearch } from 'react-icons/fa';
+import React from 'react';
+import { FaFacebook, FaInstagram, FaPinterest } from 'react-icons/fa';
 import { FaThreads, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import { useGlobal } from '../../global/GlobalContext';
-import { BiOutline, BiSolidTruck } from 'react-icons/bi';
-import PremiumText from '../PremiumText';
-import Skeleton from 'react-loading-skeleton';
 
-const Footer = ({ planters, container, accessoriesCat, loading }) => {
+const Footer = () => {
 
   const links = [
-    { labelCompany: 'About Us', pathCompany: '/about-us', labelService: 'Contact Us', pathService: '/contact-us' },
+    { labelCompany: 'About Us', pathCompany: '/about', labelService: 'Contact Us', pathService: '/contact-us' },
     { labelService: 'Track Order', pathService: '/myaccount/orders' },
     { labelCompany: 'Terms & Conditions', pathCompany: '/terms-and-conditions', labelService: 'Return Order', pathService: '/myaccount/orders' },
     { labelCompany: 'Privacy Policy', pathCompany: '/privacy-policy', labelService: 'Cancel Order', pathService: '/myaccount/orders' },

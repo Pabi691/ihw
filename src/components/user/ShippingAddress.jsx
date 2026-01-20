@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import API_BASE_URL from "../../global/apiConfig";
+// import API_BASE_URL from "../../global/apiConfig";
 import { useGlobal } from "../../global/GlobalContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { TextField, Button, MenuItem, Select, FormControl, InputLabel, Box, Typography } from "@mui/material";
+import { TextField, MenuItem, Select, FormControl, InputLabel, Box } from "@mui/material";
 import axios from "axios";
 
 const ShippingAddress = () => {

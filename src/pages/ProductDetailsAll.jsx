@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FaCartPlus, FaHeart, FaRegHeart } from 'react-icons/fa';
+import { FaCartPlus } from 'react-icons/fa';
 import Breadcrumb from '../components/Breadcrumb';
 import { useGlobal } from '../global/GlobalContext';
 import ProductDetailsAccordian from '../components/ProductDetailsAccordian';
@@ -29,7 +29,7 @@ function ProductDetailsAll() {
   const [loading, setLoading] = useState(true);
   const [sizeChart, setSizeChart] = useState(false);
   const [keyHighlights, setKeyHighlights] = useState([]);
-  const { wishlist, setWishlist, addToCart, token, cart } = useGlobal();
+  const { wishlist, setWishlist, addToCart, token } = useGlobal();
   const [likedProductsTag, setLikedProductsTag] = useState(null);
   const [openSizeChart, setOpenSizeChart] = useState(false);
   const [unAvailableSize, setUnAvailableSize] = useState(false);

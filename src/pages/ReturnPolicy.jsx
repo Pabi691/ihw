@@ -1,6 +1,5 @@
 import React from 'react';
 import MainLayOut from '../layout/MainLayOut';
-import { Link } from 'react-router-dom';
 
 const ReturnPolicy = () => {
   return (

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import HomeBannerMobile from '../../components/mobileComponents/HomeBannerMobile'
-import { Link } from 'react-router-dom'
 import { useGlobal } from '../../global/GlobalContext'
 import axios from 'axios'
 import AllCatMobile from '../../components/mobileComponents/AllCatMobile'
 import BottomFixedNav from '../../components/mobileComponents/BottomFixedNav'
-import SingleSlider from '../../components/SingleSlider'
-import TargetAudience from '../../components/TargetAudience'
-import ProductSliderHome from '../../components/ProductSliderHome'
+// import SingleSlider from '../../components/SingleSlider'
+// import TargetAudience from '../../components/TargetAudience'
+// import ProductSliderHome from '../../components/ProductSliderHome'
 
 const MobileHomeBody = () => {
 

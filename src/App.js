@@ -59,7 +59,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             {/* inner pages */}
-            <Route path="/about-us" element={<About />} />
+            <Route path="/about" element={<About />} />
             <Route path="/terms-and-conditions" element={<TermsCondition />} />
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/contact-us" element={<SearchableTabs />} />

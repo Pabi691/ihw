@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -16,7 +16,7 @@ const VerifyEmail = () => {
   const tokenvarify = queryParams.get("token");
   const email = queryParams.get("email");
 
-  const handleVerify = async () => {
+  const handleVerify = useCallback( async () => {
     // console.log('tokenvarify', tokenvarify);
     // console.log('email', email);
     // console.log('token', token);
@@ -41,8 +41,6 @@ const VerifyEmail = () => {
         }
       );
 
-      // console.log('response', response);
-
       if (response.data.status) {
         setMessage("✅ Email verified successfully!");
         toast.success("Email verified successfully!", { position: "top-center" });
@@ -60,11 +58,11 @@ const VerifyEmail = () => {
     } finally {
       setVerifying(false);
     }
-  };
+  }, [tokenvarify, email, navigate, token]);
 
   useEffect(() => {
     handleVerify();
-  }, []);
+  }, [handleVerify]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

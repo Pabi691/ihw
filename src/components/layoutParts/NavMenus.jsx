@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import { useGlobal } from '../../global/GlobalContext';
+// import axios from 'axios';
+// import { useGlobal } from '../../global/GlobalContext';
 import Skeleton from 'react-loading-skeleton';
 
 
@@ -11,7 +11,7 @@ function NavMenus() {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const { token } = useGlobal();
+  // const { token } = useGlobal();
 
 
   // Track mouse movement and enable hover effect after mouse move

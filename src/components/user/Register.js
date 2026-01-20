@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Add icons for password visibility toggle
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainLayOut from "../../layout/MainLayOut";
 import { useAuth } from "./AuthContext";
 import { useGlobal } from "../../global/GlobalContext";
@@ -18,9 +18,9 @@ const Register = () => {
   const [success, setSuccess] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [varify, setVarify] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const redirectTo = '/myaccount';
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const redirectTo = '/myaccount';
   const { setToken } = useAuth();
   const { mergeLocalCartWithServer } = useGlobal();
 

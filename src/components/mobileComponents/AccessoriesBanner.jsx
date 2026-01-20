@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-
+import React from 'react';
 
 const BannerCards = [
   {
@@ -9,9 +8,7 @@ const BannerCards = [
   }
 ]
 
-
 const AccessoriesBanner = () => {
-
 
   return (
         <div className=''>

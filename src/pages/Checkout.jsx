@@ -45,7 +45,7 @@ const Checkout = () => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [varify, setVarify] = useState(false);
   const location = useLocation();
-  const finalAmount = location.state?.finalAmount;
+  // const finalAmount = location.state?.finalAmount;
   const discount = location.state?.discount;
   const couponCode = location.state?.couponCode;
 
@@ -82,7 +82,7 @@ const Checkout = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [token]);
+  }, [token, navigate]);
 
   const fetchShippingAddresses = useCallback(async () => {
     try {
@@ -104,7 +104,6 @@ const Checkout = () => {
     }
   }, [token]);
 
-
   useEffect(() => {
     if (!token) {
       navigate('/login');
@@ -120,10 +119,10 @@ const Checkout = () => {
     setShippingDetails(address);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setShippingDetails((prev) => ({ ...prev, [name]: value }));
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setShippingDetails((prev) => ({ ...prev, [name]: value }));
+  // };
 
   const calculateSummary = () => {
     const totalMRP = cartItems.reduce(

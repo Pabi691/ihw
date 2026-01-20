@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MainLayOut from '../layout/MainLayOut';
 import HeroSection from '../components/HeroSection';
 import HomeBody from '../components/home/HomeBody';

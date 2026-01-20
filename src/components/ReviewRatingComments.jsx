@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BiSolidStar, BiSolidStarHalf, BiStar } from "react-icons/bi";
-import { FaStar, FaStarHalfAlt, FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { AiFillSafetyCertificate } from "react-icons/ai";
 
 const ReviewRatingComments = ({ reviews, overallRating, totalRatings, ratingBreakdown }) => {

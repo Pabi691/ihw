@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGlobal } from '../global/GlobalContext';
-import API_BASE_URL from './../global/apiConfig';
+// import API_BASE_URL from './../global/apiConfig';
 
 function ProductSizeGuide() {
   const [selectedSize, setSelectedSize] = useState(null);

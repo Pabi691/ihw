@@ -35,7 +35,7 @@ const Login = () => {
     if (localStorage.getItem('userToken') && localStorage.getItem('uservarified')) {
       navigate(redirectTo, { state: location.state });
     }
-  }, [redirectTo])
+  }, [redirectTo, location.state, navigate]);
 
   const loginUser = async (e) => {
     e.preventDefault();
