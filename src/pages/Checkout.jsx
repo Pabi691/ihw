@@ -487,7 +487,7 @@ const Checkout = () => {
   }
 
   return (
-    <SimpleLayout title='Checkout' link='javascript:;'>
+    <SimpleLayout title='Checkout'>
 
       {varify ? (
         <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md text-sm my-10 mx-auto w-1/2">

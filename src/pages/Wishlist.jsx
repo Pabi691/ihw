@@ -40,7 +40,7 @@ const Wishlist = () => {
   };
 
   return (
-    <SimpleLayout ProductsCount={`(${wishlist.length} ${wishlist.length>1 ? 'items' : 'item'})`} title='My Wishlist' link='javascript:;'>
+    <SimpleLayout ProductsCount={`(${wishlist.length} ${wishlist.length>1 ? 'items' : 'item'})`} title='My Wishlist'>
       <div className="wishlist-page p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-lg font-semibold hidden md:block">
           My Wishlist 

@@ -73,7 +73,7 @@ function ProductPage({ showAll }) {
         </MainLayOut>
       </div>
       <div className='md:hidden'>
-        <MobileMainLayout link='javascript:;' ProductsCount={`${productLength} products`} title={showAll ? 'All Products' : categorySlug}>
+        <MobileMainLayout ProductsCount={`${productLength} products`} title={showAll ? 'All Products' : categorySlug}>
           {(catagoryProducts || products) && (
             <ProductPageBody products={products} catagoryProducts={catagoryProducts} categorySlug={showAll ? null : categorySlug} />
           )}

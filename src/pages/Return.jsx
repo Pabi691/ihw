@@ -96,7 +96,7 @@ const Return = () => {
 
 
   return (
-    <SimpleLayout title='Return' link='javascript:;'>
+    <SimpleLayout title='Return'>
 
       <button
         type="button"

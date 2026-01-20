@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import axios from "axios";
 import { useGlobal } from "../global/GlobalContext";
 import API_BASE_URL from "../global/apiConfig";
@@ -55,8 +55,6 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
         const matchesCategory =
           !filters.category.length || // No filter applied → show all
           product.product_categories?.some((v) => filters.category.includes(v.category_name));
-
-
         return matchesSize && matchesBrand && matchesColor && matchesCategory;
       });
     }
@@ -148,7 +146,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
     const uniqueCategories = Array.from(uniqueCategoryMap.values());
     // console.log("Extracted Categories:", uniqueCategories); // Ensure colors are being set correctly
     setCategories(uniqueCategories);
-  }, []);
+  }, [ catagoryProducts.products, products?.products]);
 
 
   const handleSortChange = (event) => {

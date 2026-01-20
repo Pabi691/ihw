@@ -216,7 +216,7 @@ const Cart = () => {
 
 
   return (
-    <SimpleLayout title={`My Bag (${cartLength} ${cartLength > 1 ? 'Items' : 'Item'})`} link='javascript:;'>
+    <SimpleLayout title={`My Bag (${cartLength} ${cartLength > 1 ? 'Items' : 'Item'})`}>
       <div className="cart-page p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
         <>
           {cartLength > 0 ? (
