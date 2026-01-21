@@ -5,25 +5,25 @@ const teamMembers = [
     name: "Soham Chakraborty",
     role: "Chairman",
     image:
-      "https://indianhairworld.com/wp-content/uploads/2024/05/Soham-Chakraborty-scaled.jpg",
+      "/images/Soham-Chakraborty.jpg",
   },
   {
     name: "Sayak Chakraborty",
     role: "CEO",
     image:
-      "https://indianhairworld.com/wp-content/uploads/2024/05/Sayak-Chakraborty-scaled.jpg",
+      "/images/Sayak-Chakraborty.jpg",
   },
   {
     name: "Sudipto Ghosh",
     role: "Co Founder",
     image:
-      "https://indianhairworld.com/wp-content/uploads/2024/05/Sudipto-ghosh-scaled.jpg",
+      "/images/Sudipto-ghosh.jpg",
   },
   {
     name: "Saheb Ghosh",
     role: "Co Owner",
     image:
-      "https://indianhairworld.com/wp-content/uploads/2024/11/IMG20240428213921-scaled.jpg",
+      "/images/saheb-ghosh.jpg",
   },
 ];
 

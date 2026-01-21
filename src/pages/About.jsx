@@ -4,10 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination, Autoplay } from "swiper/modules";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { DesktopNav } from '../components/Navigation';
 
 const About = () => {
   return (
     <MainLayOut>
+      <DesktopNav />
       <div>
         {/* OUR STORY */}
         <div className='py-16 md:py-24 text-base md:text-lg px-4 md:px-8 lg:px-12 xl:px-20'>

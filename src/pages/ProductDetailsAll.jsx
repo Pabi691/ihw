@@ -207,7 +207,7 @@ function ProductDetailsAll() {
       ) : (
         <>
           <Breadcrumb
-            category="Products"
+            category="shop"
             productName={product.prod_name}
           />
         </>

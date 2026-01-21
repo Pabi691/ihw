@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MainLayOut from "../layout/MainLayOut";
+import { DesktopNav } from "../components/Navigation";
 
 const tabs = [
   {
@@ -93,6 +94,7 @@ const SearchableTabs = () => {
 
   return (
     <MainLayOut>
+      <DesktopNav />
       <div className="max-w-7xl p-4 space-y-4 mx-auto py-10">
         <div className="p-8 text-center md:text-left">
           <h1 className="mb-4 text-2xl font-semibold">Contact Us</h1>

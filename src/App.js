@@ -47,6 +47,8 @@ import ResetPassword from './components/user/ResetPassword';
 import SearchableTabs from './pages/SearchableTabs';
 import AnswerPage from './pages/AnswerPage';
 import VarifyEmail from './components/user/VarifyEmail';
+import Services from './pages/Services';
+import Branches from './pages/Branches';
 
 
 function App() {
@@ -60,6 +62,8 @@ function App() {
             <Route path="/" element={<Home />} />
             {/* inner pages */}
             <Route path="/about" element={<About />} />
+            <Route path='/services' element={<Services />} />
+            <Route path='/:branch' element={<Branches />} />
             <Route path="/terms-and-conditions" element={<TermsCondition />} />
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/contact-us" element={<SearchableTabs />} />

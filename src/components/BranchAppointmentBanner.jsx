@@ -1,4 +1,5 @@
 import { branchData } from "../content/branchData";
+import { strokedHeading } from "../styles/typography";
 
 const BranchAppointmentBanner = () => {
   return (
@@ -6,19 +7,19 @@ const BranchAppointmentBanner = () => {
 
       {/* ================= DESKTOP VIEW ================= */}
       <div className="hidden min-[1300px]:block relative w-full h-[300px]">
-
+        <h4 className={`${strokedHeading} z-10 relative text-right`}>Book an <span>appointment</span></h4>
         {/* Background Banner */}
         <div
           className="absolute inset-0 bg-no-repeat bg-top bg-contain"
           style={{
             backgroundImage:
-              "url(http://indianhairworld.com/wp-content/uploads/2025/07/IHW-Banner.jpg)",
+              "url(/images/banner.jpeg)",
           }}
         />
 
         {/* Cards Overlay */}
         <div className="absolute left-[31%] top-20 flex z-10">
-          {branchData.map((branch, index) => (
+          {Object.values(branchData).map((branch, index) => (
             <div
               key={index}
               className="bg-white min-w-[250px] min-h-[160px] mr-[-30px]"
@@ -32,13 +33,13 @@ const BranchAppointmentBanner = () => {
                 className="w-full h-[80px] object-cover"
               />
 
-              <div className="bg-[#04A9FF] h-[30px] flex items-center px-4 text-white font-bold">
+              <div className="bg-[#04A9FF] h-[30px] flex items-center px-10 text-white font-bold">
                 📞 {branch.name}
               </div>
 
               <a
                 href={`tel:${branch.phone}`}
-                className="block text-black font-bold text-lg px-4 py-2"
+                className="block text-black font-bold text-lg px-10 py-2"
               >
                 {branch.phone}
               </a>
@@ -54,7 +55,7 @@ const BranchAppointmentBanner = () => {
         </h3>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {branchData.map((branch, index) => (
+          {Object.values(branchData).map((branch, index) => (
             <div
               key={index}
               className="bg-white shadow-lg hover:-translate-y-1 transition rounded-md overflow-hidden"

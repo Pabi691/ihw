@@ -25,7 +25,7 @@ const ShopOnlineBanner = () => {
             {/* Women */}
             <a href="/women" className="w-1/2 flex justify-center">
               <img
-                src="http://indianhairworld.com/wp-content/uploads/2025/05/women3.png"
+                src="/images/shop-women.png"
                 alt="Women"
                 className="w-[280px] sm:w-[350px] object-contain"
               />
@@ -34,7 +34,7 @@ const ShopOnlineBanner = () => {
             {/* Men */}
             <a href="/men" className="w-1/2 flex justify-center">
               <img
-                src="http://indianhairworld.com/wp-content/uploads/2025/05/men1.png"
+                src="/images/shop-men.png"
                 alt="Men"
                 className="w-[280px] sm:w-[350px] object-contain"
               />

@@ -9,7 +9,7 @@ const WelcomeSection = () => {
           {/* Image Section */}
           <div className="flex justify-center">
             <img
-              src="https://indianhairworld.com/wp-content/uploads/2025/04/LOL02996-scaled.jpg"
+              src="/images/welcome-image.jpg"
               alt="Indian Hair World"
               className="rounded-lg shadow-lg w-full h-auto object-cover"
               loading="lazy"
