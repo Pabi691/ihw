@@ -1,27 +1,25 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaCartPlus } from 'react-icons/fa';
-import Breadcrumb from '../components/Breadcrumb';
-import { useGlobal } from '../global/GlobalContext';
-import ProductDetailsAccordian from '../components/ProductDetailsAccordian';
-import YouAlsoLike from '../components/YouAlsoLike';
+import Breadcrumb from '../Breadcrumb';
+import { useGlobal } from '../../global/GlobalContext';
+import ProductDetailsAccordian from '../ProductDetailsAccordian';
+import YouAlsoLike from '../YouAlsoLike';
 import Slider from 'react-slick';
-import DeliveryEstimate from '../components/DeliveryEstimate';
+import DeliveryEstimate from '../DeliveryEstimate';
 import Zoom from "react-medium-image-zoom";
 import Skeleton from 'react-loading-skeleton';
 import { Bell } from 'lucide-react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import ReviewRatingComments from '../components/ReviewRatingComments';
+import ReviewRatingComments from '../ReviewRatingComments';
 import axios from 'axios';
-import RecentlyViewed from '../components/RecentlyViewed';
+import RecentlyViewed from '../RecentlyViewed';
 import { FaBolt } from 'react-icons/fa6';
-import WishlistButton from '../components/WishlistButton';
+import WishlistButton from '../WishlistButton';
 import confetti from 'canvas-confetti';
-import MetaData from '../layout/MetaData';
-import compressImage from '../utils/compressImage';
-import MetaContentConfig from '../content/MetaContentConfig';
-
-
+import MetaData from '../../layout/MetaData';
+import compressImage from '../../utils/compressImage';
+import MetaContentConfig from '../../content/MetaContentConfig';
 
 function ProductDetailsAll() {
   const { slug } = useParams();
@@ -57,10 +55,9 @@ function ProductDetailsAll() {
     // Check if the product is already in the list
     const existingProduct = viewedProducts.find((item) => item.slug === slug);
 
+    console.log('existingProduct', existingProduct);
+
     if (existingProduct) {
-      // console.log("Loading product from sessionStorage");
-      // console.log("existingProduct product_tag", existingProduct.product_tag);
-      // Load from sessionStorage instead of calling the API
       setProduct(existingProduct);
       setSelectedImage(existingProduct.primary_img);
       setKeyHighlights(existingProduct.product_key_highlights || []);
@@ -70,7 +67,6 @@ function ProductDetailsAll() {
       setLikedProductsTag(existingProduct.product_tag);
       return;
     }
-
     // If not in sessionStorage, fetch from API
     setLoading(true);
     try {
@@ -105,10 +101,6 @@ function ProductDetailsAll() {
     }
   }, [slug, token]);
 
-
-
-
-
   useEffect(() => {
     fetchProductDetails();
   }, [fetchProductDetails]);
@@ -137,7 +129,7 @@ function ProductDetailsAll() {
   const handleAddToCart = (product) => {
     return new Promise((resolve) => {
       // console.log('productVariations', productVariations);
-      if ((!selectedSize || selectedSize === 'null') && productVariations.length !== 0 ) {
+      if ((!selectedSize || selectedSize === 'null') && productVariations.length !== 0) {
         setOpenSizeChart(true);
         resolve(false);
         return;
@@ -158,7 +150,6 @@ function ProductDetailsAll() {
     });
   };
 
-
   const mobileSettings = {
     dots: true,
     infinite: true,
@@ -176,10 +167,9 @@ function ProductDetailsAll() {
     ]
     : [];
 
-
   return (
     <>
-    {product?.seo_metadata ? (
+      {product?.seo_metadata ? (
         <MetaData
           title={(product.seo_metadata?.meta_title !== "" ? product.seo_metadata?.meta_title : `${product?.prod_name} | Indian Hair World`) || MetaContentConfig.default.title}
           description={(product.seo_metadata?.meta_description !== '' ? product.seo_metadata?.meta_description : product?.prod_desc) || MetaContentConfig.default.description}
@@ -300,30 +290,52 @@ function ProductDetailsAll() {
                     <p className='text-blue-700 font-semibold text-sm md:text-base'><span>{overallRating}</span> | {productReviews.length} Reviews</p>
                   )}
                 </div>
-                <div className="flex items-center space-x-4 mt-3">
-                  <p className="font-semibold text-lg text-gray-800">
-                    ₹ {product.sale_price || product.regular_price}
-                  </p>
-                  {product.sale_price && (
-                    <p className="text-base text-gray-500 line-through">₹ {product.regular_price}</p>
-                  )}
 
-                  <p className='text-green-600 font-medium'>
-                    {(100 - (product.sale_price / product.regular_price) * 100).toFixed(2)} % OFF
-                  </p>
+                {!selectedSize ? (
+                  <div className="flex items-center space-x-4 mt-3">
+                    <p className="font-semibold text-lg text-gray-800">
+                      ₹ {product.sale_price || product.regular_price}
+                    </p>
+                    {product.sale_price && (
+                      <p className="text-base text-gray-500 line-through">₹ {product.regular_price}</p>
+                    )}
+                    <p className='text-green-600 font-medium'>
+                      {(100 - (product.sale_price / product.regular_price) * 100).toFixed(2)} % OFF
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    {Array.isArray(productVariations) && productVariations.length > 0 ? (
+                      productVariations
+                        .filter((size) => size.id === selectedSize)
+                        .map((size) => (
+                          <div key={size.size_id} className="flex items-center space-x-4 mt-3">
+                            <p className="font-semibold text-lg text-gray-800">
+                              ₹ {size.sale_price || size.regular_price}
+                            </p>
+                            {size.sale_price && (
+                              <p className="text-base text-gray-500 line-through">₹ {size.regular_price}</p>
+                            )}
+                            <p className='text-green-600 font-medium'>
+                              {(100 - (size.sale_price / size.regular_price) * 100).toFixed(2)} % OFF
+                            </p>
+                          </div>
+                        ))
+                    ) : null}
+                  </>
+                )}
 
-                </div>
                 <p className='text-gray-500'>Inclusive of all taxes</p>
                 <div className='flex gap-2 mt-3'>
                   {(product.product_tag && product.product_tag !== 'null') && (
-                  <span className='border px-2 py-1 bg-green-400 text-white font-medium uppercase text-[10px] md:text-xs'>
-                    {product.product_tag}
-                  </span>
+                    <span className='border px-2 py-1 bg-green-400 text-white font-medium uppercase text-[10px] md:text-xs'>
+                      {product.product_tag}
+                    </span>
                   )}
                   {(product.product_quality && product.product_quality !== 'null') && (
-                  <span className='border px-2 py-1 bg-gray-400 text-white font-medium uppercase text-[10px] md:text-xs'>
-                    {product.product_quality}
-                  </span>
+                    <span className='border px-2 py-1 bg-gray-400 text-white font-medium uppercase text-[10px] md:text-xs'>
+                      {product.product_quality}
+                    </span>
                   )}
                 </div>
                 {/* sizes */}
@@ -428,7 +440,9 @@ function ProductDetailsAll() {
                                     name="size"
                                     value={size.size}
                                     checked={selectedSize === size.id}
-                                    onChange={() => setSelectedSize(size.id)}
+                                    onChange={() => {
+                                      setSelectedSize(size.id);
+                                    }}
                                     className='absolute opacity-0 -z-10'
                                     disabled={size.stock_qty === 0}
                                   />
@@ -456,8 +470,7 @@ function ProductDetailsAll() {
                       </button>
                       <Bell />
                     </div>
-                    {
-                      unAvailableSize && (
+                    {unAvailableSize && (
                         <div className="mt-2 openPopup">
                           <div className='flex justify-between items-center font-semibold'>
                             <p>Couldn't find your size in stock?</p>
@@ -501,7 +514,6 @@ function ProductDetailsAll() {
                         </div>
                       )
                     }
-
                   </>
                 )
                 }
@@ -530,7 +542,6 @@ function ProductDetailsAll() {
                         </svg>
                       )}
                     </div>
-
                   </button>
 
                   <button
@@ -547,7 +558,6 @@ function ProductDetailsAll() {
                     <FaBolt className="text-yellow-500" />
                     <span>BUY NOW</span>
                   </button>
-
                   <WishlistButton
                     product={product}
                     wishlist={wishlist}
@@ -555,7 +565,6 @@ function ProductDetailsAll() {
                     token={token}
                     content
                   />
-
                 </div>
 
                 <div>
@@ -590,9 +599,6 @@ function ProductDetailsAll() {
         </div>
         <div className='my-4 remove_nav ms-2 md:ms-0'>
           {likedProductsTag && <YouAlsoLike likedProductsTag={likedProductsTag} />}
-          {/* {!loading && (
-            <YouAlsoLike likedProductsTag={likedProductsTag} />
-          )}      */}
         </div>
 
         <div className='my-4 remove_nav ms-2 md:ms-0'>

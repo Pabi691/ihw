@@ -1,8 +1,8 @@
 import React from 'react';
 import MainLayOut from '../layout/MainLayOut';
-import ProductDetailsAll from './ProductDetailsAll';
+import ProductDetailsAll from '../components/products/ProductDetailsAll';
+// import { ProductDetailsPage } from '../components/products';
 import MobileMainLayout from '../layout/MobileMainLayout';
-
 
 function ProductDetails() {
  
@@ -19,7 +19,6 @@ function ProductDetails() {
       </MobileMainLayout>
     </div>
     </>
-    
   );
 }
 

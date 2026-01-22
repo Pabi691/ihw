@@ -22,7 +22,6 @@ const Cart = () => {
   const [couponData, setCouponData] = useState([]);
   const [defaultCoupon, setDefaultCoupon] = useState([]);
 
-
   useEffect(() => {
     if (cartLength > 0) {
       setLoading(false);
@@ -109,18 +108,7 @@ const Cart = () => {
 
         // 👇 Correctly update cart
         setCart(localCart);
-
-        // let localCart = JSON.parse(localStorage.getItem('localCart'));
-        // localCart = localCart.filter((item) => item.id !== cartId);
-        // localStorage.setItem('localCart', JSON.stringify(localCart));
-        // console.log('localCart', localCart);
-
-        //   setCart(prevCart => ({
-        //     ...prevCart,
-        //     cart_items: localCart
-        //   }))
       }
-
 
     } catch (error) {
       console.error('Error removing item from cart:', error.response?.data?.message || error.message);
@@ -149,7 +137,6 @@ const Cart = () => {
         console.error(error45);
       }
     }
-
     fetchCoupon();
   }, [token])
 
@@ -274,27 +261,42 @@ const Cart = () => {
 
                             <h3 className="text-xs text-gray-600 font-medium my-1 md:my-3">{item.prod_name}</h3>
                             <p className="text-gray-600 text-xs flex gap-2"> <FaTruck className='text-green-600' /> Ships in 2-3 days</p>
-                            {item.variation_name && (
+                            {/* {item.variation_name && (
                               <p className="text-gray-600 text-sm">Size: {item.variation_name}</p>
                             )}
                             {item.variation_name && (
                               <p className="text-gray-600 text-sm">Size: {item.variation_name}</p>
-                            )}
+                            )} */}
 
                             <div className='absolute bottom-4 right-4 text-xs'>
                               <div className="flex items-center gap-2 text-sm mb-1 md:my-2">
-                                <p className="text-black font-bold">₹{item.sale_price * item.quantity}</p>
-                                {item.regular_price && (
+                                { item.product_variation.sale_price && item.product_variation.regular_price ? (
+                                  <>
+                                  <p className="text-black font-bold">₹{item.product_variation.sale_price * item.quantity}</p>
+                                  <p className="text-gray-500 line-through">
+                                    ₹{item.product_variation.regular_price * item.quantity}
+                                  </p>
+                                  {item.product_variation.regular_price > item.product_variation.sale_price && (
+                                    <p className="text-green-800 font-medium">
+                                      You saved ₹{(item.product_variation.regular_price - item.product_variation.sale_price) * item.quantity}
+                                    </p>
+                                  )}
+                                  </>
+                                ) : (
+                                  <>
+                                  <p className="text-black font-bold">₹{item.sale_price * item.quantity}</p>
                                   <p className="text-gray-500 line-through">
                                     ₹{item.regular_price * item.quantity}
                                   </p>
+                                  {item.regular_price > item.sale_price && (
+                                    <p className="text-green-800 font-medium">
+                                      You saved ₹{(item.regular_price - item.sale_price) * item.quantity}
+                                    </p>
+                                  )}
+                                  </>
                                 )}
                               </div>
-                              {item.regular_price > item.sale_price && (
-                                <p className="text-green-800 font-medium">
-                                  You saved ₹{(item.regular_price - item.sale_price) * item.quantity}
-                                </p>
-                              )}
+                              
                             </div>
 
                             {/* start size and qty */}
@@ -340,8 +342,6 @@ const Cart = () => {
                             </button>
                           </div>
                         )}
-
-
                       </div>
                     ) : (
                       <div key={item.id} className="cart-item">

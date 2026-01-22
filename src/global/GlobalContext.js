@@ -116,12 +116,16 @@ export const GlobalProvider = ({ children }) => {
       return;
     }
 
-    const payload = {
-      product_id: product.id,
-      prod_variation_id: selectedSize,
-      quantity: 1,
-      price: product.sale_price,
-    };
+      const selectedVariation = product.product_variations?.find(
+        (v) => v.id === selectedSize
+      );
+
+      const payload = {
+        product_id: product.id,
+        prod_variation_id: selectedSize,
+        quantity: 1,
+        price: selectedVariation?.sale_price || product.sale_price,
+      };
 
     if (userToken) {
 
@@ -211,8 +215,10 @@ export const GlobalProvider = ({ children }) => {
     const items = Array.isArray(cart) ? cart : []; // Fallback to empty array if not an array
   
     // Calculate total amount, total MRP, and subtotal
-    const totalAmount = items.reduce((sum, item) => sum + parseFloat(item.sale_price) * item.quantity, 0);
-    const totalMRP = items.reduce((sum, item) => sum + parseFloat(item.regular_price || 0) * item.quantity, 0);
+    const totalAmount = items.reduce((sum, item) => sum + parseFloat(item.product_variation.sale_price ? 
+      item.product_variation.sale_price : item.sale_price) * item.quantity, 0);
+    const totalMRP = items.reduce((sum, item) => sum + parseFloat((item.product_variation.regular_price ? 
+      item.product_variation.regular_price : item.regular_price) || 0) * item.quantity, 0);
     const subtotal = totalAmount; // You could use the same calculation for subtotal as totalAmount
     const savings = totalMRP - subtotal;
   

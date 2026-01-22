@@ -37,7 +37,7 @@ const WishlistButton = ({ product, wishlist, setWishlist, token, content }) => {
 
   // Add to wishlist handler
   const handleAddToWishlist = async (product) => {
-    if(!username){
+    if (!username) {
       navigate('/login');
     }
 
@@ -71,56 +71,31 @@ const WishlistButton = ({ product, wishlist, setWishlist, token, content }) => {
   // Determine if product is in wishlist
   const isInWishlist = wishlist.some((item) => item.product_id === product.id);
 
-  // return isInWishlist ? (
-  //   <button
-  //     className={`text-black font-semibold ${content && 'flex items-center gap-2 px-4 py-3 border rounded-lg'}`}
-  //     onClick={() => {
-  //       const productId = wishlist.find((item) => item.product_id === product.id).id;
-  //       removeFromWishlist(productId);
-  //     }}
-  //   >
-  //     <FaHeart />
-  //     {content && (
-  //       <span>Wishlisted</span>
-  //     )}
-  //   </button>
-  // ) : (
-  //   <button
-  //     className={`text-gray-400 ${content && 'flex items-center gap-2 px-4 py-3 border rounded-lg'}`}
-  //     onClick={() => handleAddToWishlist(product)}
-  //   >
-  //     <FaRegHeart />
-  //     {content && (
-  //       <span>Wishlist</span>
-  //     )} 
-  //   </button>
-  // );
-
   return (
     <button
-  className={`font-semibold ${content ? 'flex items-center gap-2 px-4 py-3 border rounded-lg' : ''} ${isInWishlist ? 'text-black' : 'text-gray-400'}`}
-  onClick={() => {
-    if (loading) return;
-    if (isInWishlist) {
-      const productId = wishlist.find((item) => item.product_id === product.id).id;
-      removeFromWishlist(productId);
-    } else {
-      handleAddToWishlist(product);
-    }
-  }}
->
-  {loading ? (
-    <svg className="animate-spin h-5 w-5 text-gray-500" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-    </svg>
-  ) : (
-    <>
-      {isInWishlist ? <FaHeart /> : <FaRegHeart />}
-      {content && <span className="hidden md:inline-block">{isInWishlist ? 'Wishlisted' : 'Wishlist'}</span>}
-    </>
-  )}
-</button>
+      className={`font-semibold ${content ? 'flex items-center gap-2 px-4 m-2 py-2 border rounded-lg' : ''} ${isInWishlist ? 'text-black' : 'text-gray-400'}`}
+      onClick={() => {
+        if (loading) return;
+        if (isInWishlist) {
+          const productId = wishlist.find((item) => item.product_id === product.id).id;
+          removeFromWishlist(productId);
+        } else {
+          handleAddToWishlist(product);
+        }
+      }}
+    >
+      {loading ? (
+        <svg className="animate-spin h-5 w-5 text-gray-500" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+        </svg>
+      ) : (
+        <>
+          {isInWishlist ? <FaHeart /> : <FaRegHeart />}
+          {content && <span className="hidden md:inline-block">{isInWishlist ? 'Wishlisted' : 'Wishlist'}</span>}
+        </>
+      )}
+    </button>
 
   )
 };
