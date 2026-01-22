@@ -215,10 +215,8 @@ export const GlobalProvider = ({ children }) => {
     const items = Array.isArray(cart) ? cart : []; // Fallback to empty array if not an array
   
     // Calculate total amount, total MRP, and subtotal
-    const totalAmount = items.reduce((sum, item) => sum + parseFloat(item.product_variation.sale_price ? 
-      item.product_variation.sale_price : item.sale_price) * item.quantity, 0);
-    const totalMRP = items.reduce((sum, item) => sum + parseFloat((item.product_variation.regular_price ? 
-      item.product_variation.regular_price : item.regular_price) || 0) * item.quantity, 0);
+    const totalAmount = items.reduce((sum, item) => sum + parseFloat(item.product_variation?.sale_price ?? item.sale_price) * item.quantity, 0);
+    const totalMRP = items.reduce((sum, item) => sum + parseFloat(item.product_variation?.regular_price ?? item.regular_price) * item.quantity, 0);
     const subtotal = totalAmount; // You could use the same calculation for subtotal as totalAmount
     const savings = totalMRP - subtotal;
   

@@ -128,8 +128,15 @@ function ProductDetailsAll() {
 
   const handleAddToCart = (product) => {
     return new Promise((resolve) => {
-      // console.log('productVariations', productVariations);
-      if ((!selectedSize || selectedSize === 'null') && productVariations.length !== 0) {
+      // if ((!selectedSize || selectedSize === 'null') && productVariations.length !== 0) {
+      //   setOpenSizeChart(true);
+      //   resolve(false);
+      //   return;
+      // }
+      const hasSize = productVariations.some(v => v.size_id !== null);
+      if (hasSize && openSizeChart !== true) {
+        console.log('productVariations', productVariations);
+        console.log(openSizeChart);
         setOpenSizeChart(true);
         resolve(false);
         return;

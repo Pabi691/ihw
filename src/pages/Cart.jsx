@@ -270,55 +270,54 @@ const Cart = () => {
 
                             <div className='absolute bottom-4 right-4 text-xs'>
                               <div className="flex items-center gap-2 text-sm mb-1 md:my-2">
-                                { item.product_variation.sale_price && item.product_variation.regular_price ? (
+                                {item.product_variation?.sale_price && item.product_variation?.regular_price ? (
                                   <>
-                                  <p className="text-black font-bold">₹{item.product_variation.sale_price * item.quantity}</p>
-                                  <p className="text-gray-500 line-through">
-                                    ₹{item.product_variation.regular_price * item.quantity}
-                                  </p>
-                                  {item.product_variation.regular_price > item.product_variation.sale_price && (
-                                    <p className="text-green-800 font-medium">
-                                      You saved ₹{(item.product_variation.regular_price - item.product_variation.sale_price) * item.quantity}
+                                    <p className="text-black font-bold">₹{item.product_variation.sale_price * item.quantity}</p>
+                                    <p className="text-gray-500 line-through">
+                                      ₹{item.product_variation.regular_price * item.quantity}
                                     </p>
-                                  )}
+                                    {item.product_variation.regular_price > item.product_variation.sale_price && (
+                                      <p className="text-green-800 font-medium">
+                                        You saved ₹{(item.product_variation.regular_price - item.product_variation.sale_price) * item.quantity}
+                                      </p>
+                                    )}
                                   </>
                                 ) : (
                                   <>
-                                  <p className="text-black font-bold">₹{item.sale_price * item.quantity}</p>
-                                  <p className="text-gray-500 line-through">
-                                    ₹{item.regular_price * item.quantity}
-                                  </p>
-                                  {item.regular_price > item.sale_price && (
-                                    <p className="text-green-800 font-medium">
-                                      You saved ₹{(item.regular_price - item.sale_price) * item.quantity}
+                                    <p className="text-black font-bold">₹{item.sale_price * item.quantity}</p>
+                                    <p className="text-gray-500 line-through">
+                                      ₹{item.regular_price * item.quantity}
                                     </p>
-                                  )}
+                                    {item.regular_price > item.sale_price && (
+                                      <p className="text-green-800 font-medium">
+                                        You saved ₹{(item.regular_price - item.sale_price) * item.quantity}
+                                      </p>
+                                    )}
                                   </>
                                 )}
                               </div>
-                              
                             </div>
 
                             {/* start size and qty */}
                             <div className='flex gap-3 items-center absolute left-4 bottom-0 md:left-0 md:relative'>
-                              <div className="flex items-center">
+                              {item.product_variation?.size ? (
+                                <div className="flex items-center">
+                                  <button
+                                    className="my-4 px-2 py-[2px] bg-gray-200 text-black text-[10px]"
+                                  >
+                                    Size: {item.product_variation?.size}
+                                  </button>
+                                </div>
+                              ) : item.product_variations?.find((size) => size.id === item.prod_variation_id)? (
+                                <div className="flex items-center">
+                                  <button
+                                    className="my-4 px-2 py-[2px] bg-gray-200 text-black text-[10px]"
+                                  >
+                                    Size: {item.product_variations?.find((size) => size.id === item.prod_variation_id)?.size}
+                                  </button>
+                                </div>
+                              ): ''}
 
-                                <button
-                                  className="my-4 px-2 py-[2px] bg-gray-200 text-black text-[10px]"
-                                >
-                                  {
-                                    item.product_variation?.size ? (
-                                      <>
-                                        Size:  {item.product_variation?.size}
-                                      </>
-                                    ) : (
-                                      <>
-                                        Size: {item.product_variations?.find((size) => size.id === item.prod_variation_id)?.size}
-                                      </>
-                                    )
-                                  }
-                                </button>
-                              </div>
                               <div className="flex items-center">
                                 <span>{item.name}</span>
                                 <button
