@@ -11,6 +11,7 @@ import API_BASE_URL from '../global/apiConfig';
 import axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
 import { cacheManager } from '../utils/cacheManager'; // ✅ Import cacheManager
+import { themeBgColor } from '../styles/typography';
 
 const SingleSlider = ({ slug_name, price_filter, title, discountPercentage, cat_slug_name }) => {
   const { token, wishlist, setWishlist } = useGlobal();
@@ -86,7 +87,7 @@ const SingleSlider = ({ slug_name, price_filter, title, discountPercentage, cat_
         </div>
         {cat_slug_name && (
           <Link
-            className="w-16 text-[10px] font-medium text-blue-500"
+            className="w-16 text-[10px] font-medium text-[#04A9FF]"
             to={`/${cat_slug_name}`}
           >
             {'Explore All'}
@@ -119,7 +120,7 @@ const SingleSlider = ({ slug_name, price_filter, title, discountPercentage, cat_
             <SwiperSlide key={product.id}>
               <div className="bg-white overflow-hidden relative md:h-[330px] h-[300px] border-none md:border rounded-sm">
                 {product.product_tag && product.product_tag !== 'null' && (
-                  <span className="absolute z-10 bg-[#203466] text-white top-0 left-0 text-[8px] sm:text-[10px] p-1 rotate-text">
+                  <span className={`absolute z-10 ${themeBgColor} text-white top-0 left-0 text-[8px] sm:text-[10px] p-1 rotate-text`}>
                     {product.product_tag}
                   </span>
                 )}

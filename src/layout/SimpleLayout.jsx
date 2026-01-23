@@ -4,6 +4,7 @@ import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import MobileHeader from '../components/layoutParts/mobile/MobileHeader';
 import { useGlobal } from '../global/GlobalContext';
+import { themeBgColor } from '../styles/typography';
 
 const SimpleLayout = ({ children, title, ProductsCount, link }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -47,7 +48,7 @@ const SimpleLayout = ({ children, title, ProductsCount, link }) => {
       </div>
 
       <div className="block md:hidden mb-12">
-        <div className="bg-[#203466] p-4 text-white font-medium border-b flex justify-between text-base" onClick={() => setShowMenu(!showMenu)}>
+        <div className={`${themeBgColor} p-4 text-white font-medium border-b flex justify-between text-base`} onClick={() => setShowMenu(!showMenu)}>
           <span>More About Indian Hair World</span>
           <span className="text-2xl">
             {showMenu ? <BiChevronUp /> : <BiChevronDown />}

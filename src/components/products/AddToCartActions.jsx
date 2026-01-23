@@ -2,6 +2,7 @@ import React from 'react';
 import { FaCartPlus } from 'react-icons/fa';
 import { FaBolt } from 'react-icons/fa6';
 import WishlistButton from '../WishlistButton';
+import { themeBgColor } from '../../styles/typography';
 
 function AddToCartActions({
   product,
@@ -17,7 +18,7 @@ function AddToCartActions({
       <button
         onClick={onAdd}
         className={`text-white px-6 gap-2 m-2 py-2 
-        rounded-lg flex items-center text-sm font-semibold ${addSuccess ? 'bg-[#2CA003] flex-col w-full' : 'bg-[#203466]'}`}
+        rounded-lg flex items-center text-sm font-semibold ${addSuccess ? 'bg-[#2CA003] flex-col w-full' : themeBgColor}`}
       >
         {addSuccess && addedProductName}
         {addSuccess && (<hr className='h-1 text-white w-full' />)}
@@ -34,7 +35,7 @@ function AddToCartActions({
 
       <button
         onClick={onBuy}
-        className="text-white bg-[#203466] px-6 gap-2 my-2 py-2 rounded-lg flex items-center text-sm font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+        className={`text-white ${themeBgColor} px-6 gap-2 my-2 py-2 rounded-lg flex items-center text-sm font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg`}
       >
         <FaBolt className="text-yellow-400" />
         BUY NOW

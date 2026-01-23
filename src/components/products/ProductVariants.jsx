@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { themeBgColor, themeTextColor } from '../../styles/typography';
 
 function ProductVariants({
   product,
@@ -44,7 +45,7 @@ function ProductVariants({
             {product.size_chart_details && (
               <button
                 onClick={() => setSizeChart(true)}
-                className="text-blue-600"
+                className={themeTextColor}
               >
                 SIZE GUIDE
               </button>
@@ -59,7 +60,7 @@ function ProductVariants({
                   key={size.size_id}
                   className={`border rounded-lg px-3 py-1 cursor-pointer
                   ${selectedSize === size.id
-                      ? 'bg-[#203466] text-white'
+                      ? `${themeBgColor} text-white`
                       : ''
                     }`}
                 >

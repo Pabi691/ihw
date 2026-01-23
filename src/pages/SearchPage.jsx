@@ -6,6 +6,7 @@ import { useGlobal } from "../global/GlobalContext";
 import MainLayOut from "../layout/MainLayOut";
 import { FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { themeBgColor } from "../styles/typography";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -156,7 +157,7 @@ const SearchPage = () => {
   </p>
   <button
     onClick={() => setQuery("")}
-    className="mt-6 px-6 py-2 bg-[#203466] text-white rounded-full hover:bg-gray-800 transition"
+    className={`mt-6 px-6 py-2 ${themeBgColor} text-white rounded-full hover:bg-gray-800 transition`}
   >
     Clear Search
   </button>

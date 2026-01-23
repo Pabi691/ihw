@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGlobal } from '../global/GlobalContext';
+import { themeBgColor } from '../styles/typography';
 // import API_BASE_URL from './../global/apiConfig';
 
 function ProductSizeGuide() {
@@ -103,7 +104,7 @@ function ProductSizeGuide() {
                 className={`cursor-pointer relative border-1 rounded-sm flex items-center justify-center border
                    transition-all duration-200 ease-in-out ${
                   selectedSize === size.id
-                    ? 'border-black ring-1 ring-black bg-[#203466] text-white'
+                    ? `border-black ring-1 ring-black ${themeBgColor} text-white`
                     : 'border-gray-300'
                 }`}
               >

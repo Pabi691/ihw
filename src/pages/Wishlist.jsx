@@ -5,6 +5,7 @@ import { useGlobal } from '../global/GlobalContext';
 import { FaTrashCan } from 'react-icons/fa6';
 import { Link, useNavigate } from 'react-router-dom';
 import SimpleLayout from '../layout/SimpleLayout';
+import { themeBgColor } from '../styles/typography';
 
 const Wishlist = () => {
   const { wishlist, addToCart, token, setWishlist } = useGlobal();
@@ -91,7 +92,7 @@ const Wishlist = () => {
                     </button>
                     <button
                       onClick={() => openSizePopup(item)}
-                      className="text-white bg-[#203466] text-xs px-4 py-2 rounded-lg font-medium"
+                      className={`text-white ${themeBgColor} text-xs px-4 py-2 rounded-lg font-medium`}
                     >
                       Add to Cart
                     </button>
@@ -138,7 +139,7 @@ const Wishlist = () => {
                     </button>
                     <button
                       onClick={() => openSizePopup(item)}
-                      className="text-white bg-[#203466] text-xs px-4 py-2 rounded-lg font-medium"
+                      className={`text-white ${themeBgColor} text-xs px-4 py-2 rounded-lg font-medium`}
                     >
                       Add to Cart
                     </button>
@@ -174,7 +175,7 @@ const Wishlist = () => {
             </p>
             <button
               onClick={() => navigate('/')} // or use useNavigate if in React Router
-              className="my-6 px-6 py-2 bg-[#203466] text-white text-sm rounded-md hover:bg-gray-800 transition-all"
+              className={`my-6 px-6 py-2 ${themeBgColor} text-white text-sm rounded-md hover:bg-gray-800 transition-all`}
             >
               Start Exploring
             </button>
@@ -185,7 +186,7 @@ const Wishlist = () => {
       </div>
 
       {showPopup && popupItem && (
-        <div className="fixed inset-0 bg-[#203466] bg-opacity-50 flex justify-center items-center">
+        <div className={`fixed inset-0 ${themeBgColor} bg-opacity-50 flex justify-center items-center`}>
           <div className="bg-white p-6 rounded-lg w-96 relative">
             <h3 className="text-lg font-semibold mb-4">Select Size</h3>
             <div className='mb-4 flex gap-2'>
@@ -196,7 +197,7 @@ const Wishlist = () => {
                     className={`cursor-pointer relative border 
                     rounded-sm flex items-center justify-center p-1 text-xs 
                     font-medium transition-all duration-200 ease-in-out ${selectedSize === size.id
-                        ? 'border-black ring-1 ring-black bg-[#203466] text-white'
+                        ? `border-black ring-1 ring-black ${themeBgColor} text-white`
                         : 'border-gray-300'
                       }`}
                   >
@@ -213,7 +214,7 @@ const Wishlist = () => {
                 ))}
             </div>
             <button
-              className="bg-[#203466] text-white px-4 py-1 rounded-sm w-full text-xs disabled:opacity-50"
+              className={`${themeBgColor} text-white px-4 py-1 rounded-sm w-full text-xs disabled:opacity-50`}
               onClick={async () => {
                 if (!selectedSize) return;
 

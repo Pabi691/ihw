@@ -88,7 +88,7 @@ const ReviewRatingComments = ({ reviews, overallRating, totalRatings, ratingBrea
       {totalRatings > 5 && (
               <button
                 onClick={() => setOpenReviews(!openReviews)}
-                className="text-blue-600 mt-2"
+                className="text-[#04A9FF] mt-2"
               >
                 {openReviews ? 'View Less Reviews' : 'View All Reviews'}
               </button>

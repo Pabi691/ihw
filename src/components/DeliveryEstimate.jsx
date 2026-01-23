@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useGlobal } from "../global/GlobalContext";
+import { themeBgColor } from "../styles/typography";
 
 const DeliveryEstimate = () => {
   const [pinCode, setPinCode] = useState("");
@@ -64,7 +65,7 @@ const DeliveryEstimate = () => {
         />
         <button
           onClick={fetchDeliveryDetails}
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-[#203466]"
+          className={`bg-gray-500 text-white px-4 py-2 rounded hover:${themeBgColor}`}
         >
           Check
         </button>

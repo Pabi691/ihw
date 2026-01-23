@@ -8,6 +8,7 @@ import compressImage from '../utils/compressImage';
 // Import Swiper core and required modules
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { themeBgColor } from '../styles/typography';
 
 const WishlistSlider = () => {
   const { setCart, wishlist, addToCart, token, setWishlist } = useGlobal();
@@ -95,7 +96,7 @@ const WishlistSlider = () => {
 
   <button
     onClick={() => openSizePopup(item)}
-    className="text-white bg-[#203466] px-4 py-2 rounded-sm text-sm"
+    className={`text-white ${themeBgColor} px-4 py-2 rounded-sm text-sm`}
   >
     Add to Cart
   </button>
@@ -111,7 +112,7 @@ const WishlistSlider = () => {
           )}
 
           {showPopup && popupItem && (
-            <div className="fixed inset-0 bg-[#203466] bg-opacity-50 flex justify-center items-center z-30">
+            <div className={`fixed inset-0 ${themeBgColor} bg-opacity-50 flex justify-center items-center z-30`}>
               <div className="bg-white p-6 rounded-lg w-96 relative">
                 <h3 className="text-lg font-semibold mb-4">Select Size</h3>
                 <div className='mb-4 flex gap-2'>
@@ -122,7 +123,7 @@ const WishlistSlider = () => {
                         className={`cursor-pointer relative border 
                           rounded-md flex items-center justify-center min-w-8 h-8 text-sm 
                           font-medium transition-all duration-200 ease-in-out ${selectedSize === size.id
-                            ? 'border-black ring-1 ring-black bg-[#203466] text-white'
+                            ? `border-black ring-1 ring-black ${themeBgColor} text-white`
                             : 'border-gray-300'
                           }`}
                       >
@@ -139,7 +140,7 @@ const WishlistSlider = () => {
                     ))}
                 </div>
                 <button
-                  className="bg-[#203466] text-white px-4 py-2 rounded-sm ml-auto block text-xs disabled:opacity-50"
+                  className={`${themeBgColor} text-white px-4 py-2 rounded-sm ml-auto block text-xs disabled:opacity-50`}
                   onClick={async () => {
                     if (!selectedSize) return;
 

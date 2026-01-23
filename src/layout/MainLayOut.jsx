@@ -3,6 +3,7 @@ import NavTop from '../components/layoutParts/NavTop';
 import Footer from '../components/layoutParts/Footer';
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { useGlobal } from "../global/GlobalContext";
+import { themeBgColor } from "../styles/typography";
 
 const MainLayOut = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,7 +18,7 @@ const MainLayOut = ({ children }) => {
       {/* Mobile Footer */}
       <div className="block md:hidden mb-12">
         <div
-          className="bg-[#203466] p-4 text-white font-medium border-b flex justify-between text-base"
+          className={`${themeBgColor} p-4 text-white font-medium border-b flex justify-between text-base`}
           onClick={() => setShowMenu(!showMenu)}
         >
           <span>More About Indian Hair World</span>

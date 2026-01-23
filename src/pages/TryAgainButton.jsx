@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { themeBgColor } from "../styles/typography";
 
 export default function TryAgainButton() {
   const [letterIndex, setLetterIndex] = useState(0);
@@ -25,7 +26,7 @@ export default function TryAgainButton() {
       <div className="text-6xl font-bold animate-bounce">{letters[letterIndex]}</div>
       {showRetry && (
         <button
-          className="mt-5 px-6 py-2 bg-[#203466] text-white text-lg font-semibold rounded-lg shadow-md hover:bg-[#ef7f1a] transition"
+          className={`mt-5 px-6 py-2 ${themeBgColor} text-white text-lg font-semibold rounded-lg shadow-md hover:bg-[#ef7f1a] transition`}
           onClick={() => window.location.reload()}
         >
           Try Again

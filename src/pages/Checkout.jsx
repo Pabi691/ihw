@@ -10,6 +10,7 @@ import { MdSwapHoriz, MdSecurity } from "react-icons/md";
 import { IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
 import { toast } from 'react-toastify';
 import compressImage from '../utils/compressImage';
+import { themeBgColor } from '../styles/typography';
 
 const messages = [
   { icon: <BiCycling />, text: "Yayy! You got free delivery" },
@@ -140,6 +141,7 @@ const Checkout = () => {
 
   const { totalMRP, savings, newSubtotal } = calculateSummary();
   useEffect(() => {
+    if(!token) return;
     const payment = async () => {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/get_payment_mothods`, {
         headers: {
@@ -150,7 +152,6 @@ const Checkout = () => {
       if (response.data.status) {
         setPaymentMethods(response.data.payment_methods);
       }
-
     }
     payment();
   }, [token]);
@@ -528,7 +529,7 @@ const Checkout = () => {
             </div>
             <div className="w-full md:w-2/5 border rounded-lg p-4 relative">
 
-              <div className="absolute left-1/2 transform -translate-x-1/2 bg-[#203466] rounded-ss-lg rounded-se-lg top-0 w-full overflow-hidden">
+              <div className={`absolute left-1/2 transform -translate-x-1/2 ${themeBgColor} rounded-ss-lg rounded-se-lg top-0 w-full overflow-hidden`}>
                 <motion.div
                   key={currentMessage} // Re-renders motion.div for each new message
                   initial={{ opacity: 0, y: 10 }} // In from bottom
@@ -549,7 +550,7 @@ const Checkout = () => {
                   <p className='text-sm mb-4'>
                     Additional cash collection charges of ₹ 20 is applicable on this order.
                   </p>
-                  <button disabled={loading} onClick={handleSubmit} className={`${loading ? 'bg-gray-400 text-black' : 'bg-[#203466] text-white'} px-4 py-2 rounded w-full`}>
+                  <button disabled={loading} onClick={handleSubmit} className={`${loading ? 'bg-gray-400 text-black' : `${themeBgColor} text-white`} px-4 py-2 rounded w-full`}>
                     {loading ? 'please wait...' : 'Place Order'}</button>
                 </>
 
@@ -565,9 +566,7 @@ const Checkout = () => {
                     Select your preferred payment method and complete your purchase with confidence!
                   </p>
 
-
-
-                  <button onClick={handleSubmit} className="bg-[#203466] text-white px-4 py-2 rounded w-full mt-4">
+                  <button onClick={handleSubmit} className={`${themeBgColor} text-white px-4 py-2 rounded w-full mt-4`}>
                     Pay {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(newSubtotal)}
                   </button>
                 </>
@@ -598,7 +597,7 @@ const Checkout = () => {
                             <span
                               onClick={() => handleAddressSelect(address)}
                               className={`w-5 h-5 rounded-full cursor-pointer block border
-                          ${selectedAddress?.id === address.id ? "bg-[#203466] text-white" : "border-gray-300"}`}>
+                          ${selectedAddress?.id === address.id ? `${themeBgColor} text-white` : "border-gray-300"}`}>
                               {selectedAddress?.id === address.id ? (<><BiCheck /></>) : ""}
                             </span>
                             <div className='text-xs'>

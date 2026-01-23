@@ -20,6 +20,7 @@ import confetti from 'canvas-confetti';
 import MetaData from '../../layout/MetaData';
 import compressImage from '../../utils/compressImage';
 import MetaContentConfig from '../../content/MetaContentConfig';
+import { hoverScale, themeBgColor, themeBgDark, themeBgGray, themeTextColor } from '../../styles/typography';
 
 function ProductDetailsAll() {
   const { slug } = useParams();
@@ -30,8 +31,8 @@ function ProductDetailsAll() {
   const { wishlist, setWishlist, addToCart, token } = useGlobal();
   const [likedProductsTag, setLikedProductsTag] = useState(null);
   const [openSizeChart, setOpenSizeChart] = useState(false);
-  const [unAvailableSize, setUnAvailableSize] = useState(false);
-  const [selectedUnAvailableSize, setSelectedUnAvailableSize] = useState(null);
+  // const [unAvailableSize, setUnAvailableSize] = useState(false);
+  // const [selectedUnAvailableSize, setSelectedUnAvailableSize] = useState(null);
 
   const [productVariations, setProductVariations] = useState([]);
   const [colorVariations, setColorVariations] = useState([]);
@@ -134,7 +135,7 @@ function ProductDetailsAll() {
       //   return;
       // }
       const hasSize = productVariations.some(v => v.size_id !== null);
-      if (hasSize && openSizeChart !== true) {
+      if (hasSize && !selectedSize) {
         console.log('productVariations', productVariations);
         console.log(openSizeChart);
         setOpenSizeChart(true);
@@ -211,7 +212,7 @@ function ProductDetailsAll() {
       )}
 
       {sizeChart && (
-        <div className="fixed inset-0 bg-[#203466] bg-opacity-50 flex items-center justify-center ml-[-30%] z-50">
+        <div className={`fixed inset-0 ${themeBgColor} bg-opacity-50 flex items-center justify-center ml-[-30%] z-50`}>
           <div className="bg-white p-2 shadow-lg">
             <div className="flex justify-end gap-4 mr-2 text-lg">
               <button onClick={() => setSizeChart(false)} className="font-semibold">✕</button>
@@ -294,7 +295,7 @@ function ProductDetailsAll() {
                     <p className=" text-gray-500 text-sm font-normal">{product.prod_name}</p>
                   </div>
                   {productReviews && (
-                    <p className='text-blue-700 font-semibold text-sm md:text-base'><span>{overallRating}</span> | {productReviews.length} Reviews</p>
+                    <p className={`${themeTextColor} font-semibold text-sm md:text-base`}><span>{overallRating}</span> | {productReviews.length} Reviews</p>
                   )}
                 </div>
 
@@ -420,7 +421,7 @@ function ProductDetailsAll() {
                           Select Size
                         </p>
                         {product.size_chart_details && (
-                          <button onClick={() => setSizeChart(true)} className='rounded-md text-blue-600 text-sm font-semibold'>
+                          <button onClick={() => setSizeChart(true)} className={`rounded-md ${themeTextColor} text-sm font-semibold`}>
                             SIZE GUIDE
                           </button>
                         )}
@@ -434,7 +435,7 @@ function ProductDetailsAll() {
                                 <label
                                   className={`relative border-1 rounded-lg flex items-center justify-center border
                                transition-all duration-200 ease-in-out ${selectedSize === size.id
-                                      ? 'border-black ring-1 ring-black bg-[#203466] text-white'
+                                      ? `${themeBgColor} text-white`
                                       : 'border-gray-300'
                                     } ${size.stock_qty === 0 ?
                                       'text-gray-200 border-gray-200 cursor-default' :
@@ -469,7 +470,7 @@ function ProductDetailsAll() {
                   ) : ""}
                 </div>
                 {/* sizex */}
-                {productVariations.some((size) => size.stock_qty === 0) && (
+                {/* {productVariations.some((size) => size.stock_qty === 0) && (
                   <>
                     <div className='flex justify-between items-center my-5'>
                       <button onClick={() => setUnAvailableSize(true)} className="font-medium text-gray-800 flex gap-2">
@@ -505,7 +506,6 @@ function ProductDetailsAll() {
                                       checked={selectedUnAvailableSize === size.id}
                                       onChange={() => setSelectedUnAvailableSize(size.id)}
                                       className='absolute opacity-0 -z-10'
-                                    // disabled={size.stock_qty === 0}
                                     />
                                     <div className="flex items-center justify-center text-lg
                               text-center px-3 py-1 font-medium w-fit">
@@ -523,7 +523,7 @@ function ProductDetailsAll() {
                     }
                   </>
                 )
-                }
+                } */}
 
                 {/* Add to Cart and Wishlist Button */}
                 <div className="flex items-center flex-wrap mt-4">
@@ -536,7 +536,7 @@ function ProductDetailsAll() {
                       }
                     }}
                     className={`text-white px-6 gap-2 py-3 m-2 
-        rounded-lg flex items-center text-sm font-semibold ${addSuccess ? 'bg-[#2CA003] flex-col w-full' : 'bg-[#203466]'}`}
+        rounded-lg flex items-center text-sm font-semibold ${addSuccess ? 'bg-[#2CA003] flex-col w-full' : `${themeBgGray} hover:${themeBgDark} ${hoverScale}` }`}
                   >
                     {addSuccess && addedProductName}
                     {addSuccess && (<hr className='h-1 text-white w-full' />)}
@@ -560,7 +560,7 @@ function ProductDetailsAll() {
                         }, 800)
                       }
                     }}
-                    className="text-white bg-[#203466] px-6 gap-2 py-3 m-2 rounded-lg flex items-center text-sm font-semibold transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+                    className={`text-white ${themeBgColor} px-6 gap-2 py-3 m-2 rounded-lg flex items-center text-sm font-semibold ${hoverScale}`}
                   >
                     <FaBolt className="text-yellow-500" />
                     <span>BUY NOW</span>

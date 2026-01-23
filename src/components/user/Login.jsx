@@ -9,6 +9,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 // import GoogleLoginButton from './GoogleLoginButton';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { themeBgColor, themeTextColor } from '../../styles/typography';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -164,7 +165,7 @@ const Login = () => {
               ) : (
                 <button
                   onClick={resendHandler}
-                  className="text-blue-600 underline hover:text-blue-800 font-medium"
+                  className={`${themeTextColor} underline hover:text-blue-800 font-medium`}
                 >
                   {loading ? 'Please Wait......' : 'Resend Verification Link'}
                 </button>
@@ -214,7 +215,7 @@ const Login = () => {
                     )}
 
                     <button
-                      className={`py-2 px-3 rounded-md ${loading ? 'bg-gray-400' : 'bg-[#203466]'} text-white font-medium m-auto block`}
+                      className={`py-2 px-3 rounded-md ${loading ? 'bg-gray-400' : themeBgColor} text-white font-medium m-auto block`}
                       type="submit"
                       disabled={loading}
                     >
@@ -222,7 +223,7 @@ const Login = () => {
                     </button>
                   </form>
                   <div className="flex justify-between">
-                    <button onClick={() => setIsPasswordChange(false)} className="text-blue-500 text-sm">
+                    <button onClick={() => setIsPasswordChange(false)} className={`${themeTextColor} text-sm`} >
                       Back to login
                     </button>
                   </div>
@@ -264,7 +265,7 @@ const Login = () => {
                       </button>
                     </div>
                     <button
-                      className='py-2 px-3 rounded-md bg-[#203466] text-white font-medium m-auto block'
+                      className={`py-2 px-3 rounded-md ${themeBgColor} text-white font-medium m-auto block`}
                       type="submit"
                       disabled={loading}
                     >
@@ -272,7 +273,7 @@ const Login = () => {
                     </button>
                   </form>
                   <div className="flex justify-between">
-                    <button onClick={() => setIsPasswordChange(true)} className="text-blue-500 text-sm">
+                    <button onClick={() => setIsPasswordChange(true)} className={`${themeTextColor} text-sm`}>
                       Forgot your password?
                     </button>
                   </div>

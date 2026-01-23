@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { themeTextColor } from '../../styles/typography';
 
 function BankAccountForm({ order, token }) {
   const [formData, setFormData] = useState({
@@ -61,7 +62,7 @@ function BankAccountForm({ order, token }) {
         <li>We're not responsible for any mistakes done through the refund form.</li>
         <li>
           We reserve the full rights to stop the refund if all our return/refund conditions are not met.
-          Please refer to the <a href="/return-policy" class="text-blue-600 hover:underline">Return/Refund section</a>.
+          Please refer to the <a href="/return-policy" class={`${themeTextColor} hover:underline`} >Return/Refund section</a>.
         </li>
         <li>Refund will take up to 14 business days to get credited to your account.</li>
       </ol>

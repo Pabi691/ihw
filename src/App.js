@@ -44,8 +44,8 @@ import ReturnPolicy from './pages/ReturnPolicy';
 import Return from './pages/Return';
 import OrderDetails from './components/user/OrderDetails';
 import ResetPassword from './components/user/ResetPassword';
-import SearchableTabs from './pages/SearchableTabs';
-import AnswerPage from './pages/AnswerPage';
+import Contact from './pages/Contact';
+import AnswerPage from './components/contact/AnswerPage';
 import VarifyEmail from './components/user/VarifyEmail';
 import Services from './pages/Services';
 import Branches from './pages/Branches';
@@ -63,10 +63,10 @@ function App() {
             {/* inner pages */}
             <Route path="/about" element={<About />} />
             <Route path='/services' element={<Services />} />
-            <Route path='/:branch' element={<Branches />} />
+            <Route path='/branch/:branch' element={<Branches />} />
             <Route path="/terms-and-conditions" element={<TermsCondition />} />
             <Route path="/privacy-policy" element={<Privacy />} />
-            <Route path="/contact-us" element={<SearchableTabs />} />
+            <Route path="/contact-us" element={<Contact />} />
             <Route path="/contact-us/page" element={<AnswerPage />} />
             <Route path="/return-policy" element={<ReturnPolicy />} />
             <Route path="/search" element={<SearchPage />} />

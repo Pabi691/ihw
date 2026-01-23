@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import SimpleLayout from '../../layout/SimpleLayout';
 import MainLayOut from '../../layout/MainLayOut';
+import { themeBgColor } from '../../styles/typography';
 
 const ResetPassword = () => {
   const location = useLocation();
@@ -89,7 +90,7 @@ const ResetPassword = () => {
 
             <button
               type="submit"
-              className="py-2 px-3 rounded-md bg-[#203466] text-white font-medium m-auto block"
+              className={`py-2 px-3 rounded-md ${themeBgColor} text-white font-medium m-auto block`}
             >
               Reset Password
             </button>

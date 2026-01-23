@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import MainLayOut from "../layout/MainLayOut";
+import MainLayOut from "../../layout/MainLayOut";
 import { BiChevronLeft } from "react-icons/bi";
 
 const answers = {

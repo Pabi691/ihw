@@ -4,6 +4,7 @@ import { useGlobal } from '../global/GlobalContext';
 import axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
 import compressImage from '../utils/compressImage';
+import { themeBgColor } from '../styles/typography';
 
 function ShopByCategoryAccessories({ title }) {
   const [categories, setCategories] = useState([]);
@@ -54,7 +55,7 @@ function ShopByCategoryAccessories({ title }) {
   }, [fetchAccessoriesCategory]);
 
   return (
-    <div className="bg-[#203466] py-3 bg-opacity-5">
+    <div className={`${themeBgColor} py-3 bg-opacity-5`}>
     <h4 className="text-start md:text-center my-4 md:my-8  capitalize md:uppercase">
         {title}
     </h4>

@@ -4,6 +4,7 @@ import { useGlobal } from "../../global/GlobalContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TextField, MenuItem, Select, FormControl, InputLabel, Box } from "@mui/material";
 import axios from "axios";
+import { themeBgColor } from "../../styles/typography";
 
 const ShippingAddress = () => {
   const [shippingAddresses, setShippingAddresses] = useState([]);
@@ -222,7 +223,7 @@ const ShippingAddress = () => {
             <TextField label="Country" fullWidth margin="normal" value={newAddress.country} onChange={(e) => setNewAddress({ ...newAddress, country: e.target.value })} />
           </Box>
 
-          <button type="submit" className="bg-[#203466] text-white p-2 rounded-md mt-2 text-center block">
+          <button type="submit" className={`${themeBgColor} text-white p-2 rounded-md mt-2 text-center block`}>
         {isEditing ? "Update Address" : "Add Address"}
       </button>
 
@@ -292,14 +293,14 @@ const ShippingAddress = () => {
       </div>
 
       {showWarning && (
-        <div className="fixed inset-0 bg-[#203466] bg-opacity-50 flex items-center justify-center z-50">
+        <div className={`fixed inset-0 ${themeBgColor} bg-opacity-50 flex items-center justify-center z-50`}>
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <p className="text-xs text-gray-700">
               Your shipping address will be deleted permanently
             </p>
             <div className="mt-4 flex justify-end gap-4">
               <button onClick={() => setShowWarning(false)} className="px-4 py-2 bg-gray-300 rounded text-xs">No</button>
-              <button onClick={handleDeleteAddress} className="px-4 py-2 bg-[#203466] text-white rounded text-xs" disabled={loading}>
+              <button onClick={handleDeleteAddress} className={`px-4 py-2 ${themeBgColor} text-white rounded text-xs`} disabled={loading}>
                 {loading ? 'Removing...' : 'Yes, Delete'}
               </button>
             </div>

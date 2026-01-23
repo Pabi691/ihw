@@ -16,5 +16,4 @@ const BranchContent = () => {
     )
 }
 
-
 export default BranchContent;

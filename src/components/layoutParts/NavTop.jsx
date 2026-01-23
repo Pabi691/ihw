@@ -9,6 +9,7 @@ import { Heart, User2Icon, UserRound } from 'lucide-react';
 import { BiExit } from 'react-icons/bi';
 import { GoPackageDependents } from "react-icons/go";
 import MetaData from '../../layout/MetaData';
+import { themeBgColor } from '../../styles/typography';
 
 const NavTop = () => {
   const { userToken, logout } = useAuth();
@@ -98,7 +99,7 @@ const NavTop = () => {
             <Link to="/wishlist" className="relative">
               <FaRegHeart className='text-white md:text-black text-lg md:text-base' />
               {wishlistCount > 0 && (
-                <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-xs text-white bg-[#203466] rounded-full w-4 h-4 flex items-center justify-center">
+                <span className={`absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-xs text-white ${themeBgColor} rounded-full w-4 h-4 flex items-center justify-center`}>
                   {wishlistCount}
                 </span>
               )}
@@ -118,7 +119,7 @@ const NavTop = () => {
       {/* Mobile Menu Items */}
       <div className="mobile_menu md:hidden">
             {showMenu && (
-              <div className='bg-[#203466]/60 absolute top-0 left-0 z-[100] w-full h-screen'>
+              <div className={`${themeBgColor}/60 absolute top-0 left-0 z-[100] w-full h-screen`}>
                 <div className="menu_items relative overflow-y-scroll scrollbar-none">
                   <button onClick={()=> setShowMenu(false)} className='absolute right-2 top-3'>✕</button>
                 <div className="flex gap-3 flex-col">
@@ -126,7 +127,7 @@ const NavTop = () => {
                     <div className="flex gap-3 flex-col">
                       <div className='flex items-center gap-3'>
                         {localStorage.getItem('username') && (
-                          <span className='text-xl font-semibold w-8 h-8 rounded-full bg-[#203466] text-[#c7c7c7] uppercase flex justify-center items-center'>
+                          <span className={`text-xl font-semibold w-8 h-8 rounded-full ${themeBgColor} text-[#c7c7c7] uppercase flex justify-center items-center`}>
                             {localStorage.getItem('username')?.charAt(0) }
                           </span>
                         )}

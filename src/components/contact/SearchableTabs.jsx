@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import MainLayOut from "../layout/MainLayOut";
-import { DesktopNav } from "../components/Navigation";
 
 const tabs = [
   {
@@ -93,11 +91,8 @@ const SearchableTabs = () => {
   );
 
   return (
-    <MainLayOut>
-      <DesktopNav />
       <div className="max-w-7xl p-4 space-y-4 mx-auto py-10">
         <div className="p-8 text-center md:text-left">
-          <h1 className="mb-4 text-2xl font-semibold">Contact Us</h1>
           <p className="font-semibold">What’s your query about?</p>
           <div className="relative mt-5 mb-10 w-fit mx-auto md:mx-0">
             <span className="absolute left-3 top-1 z-10 text-3xl rotate-[270deg] text-gray-500">⌕‍</span>
@@ -174,7 +169,6 @@ const SearchableTabs = () => {
           </p>
         </div>
       </div>
-    </MainLayOut>
   );
 };
 

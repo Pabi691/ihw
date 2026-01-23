@@ -9,6 +9,7 @@ import { BiChevronRight, BiSortAZ } from "react-icons/bi";
 import { CheckIcon, SortDescIcon } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import compressImage from "../utils/compressImage";
+import { themeBgColor } from "../styles/typography";
 
 function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProducts }) {
 
@@ -248,22 +249,21 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                 scrollbar-none pt-4 p-10 md:px-0 md:pb-0`}>
               <div className="flex justify-between items-center md:hidden my-3">
                 <div
-                  className="filterTitle text-lg text-black 
-              font-medium">
+                  className="filterTitle text-lg text-black font-medium">
                   Filters
                 </div>
-                <button className="font-semibold text-xs bg-[#203466] text-white w-6 h-6 rounded-full" onClick={() => setOpenFilter(false)}>✕</button>
+                <button className={`font-semibold text-xs ${themeBgColor} text-white w-6 h-6 rounded-full`} onClick={() => setOpenFilter(false)}>✕</button>
               </div>
 
               {/* Category Filter */}
               {categories && (
                 <div className="hidden md:block">
-                  <button className="font-medium mb-3 text-gray-700">Categories</button>
+                  <button className="font-semibold mb-3 text-gray-700">Categories</button>
                   <div className="flex flex-col items-start gap-3">
                     {categories.slice(0, showAllCategories ? categories.length : 4).map((cat) => (
                       <button
                         key={cat.category_id}
-                        className="border-none flex gap-2 items-baseline text-blue-600 font-medium text-sm text-left"
+                        className="border-none flex gap-2 items-baseline text-gray-600 font-medium text-sm text-left hover:text-[#04A9FF]"
                         onClick={() => navigate(`../../${cat.category_slug}`)}
                       >
                         {cat.category}
@@ -273,7 +273,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                     {categories.length > 4 && (
                       <button
                         onClick={() => setShowAllCategories(!showAllCategories)}
-                        className="text-blue-500 mt-2 text-xs"
+                        className="text-[#04A9FF] mt-2 text-xs"
                       >
                         {showAllCategories ? "Show Less" : "Show More"}
                       </button>
@@ -289,11 +289,11 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                     {sizes.slice(0, showAllSizes ? sizes.length : 4).map((sizeObj) => (
                       <button
                         key={sizeObj.size_id}
-                        className="border-none flex gap-2 items-baseline"
+                        className="border-none flex gap-2 items-baseline hover:text-[#04A9FF]"
                         onClick={() => toggleFilter("size", sizeObj.size)} // Pass size name instead of key
                       >
                         <span className={`filterOption border text-start mb-2 w-4 h-4 flex items-center justify-center
-                        ${filters.size.includes(sizeObj.size) ? "bg-[#203466] text-white" : "border-gray-600"
+                        ${filters.size.includes(sizeObj.size) ? `${themeBgColor}` : "border-gray-600"
                           }`}>{filters.size.includes(sizeObj.size) && (<CheckIcon className="text-xs" />)}</span>
                         {sizeObj.size}
                       </button>
@@ -303,7 +303,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                     {sizes.length > 4 && (
                       <button
                         onClick={() => setShowAllSizes(!showAllSizes)}
-                        className="text-blue-500 mt-2 text-xs"
+                        className="text-[#04A9FF] mt-2 text-xs"
                       >
                         {showAllSizes ? "Show Less" : "Show More"}
                       </button>
@@ -320,10 +320,10 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                     {brands.slice(0, showAllBrands ? brands.length : 4).map((brand) => (
                       <button
                         key={brand.brand_id}
-                        className="border-none flex gap-2 items-baseline text-left text-xs"
+                        className="border-none flex gap-2 items-baseline text-left text-xs hover:text-[#04A9FF]"
                         onClick={() => toggleFilter("brand", brand.brand_name)}
                       >
-                        <span className={`filterOption border text-start mb-2 w-4 h-4 ${filters.brand.includes(brand.brand_name) ? "bg-[#203466]" : "border-gray-600"
+                        <span className={`filterOption border text-start mb-2 w-4 h-4 ${filters.brand.includes(brand.brand_name) ? themeBgColor : "border-gray-600"
                           }`}></span>
                         {brand.brand_name}
                       </button>
@@ -332,7 +332,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                     {brands.length > 4 && (
                       <button
                         onClick={() => setShowAllBrands(!showAllBrands)}
-                        className="text-blue-500 mt-2 text-xs"
+                        className="text-[#04A9FF] mt-2 text-xs"
                       >
                         {showAllBrands ? "Show Less" : "Show More"}
                       </button>
@@ -359,7 +359,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
 
                             {/* Selection Indicator */}
                             <span
-                              className={`filterOption border text-start mb-2 w-4 h-4 ${filters.color_id.includes(color.color_id) ? "bg-[#203466]" : "border-gray-600"
+                              className={`filterOption border text-start mb-2 w-4 h-4 ${filters.color_id.includes(color.color_id) ? themeBgColor : "border-gray-600"
                                 }`}
                             ></span>
 
@@ -377,7 +377,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                     {colors.length > 4 && (
                       <button
                         onClick={() => setShowAllColors(!showAllColors)}
-                        className="text-blue-500 mt-2 text-xs"
+                        className="text-[#04A9FF] mt-2 text-xs"
                       >
                         {showAllColors ? "Show Less" : "Show More"}
                       </button>
@@ -420,7 +420,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                 {isOpen && (
                   <div className="fixed w-full bottom-0 md:bottom-auto md:absolute right-0 mt-2 bg-white 
                   shadow-md rounded-2xl md:rounded-md border border-gray-300 p-2 md:w-48 z-[75]">
-                    <button className="font-semibold text-xs bg-[#203466] float-right text-white w-6 h-6 rounded-full" onClick={() => setIsOpen(false)}>✕</button>
+                    <button className={`font-semibold text-xs ${themeBgColor} float-right text-white w-6 h-6 rounded-full`} onClick={() => setIsOpen(false)}>✕</button>
                     {sortOptions.map((option) => (
                       <label key={option.value} className="flex items-center gap-2 cursor-pointer p-1 hover:bg-gray-100">
                         <input
@@ -458,7 +458,7 @@ function ProductPageBody({ categorySlug, ProductsCount, products, catagoryProduc
                           <img
                             src={compressImage(product.primary_img, 400, 70, 'webp')}
                             alt={product.prod_name}
-                            className="w-full h-full transition-opacity duration-300 ease-in-out"
+                            className="w-full h-full transition-opacity duration-300 ease-in-out object-cover object-top"
                           />
                         </Link>
 

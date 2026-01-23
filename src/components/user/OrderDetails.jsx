@@ -8,6 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 // import BankAccountForm from './BankAccountForm';
 import BankDetails from './BankDetails';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
+import { themeBgColor, themeTextColor } from '../../styles/typography';
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -127,7 +128,7 @@ const OrderDetails = () => {
                   {trackingId && (
                     <div className='flex justify-between items-center mb-4'>
                       <p className='font-medium text-xs'>Tracking no. <br /><span className='text-base font-semibold'>#{trackingId}</span></p>
-                      <img alt='delhivery-icon' className='bg-[#203466] p-[2px] w-[100px] md:w-[150px]' src={`${process.env.PUBLIC_URL || ''}/images/Delhivery_logo.png`} />
+                      <img alt='delhivery-icon' className={`${themeBgColor} p-[2px] w-[100px] md:w-[150px]`} src={`${process.env.PUBLIC_URL || ''}/images/Delhivery_logo.png`} />
                     </div>
                   )}
 
@@ -258,7 +259,7 @@ const OrderDetails = () => {
                           <button
                             type="button"
                             onClick={toggleBreakup}
-                            className="text-blue-600 text-xs underline mt-1"
+                            className={`${themeTextColor} text-xs underline mt-1`}
                           >
                             {showBreakup ? "Hide Breakup" : "View Breakup"}
                           </button>

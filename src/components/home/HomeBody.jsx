@@ -3,7 +3,7 @@ import React from 'react';
 import SingleSlider from '../SingleSlider';
 import ProductCategory from './ProductCategory';
 import ShopOnlineBanner from '../ShopOnlineBanner';
-import BranchAppointmentBanner from '../BranchAppointmentBanner';
+import BranchAppointmentBanner from '../branches/BranchAppointmentBanner';
 import WelcomeSection from './WelcomeSection';
 import WhoWeAre from './WhoWeAre';
 

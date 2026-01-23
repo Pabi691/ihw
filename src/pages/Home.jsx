@@ -5,6 +5,7 @@ import HomeBody from '../components/home/HomeBody';
 import { Link } from 'react-router-dom';
 import MobileHomeBody from "./mobile/MobileHomeBody";
 import { DesktopNav, MobileNav } from "../components/Navigation";
+import { themeBgColor } from "../styles/typography";
 
 // const storiesData = [
 //     {
@@ -107,7 +108,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="hidden md:block bg-[#203466] header_top">
+            <div className={`hidden md:block ${themeBgColor} header_top`}>
                 <div className="bg-gradient-to-r from-[#1B3A57] to-[#00A859]">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-center h-10 text-sm text-white">

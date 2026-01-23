@@ -17,7 +17,7 @@ const Siliguri = () => {
         Sevoke Road, Siliguri City Plaza, 2nd Floor, Shop No. 3<br />
         District: Jalpaiguri, Ward Number: 40<br />
         Pincode: 734001<br />
-        Phone: <a href="tel:+917439436698" className="text-blue-600">+91 74394 36698</a>
+        Phone: <a href="tel:+917439436698" className="text-[#04A9FF]">+91 74394 36698</a>
       </p>
 
       {/* Main intro */}

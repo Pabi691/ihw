@@ -4,6 +4,7 @@ import Footer from '../components/layoutParts/Footer';
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import NavTop from "../components/layoutParts/NavTop";
 import { useGlobal } from "../global/GlobalContext";
+import { themeBgColor } from "../styles/typography";
 
 const MobileMainLayout = ({ children, title, ProductsCount, link }) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -20,7 +21,7 @@ const MobileMainLayout = ({ children, title, ProductsCount, link }) => {
                 {children}
             </div>
             <div className="block md:hidden mb-12">
-                <div className="bg-[#203466] p-4 text-white font-medium border-b flex justify-between text-base" onClick={() => setShowMenu(!showMenu)}>
+                <div className={`${themeBgColor} p-4 text-white font-medium border-b flex justify-between text-base`} onClick={() => setShowMenu(!showMenu)}>
                     <span>More About Indian Hair World</span>
                     <span className="text-2xl">
                         {showMenu ? <BiChevronUp /> : <BiChevronDown />}

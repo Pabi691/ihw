@@ -9,10 +9,10 @@ export const desktopNavItems = [
   {
     label: "Branches",
     children: [
-      { label: "Lake Gardens, Kolkata", path: "/kolkata" },
-      { label: "SaltLake, Kolkata", path: "/salt-lake" },
-      { label: "Durgapur", path: "/durgapur" },
-      { label: "Siliguri", path: "/siliguri" },
+      { label: "Lake Gardens, Kolkata", path: "/branch/kolkata" },
+      { label: "SaltLake, Kolkata", path: "/branch/salt-lake" },
+      { label: "Durgapur", path: "/branch/durgapur" },
+      { label: "Siliguri", path: "/branch/siliguri" },
     ],
   },
 

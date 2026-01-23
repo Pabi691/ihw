@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BiChevronRight, BiLogoWhatsapp } from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdPending } from 'react-icons/md';
+import { themeBgColor } from '../../styles/typography';
 
 const MyOrders = () => {
   const { token } = useGlobal();
@@ -171,7 +172,7 @@ const MyOrders = () => {
         </div>
       )}
       {showWarning && (
-        <div className="fixed inset-0 bg-[#203466] bg-opacity-50 flex items-center justify-center">
+        <div className={`fixed inset-0 ${themeBgColor} bg-opacity-50 flex items-center justify-center`}>
           <div className="bg-white p-6 rounded-lg shadow-lg mx-4 md:mx-0">
             <p className="text-xs text-gray-700">
               It's important to keep in mind that too many cancellations can lead to an account ban,
@@ -181,7 +182,7 @@ const MyOrders = () => {
             </p>
             <div className="mt-4 flex justify-end gap-4">
               <button onClick={() => setShowWarning(false)} className="px-4 py-2 bg-gray-300 rounded text-xs">No</button>
-              <button onClick={cancelOrderHandler} className="px-4 py-2 bg-[#203466] text-white rounded text-xs" disabled={loading}>
+              <button onClick={cancelOrderHandler} className={`px-4 py-2 ${themeBgColor} text-white rounded text-xs`} disabled={loading}>
                 {loading ? 'Cancelling...' : 'Yes, Cancel'}
               </button>
             </div>

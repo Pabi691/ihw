@@ -3,6 +3,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { hoverScale } from "../styles/typography";
 
 const WishlistButton = ({ product, wishlist, setWishlist, token, content }) => {
 
@@ -73,7 +74,7 @@ const WishlistButton = ({ product, wishlist, setWishlist, token, content }) => {
 
   return (
     <button
-      className={`font-semibold ${content ? 'flex items-center gap-2 px-4 m-2 py-2 border rounded-lg' : ''} ${isInWishlist ? 'text-black' : 'text-gray-400'}`}
+      className={`${hoverScale} font-semibold ${content ? 'flex items-center gap-2 px-4 m-2 py-2 border rounded-lg' : ''} ${isInWishlist ? 'text-black' : 'text-gray-400'}`}
       onClick={() => {
         if (loading) return;
         if (isInWishlist) {

@@ -1,5 +1,5 @@
-import { branchData } from "../content/branchData";
-import { strokedHeading } from "../styles/typography";
+import { branchData } from "../../content/branchData";
+import { strokedHeading } from "../../styles/typography";
 
 const BranchAppointmentBanner = () => {
   return (
@@ -38,10 +38,10 @@ const BranchAppointmentBanner = () => {
               </div>
 
               <a
-                href={`tel:${branch.phone}`}
+                href={`tel:${branch.phones[0].replace(/\s+/g, "")}`}
                 className="block text-black font-bold text-lg px-10 py-2"
               >
-                {branch.phone}
+                {branch.phones[0]}
               </a>
             </div>
           ))}
@@ -71,10 +71,10 @@ const BranchAppointmentBanner = () => {
               </div>
 
               <a
-                href={`tel:${branch.phone}`}
+                href={`tel:${branch.phones[0].replace(/\s+/g, "")}`}
                 className="block px-3 py-3 font-semibold text-lg text-black hover:text-[#04A9FF]"
               >
-                {branch.phone}
+                {branch.phones[0]}
               </a>
             </div>
           ))}

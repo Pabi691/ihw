@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import MainLayOut from "../../layout/MainLayOut";
 import { useAuth } from "./AuthContext";
 import { useGlobal } from "../../global/GlobalContext";
+import { themeBgColor, themeTextColor } from "../../styles/typography";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -260,7 +261,7 @@ const Register = () => {
               <div className="mb-4">
                 <button
                   type="submit"
-                  className="w-full py-2 bg-[#203466] text-white font-bold rounded-md"
+                  className={`w-full py-2 ${themeBgColor} text-white font-bold rounded-md`}
                   disabled={loading}
                 >
                   {loading ? <span>Loading...</span> : "Register"}
@@ -271,7 +272,7 @@ const Register = () => {
 
           {!varify && (
           <div className="flex justify-between">
-            <Link to="../login" className="text-blue-500 text-sm">
+            <Link to="../login" className={`${themeTextColor} text-sm`}>
               Already have an account? Login
             </Link>
           </div>

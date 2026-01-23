@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useGlobal } from '../../global/GlobalContext';
 import axios from 'axios';
 import Skeleton from 'react-loading-skeleton';
+import { themeBgColor } from '../../styles/typography';
 
 const MyProfile = () => {
   const { token } = useGlobal();
@@ -68,7 +69,7 @@ const MyProfile = () => {
               value={updatedProfile.first_name || ''}
               onChange={handleChange}
               disabled={!isEditing}
-              className='w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#04A9FF]`}
             />
           </div>
           <div>
@@ -183,7 +184,7 @@ const MyProfile = () => {
           <>
             <button
               onClick={handleUpdate}
-              className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition'
+              className={`px-4 py-2 ${themeBgColor} text-white rounded-lg hover:bg-blue-600 transition`}
             >
               Save
             </button>

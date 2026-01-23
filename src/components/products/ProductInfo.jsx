@@ -1,4 +1,5 @@
 import React from 'react';
+import { themeTextColor } from '../../styles/typography';
 
 function ProductInfo({ product, reviews }) {
   const overallRating =
@@ -19,7 +20,7 @@ function ProductInfo({ product, reviews }) {
         </div>
 
         {reviews && (
-          <p className="text-blue-700 font-semibold">
+          <p className={`${themeTextColor} font-semibold`}>
             {overallRating} | {reviews.length} Reviews
           </p>
         )}

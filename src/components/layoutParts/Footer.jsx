@@ -2,6 +2,7 @@ import React from 'react';
 import { FaFacebook, FaInstagram, FaPinterest } from 'react-icons/fa';
 import { FaThreads, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { branchData } from '../../content/branchData';
 
 const Footer = () => {
 
@@ -17,61 +18,38 @@ const Footer = () => {
   return (
     <footer className="bg-[#2d2d2d] py-5 text-white">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 py-10 max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-{/* Branches Section */}
-        <div>
+        {/* Branches Section */}
+        <div className='lg:col-span-2'>
           <h5 className="text-[#04A9FF] font-bold mb-4 text-base uppercase">
             Branches
           </h5>
 
-          <div className="space-y-6 text-sm text-gray-200">
-
-            {/* Durgapur */}
-            <div>
-              <h6 className="font-semibold mb-1">Durgapur</h6>
-              <p>Address: 2nd Floor, Above Punjab National Bank,</p>
-              <p>City Center, Durgapur, West Bengal – 713216</p>
-              <p>Phone: +91 9875517402</p>
-              <p>+91 8910652352</p>
-            </div>
-
-            {/* Salt Lake */}
-            <div>
-              <h6 className="font-semibold mb-1">Salt Lake</h6>
-              <p>
-                Address: EC-20, Ground Floor (Back Side), Opp. CC1,
-              </p>
-              <p>Sector-1, Salt Lake City, Kolkata, West Bengal – 700064</p>
-              <p>Phone: +91 8961194044</p>
-            </div>
-
-          </div>
-        </div>
-        <div className='mt-10'>
-          <div className="space-y-6 text-sm text-gray-200">
-            {/* Lake Gardens */}
-            <div>
-              <h6 className="font-semibold mb-1">Lake Gardens, Kolkata</h6>
-              <p>Address: 1A, Sultan Alam Road,</p>
-              <p>Lake Gardens, Kolkata, West Bengal – 700033</p>
-              <p>Phone: +91 7980221032</p>
-              <p>+91 8910097668</p>
-            </div>
-
-            {/* Siliguri */}
-            <div>
-              <h6 className="font-semibold mb-1">Siliguri</h6>
-              <p>
-                Address: Sevoke Road, Siliguri City Plaza,
-              </p>
-              <p>
-                2nd Floor, Shop No. 3, District: Jalpaiguri,
-              </p>
-              <p>
-                Ward No. 40, Pincode – 734001
-              </p>
-              <p>Phone: +91 7439436698</p>
-            </div>
-
+          {/* Grid for better balance on desktop */}
+          <div className="grid gap-2 md:grid-cols-2 text-sm text-gray-200">
+            {Object.entries(branchData).map(([slug, branch]) => (
+              <div key={slug} className="space-y-1">
+                <h5 className="font-semibold mb-1 text-lg">{branch.name}</h5>
+                <p className="font-medium mb-1 text-gray-300">Address: {branch.address}</p>
+                {/* Address */}
+                {/* {branch.address.split(",").map((line, idx) => (
+                  <p key={idx}>{idx === 0 ? "Address: " : ""}{line.trim()}</p>
+                ))} */}
+                {/* Phones */}
+                <div className="mt-1">
+                  <p>Phone:</p>
+                  {branch.phones.map((phone) => (
+                  <p key={phone}>
+                    <a
+                      href={`tel:${phone.replace(/\s+/g, "")}`}
+                      className="hover:underline"
+                    >
+                      {phone}
+                    </a>
+                  </p>
+                ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         {/* Company Section */}

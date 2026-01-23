@@ -5,6 +5,7 @@ import "swiper/css";
 import { Pagination, Autoplay } from "swiper/modules";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { DesktopNav } from '../components/Navigation';
+import { themeBgColor } from '../styles/typography';
 
 const About = () => {
   return (
@@ -32,7 +33,7 @@ const About = () => {
         </div>
 
         {/* QUOTE SECTION */}
-        <div className='bg-[#203466] text-white text-center px-4 py-24 md:py-32 text-3xl md:text-4xl font-semibold leading-snug'>
+        <div className={`${themeBgColor} text-white text-center px-4 py-24 md:py-32 text-3xl md:text-4xl font-semibold leading-snug`}>
           Restoring Confidence Through <br />
           <strong>Natural-Looking, Non-Surgical Hair Solutions</strong>
         </div>
@@ -97,7 +98,7 @@ const About = () => {
         </div>
 
         {/* UNIQUE SECTION */}
-        <div className='bg-[#203466]/40 text-white px-4 md:px-8 py-16 md:py-24'>
+        <div className={`${themeBgColor}/40 text-white px-4 md:px-8 py-16 md:py-24`}>
           <h2 className='text-3xl md:text-4xl font-bold text-center mb-10'>Why Choose Indian Hair World?</h2>
           <Swiper
             autoplay={{ delay: 3000, disableOnInteraction: false }}

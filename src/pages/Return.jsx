@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useGlobal } from "../global/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import { themeBgColor } from "../styles/typography";
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
@@ -169,7 +170,7 @@ const Return = () => {
             // disabled={loading || !!message}
             disabled={loading || buttonDisable}
             className={`w-full py-3 text-center font-medium rounded-lg transition duration-200 
-          ${loading || buttonDisable ? 'bg-gray-400 text-white cursor-not-allowed' : 'bg-[#203466] text-white hover:bg-gray-900'}`}
+          ${loading || buttonDisable ? 'bg-gray-400 text-white cursor-not-allowed' : `${themeBgColor} text-white hover:bg-gray-900`}`}
           >
             {loading ? 'Submitting...' : 'Submit Return Request'}
           </button>

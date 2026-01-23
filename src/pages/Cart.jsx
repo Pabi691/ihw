@@ -6,6 +6,7 @@ import { FaTruck } from 'react-icons/fa6';
 import SimpleLayout from '../layout/SimpleLayout';
 import Skeleton from 'react-loading-skeleton';
 import compressImage from '../utils/compressImage';
+import { themeBgColor } from '../styles/typography';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -351,7 +352,7 @@ const Cart = () => {
                 </div>
 
                 {isPopupOpen && (
-                  <div className="fixed inset-0 flex items-center justify-center bg-[#203466] bg-opacity-50 z-50">
+                  <div className={`fixed inset-0 flex items-center justify-center ${themeBgColor} bg-opacity-50 z-50`}>
                     <div className="bg-white p-6 rounded shadow-lg w-80">
                       <h2 className="text-xl font-bold mb-4">Select Quantity</h2>
 
@@ -363,7 +364,7 @@ const Cart = () => {
                             key={qty}
                             onClick={() => setSelectedQuantity(qty)}
                             className={`w-full h-10 flex items-center justify-center rounded transition-none duration-0 border
-                                          ${selectedQuantity === qty ? 'bg-[#203466] text-white border-black' : 'bg-gray-200 text-gray-700 border-gray-300'}`}
+                                          ${selectedQuantity === qty ? `${themeBgColor} text-white border-black` : 'bg-gray-200 text-gray-700 border-gray-300'}`}
                           >
                             {qty}
                           </button>
@@ -416,7 +417,7 @@ const Cart = () => {
                               }
                             }
                           }}
-                          className={`px-4 py-2 rounded text-white ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-[#203466] hover:bg-gray-700"
+                          className={`px-4 py-2 rounded text-white ${isLoading ? "bg-gray-400 cursor-not-allowed" : `${themeBgColor} hover:bg-gray-700`
                             }`}
                           disabled={isLoading} // Disable button when loading
                         >
@@ -484,7 +485,7 @@ const Cart = () => {
                       </p>
                       <button
                         onClick={() => proceedHandler()}
-                        className="mt-4 w-full bg-[#203466] text-white p-2 rounded"
+                        className={`mt-4 w-full ${themeBgColor} text-white p-2 rounded`}
                       >
                         PROCEED
                       </button>
@@ -495,7 +496,7 @@ const Cart = () => {
               </div>
 
               {openCoupon && (
-                <div className="bg-[#203466] bg-opacity-50 fixed inset-0 flex justify-center items-center z-50">
+                <div className={`${themeBgColor} bg-opacity-50 fixed inset-0 flex justify-center items-center z-50`}>
                   <div className="bg-white p-5 rounded-2xl shadow-lg w-[75%] h-[95%] overflow-scroll scrollbar-none">
                     <div className="flex justify-between items-center mb-4">
                       <h2 className="text-sm md:text-xl font-semibold">Coupons & Offers</h2>
@@ -519,7 +520,7 @@ const Cart = () => {
                         />
                         <button
                           type="submit"
-                          className="bg-[#203466] text-xs text-white px-4 py-2 rounded-sm absolute right-0 bottom-0 h-full"
+                          className={`${themeBgColor} text-xs text-white px-4 py-2 rounded-sm absolute right-0 bottom-0 h-full`}
                           disabled={loading}
                         >
                           {loading ? "Applying..." : "APPLY"}
@@ -557,7 +558,7 @@ const Cart = () => {
                                 {item.description || "Tap to apply this coupon"}
                               </div>
                             </div>
-                            <div className="bg-gray-100 text-xs px-2 py-1 rounded group-hover:bg-[#203466] group-hover:text-white">
+                            <div className={`bg-gray-100 text-xs px-2 py-1 rounded group-hover:${themeBgColor} group-hover:text-white`}>
                               Select
                             </div>
                           </div>
@@ -578,7 +579,7 @@ const Cart = () => {
 
               <button
                 onClick={() => navigate('/shop')}
-                className="my-4 bg-[#203466] text-white px-6 py-2 rounded"
+                className={`my-4 ${themeBgColor} text-white px-6 py-2 rounded`}
               >
                 Continue Shopping
               </button>

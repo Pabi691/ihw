@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Package, MapPin, User, HelpCircle, SignalHigh } from "lucide-react";
 import Skeleton from 'react-loading-skeleton';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { themeBgColor } from '../../styles/typography';
 
 const OverView = () => {
   const { token } = useGlobal();
@@ -60,52 +61,8 @@ const OverView = () => {
     fetchOrders();
   }, [token]);
 
-
   return (
     <div className="min-h-screen">
-      {/* mobile start */}
-
-      {/* <div className='hidden'>
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-4 rounded-lg shadow-lg text-center">
-              <h2 className="text-lg font-semibold text-gray-700">Total Orders</h2>
-              <p className="text-xl font-bold text-black">{orders.length}</p>
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <h3 className="text-base font-semibold text-gray-800 mb-4">Recent Activity</h3>
-            <ul className="bg-white p-6 rounded-lg shadow-lg">
-              {limitOrders.map((activity) => (
-                <li
-                  key={activity.id}
-                  className="flex flex-col py-4 border-b border-gray-200 last:border-0"
-                >
-                  {activity.order_items && activity.order_items.length > 0 ? (
-                    activity.order_items.map((item, index) => (
-                      <div key={index} className="mb-2">
-                        <span className="text-gray-600">{item.product_name || 'N/A'}</span>
-                        <br />
-                        <span className="text-gray-400 text-sm">
-                          {item.updated_at
-                            ? new Date(item.updated_at).toLocaleString()
-                            : 'No update info'}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-400">No items found</p>
-                  )}
-
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div> */}
-
-      {/* mobile end */}
       <div className="max-w-5xl mx-auto md:block">
         {/* Profile Header */}
         <div className='flex flex-col md:flex-row justify-between'>
@@ -116,7 +73,7 @@ const OverView = () => {
                 width={45} />
             ) : (
               <div className="flex items-center gap-5 bg-white py-0 px-6 md:p-6 rounded-xl md:border mb-6 w-full md:w-100% md:bg-transparent border border-gray-300">
-                <div className='text-xl md:text-4xl font-extrabold w-12 h-12 rounded-full bg-[#203466] text-white uppercase flex justify-center items-center'>
+                <div className={`text-xl md:text-4xl font-extrabold w-12 h-12 rounded-full ${themeBgColor} text-white uppercase flex justify-center items-center`}>
                   {customers?.first_name?.charAt(0)}
                 </div>
 

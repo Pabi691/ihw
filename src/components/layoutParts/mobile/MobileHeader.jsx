@@ -4,6 +4,7 @@ import { FaRegHeart, FaBagShopping, FaUser } from 'react-icons/fa6';
 import { useAuth } from '../../user/AuthContext';
 import { useGlobal } from '../../../global/GlobalContext';
 import { BiChevronLeft } from 'react-icons/bi';
+import { themeBgColor } from '../../../styles/typography';
 
 const MobileHeader = ({ title, ProductsCount, link }) => {
   const { userToken, logout } = useAuth();
@@ -69,7 +70,7 @@ const MobileHeader = ({ title, ProductsCount, link }) => {
             <Link to="/wishlist" className="relative">
               <FaRegHeart className='text-black' />
               {wishlistCount > 0 && (
-                <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-xs text-white bg-[#203466] rounded-full w-4 h-4 flex items-center justify-center">
+                <span className={`absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-xs text-white ${themeBgColor} rounded-full w-4 h-4 flex items-center justify-center`}>
                   {wishlistCount}
                 </span>
               )}
