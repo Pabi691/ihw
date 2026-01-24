@@ -18,20 +18,13 @@ function NavMenus() {
         </div>       
       </nav>
       <nav className='md:hidden block'>
-      <div className='block md:hidden'>
-          <div className=' group'>
-              {/* <img src="images/mobile/planters.png" className="w-7 h-7" alt='planters' loading="lazy" /> */}
-            <Link to="/categories?category=planters" className="text-gray-900 hover:text-black pb-[25px] text-sm capitalize">
-              Men
+      <div className='flex flex-col md:hidden'>
+            <Link to="/men" className="text-gray-900 hover:text-black mb-1 text-xs capitalize">
+              - Men
             </Link>
-          </div>
-
-          <div className=' group'>
-              {/* <img src="images/mobile/tasla.png" alt='tasla' loading="lazy" className="w-7 h-7" /> */}
-            <Link to="/categories?category=tasla" className="text-gray-900 hover:text-black pb-[25px] text-sm capitalize">
-              Women
+            <Link to="/women" className="text-gray-900 hover:text-black text-xs capitalize">
+              - Women
             </Link>
-          </div> 
         </div>
       </nav>
     </>

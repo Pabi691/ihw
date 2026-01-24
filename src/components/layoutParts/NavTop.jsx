@@ -149,9 +149,15 @@ const NavTop = () => {
                     </div>     
                     </>
                   )}
-                <p className='text-gray-600 text-xs'>SHOP IN</p>
+                <p className='font-semibold'>Our Services</p>
+                <Link className='text-xs font-medium' to={'/services'}>- Services</Link>
+                <p className='font-semibold'>Branches</p>
+                <Link onClick={()=> setShowMenu(false)} className='text-xs font-medium' to={'/branch/kolkata'}>- Lake Gardens, Kolkata</Link>
+                <Link onClick={()=> setShowMenu(false)} className='text-xs font-medium' to={'/branch/salt-lake'}>- Salt lake, Kolkata</Link>
+                <Link onClick={()=> setShowMenu(false)} className='text-xs font-medium' to={'/branch/durgapur'}>- Durgapur, Kolkata</Link>
+                <Link onClick={()=> setShowMenu(false)} className='text-xs font-medium' to={'/branch/siliguri'}>- Siliguri, Kolkata</Link>
+                <p className='font-semibold'>Shop In</p>
                       <NavMenus />
-
                       {userToken && (
                         <div>
                         <p className='text-gray-600 text-[11px] my-1 font-medium'>MY PROFILE</p>
@@ -174,15 +180,9 @@ const NavTop = () => {
 
                       </div>
                       )}
-
-                      
-
-                      <p className='text-gray-600 text-[11px] my-1 font-medium'>CONTACT US</p>
-
+                      <p className='text-gray-600 text-[11px] mt-1 font-medium'>CONTACT US</p>
                       <Link className='text-xs font-medium' to={'/contact-us'}>Help & Support</Link>
-
-                      <p className='text-gray-600 text-[11px] my-1 font-medium'>ABOUT US</p>
-
+                      <p className='text-gray-600 text-[11px] mt-1 font-medium'>ABOUT US</p>
                       <Link className='text-xs font-medium' to={'/about'}>Our Story</Link>
                       {userToken && (
                       <button

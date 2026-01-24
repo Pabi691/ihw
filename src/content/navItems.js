@@ -20,14 +20,30 @@ export const desktopNavItems = [
 ];
 
 export const mobileNavItems = [
+  // {
+  //   label: "Planters",
+  //   path: "/planters",
+  //   image: "images/mobile/planters.png",
+  // },
+  // {
+  //   label: "Bucket",
+  //   path: "/bucket",
+  //   image: "images/mobile/bucket.png",
+  // },
+  { label: "Home", path: "/" },
+  { label: "Shop", path: "/shop" },
+  { label: "About Us", path: "/about" },
+  { label: "Services", path: "/services" },
+
   {
-    label: "Planters",
-    path: "/planters",
-    image: "images/mobile/planters.png",
+    label: "Branches",
+    children: [
+      { label: "Lake Gardens, Kolkata", path: "/branch/kolkata" },
+      { label: "SaltLake, Kolkata", path: "/branch/salt-lake" },
+      { label: "Durgapur", path: "/branch/durgapur" },
+      { label: "Siliguri", path: "/branch/siliguri" },
+    ],
   },
-  {
-    label: "Bucket",
-    path: "/bucket",
-    image: "images/mobile/bucket.png",
-  },
+
+  { label: "Contact Us", path: "/contact-us" },
 ];

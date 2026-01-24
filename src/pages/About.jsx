@@ -1,7 +1,6 @@
 import React from 'react';
 import MainLayOut from '../layout/MainLayOut';
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import { Pagination, Autoplay } from "swiper/modules";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { DesktopNav } from '../components/Navigation';

@@ -7,7 +7,6 @@ import BranchContent from "../components/branches/BranchContent";
 
 
 const Branches = () => {
-
     return (
         <>
             <MainLayOut>

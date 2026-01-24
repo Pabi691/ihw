@@ -1,8 +1,10 @@
 import React from 'react';
-import { BiSolidCategoryAlt, BiSolidHomeSmile } from 'react-icons/bi';
-import { FaJira, FaUser } from 'react-icons/fa6';
+import { BiSolidHomeSmile } from 'react-icons/bi';
+import { FaUser } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 import { themeTextColor } from '../../styles/typography';
+import { ShoppingBagIcon } from '@heroicons/react/20/solid';
+import { GoHeartFill } from 'react-icons/go';
 
 const BottomFixedNav = () => {
   const location = useLocation();
@@ -22,17 +24,17 @@ const BottomFixedNav = () => {
             </span>
           </Link>
 
-          <Link className='flex items-center flex-col gap-1 text-gray-500' to={'/categories'}>
-            <BiSolidCategoryAlt className={`text-xl ${location.pathname === '/categories' ? activeStyle : defaultStyle}`} />
-            <span className={`text-[10px] font-semibold ${location.pathname === '/categories' ? themeTextColor : 'text-gray-500'}`}>
-              Categories
+          <Link className='flex items-center flex-col gap-1 text-gray-500' to={'/wishlist'}>
+            <GoHeartFill className={`text-xl ${location.pathname === '/wishlist' ? activeStyle : defaultStyle}`} />
+            <span className={`text-[10px] font-semibold ${location.pathname === '/wishlist' ? themeTextColor : 'text-gray-500'}`}>
+              Wishlist
             </span>
           </Link>
 
-          <Link className='flex items-center flex-col gap-1 text-gray-500' to={'/campaign/explore'}>
-            <FaJira className={`text-xl ${location.pathname === '/campaign/explore' ? activeStyle : defaultStyle}`} />
-            <span className={`text-[10px] font-semibold ${location.pathname === '/explore' ? themeTextColor : 'text-gray-500'}`}>
-              Explore
+          <Link className='flex items-center flex-col gap-1 text-gray-500' to={'/cart'}>
+            <ShoppingBagIcon className={`text-xl ${location.pathname === '/cart' ? activeStyle : defaultStyle}`} />
+            <span className={`text-[10px] font-semibold ${location.pathname === '/cart' ? themeTextColor : 'text-gray-500'}`}>
+              cart
             </span>
           </Link>
 

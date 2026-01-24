@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import MainLayOut from '../layout/MainLayOut';
 import { useGlobal } from '../global/GlobalContext';
 import { FaTrashCan } from 'react-icons/fa6';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,143 +8,126 @@ import { themeBgColor } from '../styles/typography';
 
 const Wishlist = () => {
   const { wishlist, addToCart, token, setWishlist } = useGlobal();
-  const [selectedSize, setSelectedSize] = useState(null);
+
   const [showPopup, setShowPopup] = useState(false);
   const [popupItem, setPopupItem] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+
   const navigate = useNavigate();
+
+  /* -------------------- Helpers -------------------- */
+
+  const getVariations = (item) =>
+    item?.product_variations || item?.product_variation || [];
+
+  const hasValidSize = (item) =>
+    getVariations(item).some(
+      (v) => v.size_id !== null && v.size_id !== undefined
+    );
+
+  /* ---------------- Wishlist Actions ---------------- */
 
   const removeFromWishlist = async (productId) => {
     try {
-      await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/delete_wishlist_item/${productId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setWishlist((prevItems) => prevItems.filter((item) => item.id !== productId));
+      await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/v1/delete_wishlist_item/${productId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setWishlist((prev) => prev.filter((i) => i.id !== productId));
     } catch (error) {
-      console.error('Error removing item from wishlist:', error);
+      console.error('Wishlist remove failed:', error);
     }
   };
 
-  const openSizePopup = (item) => {
-    console.log('item', item);
-    setPopupItem(item);
-    setShowPopup(true);
+  /* ---------------- Add To Cart Logic ---------------- */
+
+  const handleAddToCart = async (item) => {
+    const product = item.product || item;
+
+    // Product has sizes → open popup
+    if (hasValidSize(item)) {
+      setPopupItem(item);
+      setSelectedSize(null);
+      setShowPopup(true);
+      return;
+    }
+
+    // Product has NO sizes → direct add
+    try {
+      setIsLoading(true);
+      await addToCart(product, null);
+      navigate('/cart');
+    } catch (error) {
+      console.error('Direct add to cart failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const closeSizePopup = () => {
+  const closePopup = () => {
     setShowPopup(false);
+    setPopupItem(null);
     setSelectedSize(null);
   };
 
+  /* -------------------- UI -------------------- */
+
   return (
-    <SimpleLayout ProductsCount={`(${wishlist.length} ${wishlist.length > 1 ? 'items' : 'item'})`} title='My Wishlist'>
-      <div className="wishlist-page p-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-lg font-semibold hidden md:block">
-          My Wishlist
-          {/* ({wishlist.length} Item{wishlist.length !== 1 ? 's' : ''}) */}
-          ({wishlist.length} Item{wishlist.length !== 1 ? 's' : ''})
-        </h2>
+    <SimpleLayout
+      title="My Wishlist"
+      ProductsCount={`(${wishlist.length} ${wishlist.length === 1 ? 'item' : 'items'
+        })`}
+    >
+      <div className="max-w-7xl mx-auto p-4">
         {wishlist.length > 0 ? (
-          <div className="wishlist-items my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {wishlist.map((item) => (
-              item.product ?
-                <div key={item.id} className="wishlist-item border p-4 rounded-lg">
-                  <Link to={`../product/${item.product.slug}`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {wishlist.map((item) => {
+              const product = item.product || item;
+
+              return (
+                <div key={item.id} className="border p-4 rounded-lg">
+                  <Link to={`../product/${product.slug}`}>
                     <img
-                      src={item.product.primary_img}
-                      alt={item.product.prod_name} loading="lazy"
-                      className="w-full h-96 object-cover rounded-lg object-top"
+                      src={product.primary_img}
+                      alt={product.prod_name}
+                      className="w-full h-96 object-cover rounded-lg"
                     />
                   </Link>
-                  <h3 className="text-sm font-semibold mt-2 text-nowrap overflow-hidden mr-2">{item.product.prod_name}</h3>
-                  {!selectedSize ? (
-                    <div className='flex items-center gap-3 my-2'>
-                      <p className="text-black text-sm font-bold">₹{item.product.sale_price}</p>
-                      <p className="text-gray-500 line-through text-sm">₹{item.product.regular_price}</p>
-                    </div>
-                  ) : (
-                    <>
-                      {Array.isArray(popupItem?.product_variation) &&
-                        popupItem.product_variation.length > 0 &&
-                        popupItem.product_variation
-                          .filter(v => v.id === selectedSize)
-                          .map(v => (
-                            <div key={v.id} className="flex items-center gap-3 my-2">
-                              <p className="font-bold">₹{v.sale_price}</p>
-                              <p className="line-through text-gray-400">₹{v.regular_price}</p>
-                            </div>
-                          ))
-                      }
 
-                    </>
-                  )}
+                  <h3 className="text-sm font-semibold mt-2 truncate">
+                    {product.prod_name}
+                  </h3>
 
-                  <div className='flex justify-between border-t-2 pt-2'>
+                  <div className="flex gap-3 my-2">
+                    <p className="font-bold text-sm">₹{product.sale_price}</p>
+                    <p className="line-through text-gray-400 text-sm">
+                      ₹{product.regular_price}
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between border-t pt-2">
                     <button
                       onClick={() => removeFromWishlist(item.id)}
-                      className="mt-2 text-black text-sm underline"
+                      className="text-sm underline"
                     >
                       <FaTrashCan />
                     </button>
+
                     <button
-                      onClick={() => openSizePopup(item)}
-                      className={`text-white ${themeBgColor} text-xs px-4 py-2 rounded-lg font-medium`}
+                      onClick={() => handleAddToCart(item)}
+                      disabled={isLoading}
+                      className={`${themeBgColor} text-white text-xs px-4 py-2 rounded-lg`}
                     >
                       Add to Cart
                     </button>
                   </div>
                 </div>
-                :
-                <div key={item.id} className="wishlist-item border p-4 rounded-lg">
-                  <Link to={`../product/${item.slug}`}>
-                    <img
-                      src={item.primary_img}
-                      alt={item.prod_name}
-                      className="w-full h-96 object-cover rounded-lg object-top"
-                    />
-                  </Link>
-                  <h3 className="text-sm font-semibold mt-2 text-nowrap overflow-hidden mr-2">{item.prod_name}</h3>
-                  {!selectedSize ? (
-                    <div className='flex items-center gap-3 my-2'>
-                      <p className="text-black text-sm font-bold">₹{item.sale_price}</p>
-                      <p className="text-gray-500 line-through text-sm">₹{item.regular_price}</p>
-                    </div>
-                  ) : (
-                    <>
-                      {Array.isArray(popupItem?.product_variations || popupItem?.product_variation) &&
-                        (popupItem?.product_variations || popupItem?.product_variation).length > 0 &&
-                        (popupItem?.product_variations || popupItem?.product_variation)
-                          .filter(v => v.id === selectedSize)
-                          .map(v => (
-                            <div key={v.id} className="flex items-center gap-3 my-2">
-                              <p className="font-bold">₹{v.sale_price}</p>
-                              <p className="line-through text-gray-400">₹{v.regular_price}</p>
-                            </div>
-                          ))
-                      }
-
-                    </>
-                  )}
-
-                  <div className='flex justify-between border-t-2 pt-2'>
-                    <button
-                      onClick={() => removeFromWishlist(item.id)}
-                      className="mt-2 text-black text-sm underline"
-                    >
-                      <FaTrashCan />
-                    </button>
-                    <button
-                      onClick={() => openSizePopup(item)}
-                      className={`text-white ${themeBgColor} text-xs px-4 py-2 rounded-lg font-medium`}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="flex flex-col items-center my-8">
@@ -180,62 +162,62 @@ const Wishlist = () => {
               Start Exploring
             </button>
           </div>
-
-
         )}
       </div>
 
+      {/* ---------------- Size Popup ---------------- */}
+
       {showPopup && popupItem && (
-        <div className={`fixed inset-0 ${themeBgColor} bg-opacity-50 flex justify-center items-center`}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-96 relative">
             <h3 className="text-lg font-semibold mb-4">Select Size</h3>
-            <div className='mb-4 flex gap-2'>
-              {(popupItem.product_variations || popupItem.product_variation)?.filter((size) => size.size && size.size.trim() !== '')
-                .map((size) => (
+
+            <div className="flex gap-2 mb-4 flex-wrap">
+              {getVariations(popupItem)
+                .filter((v) => v.size)
+                .map((v) => (
                   <label
-                    key={size.size_id}
-                    className={`cursor-pointer relative border 
-                    rounded-sm flex items-center justify-center p-1 text-xs 
-                    font-medium transition-all duration-200 ease-in-out ${selectedSize === size.id
-                        ? `border-black ring-1 ring-black ${themeBgColor} text-white`
+                    key={v.id}
+                    className={`border px-3 py-1 text-xs cursor-pointer ${selectedSize === v.id
+                        ? `border-black ${themeBgColor} text-white`
                         : 'border-gray-300'
                       }`}
                   >
                     <input
                       type="radio"
-                      name="size"
-                      value={size.size}
-                      checked={selectedSize === size.id}
-                      onChange={() => setSelectedSize(size.id)}
-                      className="absolute opacity-0 cursor-pointer"
+                      className="hidden"
+                      checked={selectedSize === v.id}
+                      onChange={() => setSelectedSize(v.id)}
                     />
-                    {size.size}
+                    {v.size}
                   </label>
                 ))}
             </div>
-            <button
-              className={`${themeBgColor} text-white px-4 py-1 rounded-sm w-full text-xs disabled:opacity-50`}
-              onClick={async () => {
-                if (!selectedSize) return;
 
-                setIsLoading(true);
+            <button
+              disabled={!selectedSize || isLoading}
+              className={`${themeBgColor} text-white w-full py-2 text-xs rounded disabled:opacity-50`}
+              onClick={async () => {
                 try {
-                  await addToCart(popupItem.product, selectedSize);
-                  setSuccess(true);
+                  setIsLoading(true);
+                  await addToCart(
+                    popupItem.product || popupItem,
+                    selectedSize
+                  );
                   navigate('/cart');
                 } catch (error) {
-                  console.error('Error adding to cart:', error);
+                  console.error('Size add to cart failed:', error);
                 } finally {
                   setIsLoading(false);
                 }
               }}
-              disabled={!selectedSize || isLoading}
             >
-              {isLoading ? "Adding..." : success ? "Added!" : "Add to Cart"}
+              {isLoading ? 'Adding...' : 'Add to Cart'}
             </button>
+
             <button
-              className="text-gray-500 absolute top-3 right-3"
-              onClick={closeSizePopup}
+              onClick={closePopup}
+              className="absolute top-3 right-3 text-gray-500"
             >
               ✕
             </button>
