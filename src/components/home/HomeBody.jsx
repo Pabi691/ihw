@@ -6,18 +6,15 @@ import ShopOnlineBanner from '../ShopOnlineBanner';
 import BranchAppointmentBanner from '../branches/BranchAppointmentBanner';
 import WelcomeSection from './WelcomeSection';
 import WhoWeAre from './WhoWeAre';
+import ServiceSlider from '../services/ServiceSlider';
+import NonSurgicalHairReplacement from './NonSurgicalHairReplacement';
+import AchievementsSlider from './AchievementsSlider';
 
 const HomeBody = () => {
   return (
     <>
-    <BranchAppointmentBanner />
-    <ShopOnlineBanner />
-    {/* <img
-        src={`${process.env.PUBLIC_URL}/images/bannNeww.jpg`}
-        className="w-full"
-        alt="Poster1" loading="lazy"
-      /> */}
-      {/* <ProductSliderHome /> */}
+      <BranchAppointmentBanner />
+      <ShopOnlineBanner />
       <WelcomeSection />
       <ProductCategory
         title={
@@ -37,6 +34,9 @@ const HomeBody = () => {
       {/* <SingleSlider slug_name="get_slug_data/hanging-planter" price_filter="699" title="HANGING PLANTER Under Rs 699" /> */}
 
       {/* <SingleSlider slug_name="get_active_products" discountPercentage="10" title="under 10% off" /> */}
+      <AchievementsSlider />
+      <NonSurgicalHairReplacement />
+      <ServiceSlider />
 
       <WhoWeAre />
 

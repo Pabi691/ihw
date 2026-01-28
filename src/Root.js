@@ -8,44 +8,54 @@ import { HelmetProvider } from 'react-helmet-async';
 function Root() {
 
   useEffect(() => {
-    const INACTIVITY_LIMIT = 60 * 60 * 1000; // 1 hour
+    const INACTIVITY_LIMIT = 60 * 60 * 1000;
 
-    function updateActivity() {
-      localStorage.setItem("lastActivity", Date.now());
+    const clearAuth = () => {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("lastActivity");
+      sessionStorage.clear();
+    };
+
+    const last = localStorage.getItem("lastActivity");
+
+    if (last && Date.now() - last > INACTIVITY_LIMIT) {
+      clearAuth();
+      window.location.replace("/login");
+      return;
     }
 
-    // Add listeners for any activity
-    window.addEventListener("mousemove", updateActivity);
-    window.addEventListener("keydown", updateActivity);
-    window.addEventListener("click", updateActivity);
-    window.addEventListener("scroll", updateActivity);
-    window.addEventListener("touchstart", updateActivity);
+    let timeout;
+    const updateActivity = () => {
+      if (timeout) return;
+      timeout = setTimeout(() => {
+        localStorage.setItem("lastActivity", Date.now());
+        timeout = null;
+      }, 5000);
+    };
 
-    updateActivity(); // set initial timestamp
+    ["mousemove", "keydown", "click", "scroll", "touchstart"].forEach(
+      (event) => window.addEventListener(event, updateActivity)
+    );
+
+    updateActivity();
 
     const interval = setInterval(() => {
       const last = localStorage.getItem("lastActivity");
-      if (!last) return;
-
-      if (Date.now() - last > INACTIVITY_LIMIT) {
-        localStorage.clear();
-        sessionStorage.clear();
-
-        // Optional redirect
-        window.location.href = "/login";
+      if (last && Date.now() - last > INACTIVITY_LIMIT) {
+        clearAuth();
+        window.location.replace("/login");
       }
-    }, 60000); // check every 1 minute
+    }, 60000);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener("mousemove", updateActivity);
-      window.removeEventListener("keydown", updateActivity);
-      window.removeEventListener("click", updateActivity);
-      window.removeEventListener("scroll", updateActivity);
-      window.removeEventListener("touchstart", updateActivity);
+      ["mousemove", "keydown", "click", "scroll", "touchstart"].forEach(
+        (event) => window.removeEventListener(event, updateActivity)
+      );
     };
   }, []);
-  
+
+
   return (
     // <StrictMode>
     <HelmetProvider>

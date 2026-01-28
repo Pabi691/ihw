@@ -18,7 +18,7 @@ const About = () => {
           </h1>
 
           <div className='grid grid-cols-1 xl:grid-cols-2 gap-8 items-center'>
-            <LazyLoadImage alt="our-story" className='w-full rounded-md' src="images/hair-patch.jpg" />
+            <LazyLoadImage alt="our-story" className='w-full rounded-md' src="images/about2.jpg" />
             <div>
               <p className='text-xl font-semibold mb-2'>It all starts with confidence</p>
               <h2 className='uppercase font-bold text-lg mb-4'>Indian Hair World</h2>
@@ -51,7 +51,7 @@ const About = () => {
           alt='about-banner'
           loading="lazy"
           className='w-full h-[300px] md:h-[450px] object-cover'
-          src='images/hair-banner.jpg'
+          src='images/about1.jpg'
         />
 
         {/* ABOUT DETAILS */}
@@ -97,7 +97,7 @@ const About = () => {
         </div>
 
         {/* UNIQUE SECTION */}
-        <div className={`${themeBgColor}/40 text-white px-4 md:px-8 py-16 md:py-24`}>
+        <div className={`${themeBgColor} text-white px-4 md:px-8 py-16 md:py-24`}>
           <h2 className='text-3xl md:text-4xl font-bold text-center mb-10'>Why Choose Indian Hair World?</h2>
           <Swiper
             autoplay={{ delay: 3000, disableOnInteraction: false }}

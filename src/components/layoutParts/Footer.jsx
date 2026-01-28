@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaPinterest } from 'react-icons/fa';
-import { FaThreads, FaXTwitter, FaYoutube } from 'react-icons/fa6';
+import { FaLinkedinIn, FaThreads, FaYoutube } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { branchData } from '../../content/branchData';
 
@@ -90,7 +90,7 @@ const Footer = () => {
           <ul className="flex space-x-6 items-center">
             <li className="flex items-center space-x-2">
               <Link
-                to={"https://www.facebook.com/"}
+                to={"https://www.facebook.com/Indianhairworld.services/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:text-gray-400"
@@ -100,7 +100,7 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-2">
               <Link
-                to={"https://www.instagram.com/"}
+                to={"https://www.instagram.com/indianhairworld.service/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:text-gray-400"
@@ -110,17 +110,17 @@ const Footer = () => {
             </li>
             <li className="flex items-center space-x-2">
               <Link
-                to={"https://twitter.com/"}
+                to={"https://www.linkedin.com/in/indian-hair-world-saltlake-627704301/"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:text-gray-400"
               >
-                <FaXTwitter size={24} />
+                <FaLinkedinIn size={24} />
               </Link>
             </li>
             <li className="flex items-center space-x-2">
               <Link
-                to={"https://www.threads.net/"}
+                to={"https://www.threads.com/@indianhairworld.service"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm hover:text-gray-400"
@@ -129,84 +129,23 @@ const Footer = () => {
               </Link>
             </li>
             <li className="flex items-center space-x-2">
-              <Link className="text-sm hover:text-gray-400" rel="noopener noreferrer" target="_blank" to={'https://in.pinterest.com/'}>
+              <Link className="text-sm hover:text-gray-400" rel="noopener noreferrer" target="_blank" to={'https://www.pinterest.com/indianhairworldsaltlake/'}>
                 <FaPinterest size={24} />
               </Link>
             </li>
             <li className="flex items-center space-x-2">
-              <Link className="text-sm hover:text-gray-400" rel="noopener noreferrer" target="_blank" to={'https://youtube.com/'}>
+              <Link className="text-sm hover:text-gray-400" rel="noopener noreferrer" target="_blank" to={'https://www.youtube.com/channel/UC5zfRMVUFshI1PxoxJxW51w'}>
                 <FaYoutube size={24} />
               </Link>
             </li>
           </ul>
           <h5 className="text-[#04A9FF] font-bold mb-3 text-base uppercase mt-4">Opening Hours</h5>
           <p className='text-sm'>Monday to Sunday: 11Am - 7Pm</p>
-          {/* <form className='w-full flex mt-4'>
-            <input type="email" placeholder="Enter Email Id" className="p-2 text-sm bg-gray-900 text-white 
-            focus:outline-none border-b-2 border-[#04A9FF]" />
-            <button type="submit" className="bg-[#04A9FF] text-black p-2 font-semibold text-sm">
-              SUBSCRIBE
-            </button>
-          </form> */}
         </div>
 
       </div>
 
-      <div className="footer_down max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* <hr />
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-10">
-          <div>
-            <h5 className="font-bold mb-3 text-base uppercase">Planters</h5>
-            {loading ? (
-              <ul>
-                {Array.from({ length: 7 }).map((_, index) => (
-                  <li key={index}>
-                    <Skeleton height={15} width={"100%"} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <ul className='flex flex-wrap gap-2 md:block'>
-                {Array.isArray(planters) &&
-                  planters.map((item) => (
-                    <li key={item.id} className="mb-2">
-                      <Link to={`../${item.slug}`} className="text-xs border-r-2 md:border-none pr-1 md:pr-0 hover:text-gray-400 font-medium">
-                        {item.category_name}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            )}
-
-          </div>
-
-          <div>
-            <h5 className="font-bold mb-3 text-base uppercase">Container</h5>
-            {loading?(
-              <ul>
-              {Array.from({ length: 7 }).map((_, index) => (
-                <li key={index}>
-                  <Skeleton height={15} width={"100%"} />
-                </li>
-              ))}
-            </ul>
-            ):(
-              <ul className='flex flex-wrap gap-2 md:block'>
-                {Array.isArray(container) &&
-                  container.map((item) => (
-                    <li key={item.id} className="mb-2">
-                      <Link to={`../${item.slug}`} className="text-xs border-r-2 md:border-none pr-1 hover:text-gray-400 font-medium">
-                        {item.category_name}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            )}
-          </div>
-
-        </div> */}
-
-
+      <div className="footer_down max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">       
         <hr className='my-3' />
 
         <div className='flex-col flex justify-center text-sm md:justify-between items-center md:flex-row'>

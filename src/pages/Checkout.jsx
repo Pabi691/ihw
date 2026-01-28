@@ -50,7 +50,6 @@ const Checkout = () => {
   const discount = location.state?.discount;
   const couponCode = location.state?.couponCode;
 
-
   useEffect(() => {
     const uservarified = localStorage.getItem('uservarified');
     if (uservarified && uservarified === 'null') {
@@ -114,7 +113,6 @@ const Checkout = () => {
     }
   }, [token, navigate, fetchCart, fetchShippingAddresses]);
 
-
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
     setShippingDetails(address);
@@ -162,7 +160,7 @@ const Checkout = () => {
 
 
   // const handleSubmit = async () => {
-  //   const delhiveryToken = '376d684856fe7b99af6f0e2cb10c3710c690b3aa';
+  //   const delhiveryToken = '2123405d6ed233bc235200c24e2ad215f816f1ff'; // this token for ihw
   //   setIsLoading(true);
 
   //   const orderPayload = {
@@ -345,7 +343,7 @@ const Checkout = () => {
   const initiateRazorpayPayment = (orderId, amount) => {
     const options = {
       // key: "rzp_test_RxOgC9sPpereLC",
-      key: "rzp_test_asasasa",
+      key: "rzp_live_KeivW5UKhTBEPL",
       amount: amount * 100,
       currency: "INR",
       name: "Indian Hair World",

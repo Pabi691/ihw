@@ -4,13 +4,13 @@ const IHWCardSection = () => {
   return (
     <section className="w-full py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
           {/* Image Card */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="">
             <img
               className="w-full h-full object-cover rounded-lg"
-              src="https://indianhairworld.com/wp-content/themes/kapee/assets/images/sec2-img.jpg"
+              src="images/sec2-img.jpg"
               alt="Hair services"
             />
           </div>
@@ -20,7 +20,7 @@ const IHWCardSection = () => {
             <div className="bg-white shadow-md rounded-lg p-6 mb-4">
               <img
                 className="w-12 mx-auto mb-3"
-                src="https://indianhairworld.com/wp-content/themes/kapee/assets/images/male-short-hair-wig-shape (1).png"
+                src="images/male-short-hair-wig-shape.png"
                 alt="Monofilament patches"
               />
               <h4 className="text-lg font-semibold mb-2">
@@ -45,7 +45,7 @@ const IHWCardSection = () => {
             <div className="bg-white shadow-md rounded-lg p-6 mb-4">
               <img
                 className="w-14 mx-auto mb-3"
-                src="https://indianhairworld.com/wp-content/themes/kapee/assets/images/lace-patches-removebg-preview.png"
+                src="images/lace-patches-removebg-preview.png"
                 alt="Front lace patches"
               />
               <h4 className="text-lg font-semibold mb-2">
@@ -70,7 +70,7 @@ const IHWCardSection = () => {
             <div className="bg-white shadow-md rounded-lg p-6">
               <img
                 className="w-14 mx-auto mb-3"
-                src="https://indianhairworld.com/wp-content/themes/kapee/assets/images/clipboard-test-tube-svgrepo-com.png"
+                src="images/clipboard-test-tube-svgrepo-com.png"
                 alt="Different methods"
               />
               <h4 className="text-lg font-semibold mb-2">

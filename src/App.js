@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-import 'swiper/swiper-bundle.css';
-import 'swiper/css/navigation';
 import 'slick-carousel/slick/slick.css';  
 import 'slick-carousel/slick/slick-theme.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +10,8 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/mousewheel';
 import "swiper/css/pagination";
+import 'swiper/swiper-bundle.css';
+import 'swiper/css/navigation';
 
 import Home from './pages/Home';
 import Checkout from './pages/Checkout';
@@ -49,6 +49,7 @@ import AnswerPage from './components/contact/AnswerPage';
 import VarifyEmail from './components/user/VarifyEmail';
 import Services from './pages/Services';
 import Branches from './pages/Branches';
+import Gallery from './pages/Gallery';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
             <Route path="/terms-and-conditions" element={<TermsCondition />} />
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/contact-us" element={<Contact />} />
+            <Route path='/our-gallery' element={<Gallery />} />
             <Route path="/contact-us/page" element={<AnswerPage />} />
             <Route path="/return-policy" element={<ReturnPolicy />} />
             <Route path="/search" element={<SearchPage />} />

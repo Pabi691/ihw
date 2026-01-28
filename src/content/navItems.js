@@ -5,6 +5,7 @@ export const desktopNavItems = [
   { label: "Shop", path: "/shop" },
   { label: "About Us", path: "/about" },
   { label: "Services", path: "/services" },
+  { label: "Gallery", path: "/our-gallery" },
 
   {
     label: "Branches",

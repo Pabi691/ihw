@@ -1,11 +1,11 @@
 const ShopOnlineBanner = () => {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-white mt-100">
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-white rounded-lg overflow-hidden flex flex-col md:flex-row items-center gap-6">
 
           {/* TEXT SECTION */}
-          <div className="w-full md:w-1/2 text-gray-800 px-2 sm:px-4">
+          <div className="w-full md:w-1/2 text-gray-800 px-2 sm:px-4 mt-10 md:mt-0">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-2 dancing-text">
               Your Hair, Your Style –
             </h2>
