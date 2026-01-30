@@ -11,6 +11,7 @@ import { IoChevronDownSharp, IoChevronUpSharp } from "react-icons/io5";
 import { toast } from 'react-toastify';
 import compressImage from '../utils/compressImage';
 import { themeBgColor } from '../styles/typography';
+import { useGlobal } from '../global/GlobalContext';
 
 const messages = [
   { icon: <BiCycling />, text: "Yayy! You got free delivery" },
@@ -20,10 +21,10 @@ const messages = [
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('userToken');
   const [isLoading, setIsLoading] = useState(true);
   const [shippingValidate, setShippingValidate] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
+  const { cart, token, CGST, SGST, grandTotal, totalGST } = useGlobal();
   const [shippingAddresses, setShippingAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -63,26 +64,26 @@ const Checkout = () => {
   // // console.log('discount', discount);
   // // console.log('couponCode', couponCode);
 
-  const fetchCart = useCallback(async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/get_customer_cart`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const cartItems = response.data.cart_items || [];
+  // const fetchCart = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/get_customer_cart`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //     const cartItems = response.data.cart_items || [];
 
-      if (response.data.status && cartItems.length > 0) {
-        setCartItems(cartItems);
-      } else {
-        navigate('/');
-      }
+  //     if (response.data.status && cartItems.length > 0) {
+  //       setCartItems(cartItems);
+  //     } else {
+  //       navigate('/');
+  //     }
 
-    } catch (error) {
-      console.error('Error fetching cart:', error.message);
-      navigate('/');
-    } finally {
-      setIsLoading(false);
-    }
-  }, [token, navigate]);
+  //   } catch (error) {
+  //     console.error('Error fetching cart:', error.message);
+  //     navigate('/');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, [token, navigate]);
 
   const fetchShippingAddresses = useCallback(async () => {
     try {
@@ -108,10 +109,10 @@ const Checkout = () => {
     if (!token) {
       navigate('/login');
     } else {
-      fetchCart();
+      // fetchCart();
       fetchShippingAddresses();
     }
-  }, [token, navigate, fetchCart, fetchShippingAddresses]);
+  }, [token, navigate, fetchShippingAddresses]);
 
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
@@ -124,20 +125,20 @@ const Checkout = () => {
   // };
 
   const calculateSummary = () => {
-    const totalMRP = cartItems.reduce(
+    const totalMRP = cart.reduce(
       (acc, item) => acc + item.regular_price * item.quantity,
       0
     );
-    const subtotal = cartItems.reduce(
+    const subtotal = cart.reduce(
       (acc, item) => acc + item.sale_price * item.quantity,
       0
     );
     const finalAmount = location.state?.finalAmount;
-    const newSubtotal = finalAmount ? finalAmount : subtotal;
-    return { totalMRP, newSubtotal, savings: totalMRP - newSubtotal };
+    const newSubtotal = finalAmount ? finalAmount : grandTotal;
+    return { totalMRP, subtotal, newSubtotal, savings: (newSubtotal < totalMRP ?  (totalMRP - grandTotal) : 'N/A') };
   };
 
-  const { totalMRP, savings, newSubtotal } = calculateSummary();
+  const { totalMRP, savings, subtotal, newSubtotal } = calculateSummary();
   useEffect(() => {
     if(!token) return;
     const payment = async () => {
@@ -245,8 +246,11 @@ const Checkout = () => {
     const shippingId = shippingDetails.id;
     const isCOD = activeTab !== "razorpay";
 
+    // send total without gst
+    const NoGstPrice = newSubtotal - totalGST
+
     const orderPayload = {
-      order_items: cartItems.map((item) => ({
+      order_items: cart.map((item) => ({
         product_id: item.product_id,
         prod_variation_id: item.prod_variation_id,
         product_name: item.prod_name,
@@ -258,22 +262,23 @@ const Checkout = () => {
       // pay_method_id:,
       pay_method_id: activeTab === 'cod' ? paymentMethods[0].id : paymentMethods[1].id,
       shipping_address: shippingId,
-      bill_amt: Number(updatedSubtotal),
+      bill_amt: Number(updatedSubtotal) - totalGST,
       discount_amt: discount ? Number(discount) : 0, // newSubtotal + discount = updatedSubtotal
       coupon_code: couponCode,
-      net_amt: newSubtotal,
+      net_amt: NoGstPrice,
       shipping_total: isCOD ? 20 : 0,
       r_off: roundOff,
-      pay_amt: roundOff < 0.5 ? (isCOD ? (newSubtotal - roundOff + 20) : (newSubtotal - roundOff)) :
-        (isCOD ? (newSubtotal - roundOff + 1 + 20) : (newSubtotal - roundOff + 1)),
+      pay_amt: roundOff < 0.5 ? (isCOD ? (NoGstPrice - roundOff + 20) : (NoGstPrice - roundOff)) :
+        (isCOD ? (NoGstPrice - roundOff + 1 + 20) : (NoGstPrice - roundOff + 1)),
     };
 
     try {
       const orderResponse = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/create_order`, orderPayload, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log('orderPayload', orderPayload);
 
-      // console.log('orderResponse', orderResponse);
+      console.log('orderResponse', orderResponse);
       // 376d684856fe7b99af6f0e2cb10c3710c690b3aa
       if (!shippingId) {
         setShippingValidate(true);
@@ -294,6 +299,7 @@ const Checkout = () => {
       if (!isCOD) {
         initiateRazorpayPayment(orderResponse.data.order_id, newSubtotal);
       } else {
+        console.log('test');
         const paymentResponse = await axios.post(
           `${process.env.REACT_APP_API_URL}/api/v1/add_order_payment`,
           {
@@ -309,6 +315,8 @@ const Checkout = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
+
+        console.log('paymentResponse'. paymentResponse);
 
         if (paymentResponse.data.status) {
           Swal.fire({
@@ -633,7 +641,7 @@ const Checkout = () => {
                 </div>
                 {isItemsOpen && (
                   <div className="mt-2 p-4">
-                    {cartItems.map((item, index) => (
+                    {cart.map((item, index) => (
                       <div key={index} className="flex items-center mb-4">
                         {(item.custom_products[0].front_img_url && item.custom_products[0].back_img_url) === null ? (
                           <Link to={`/product/${item.slug ? item.slug : item.product.slug}`}>
@@ -664,11 +672,35 @@ const Checkout = () => {
               {/* Order Summary */}
               <div className="mb-6 p-4 border rounded-lg">
                 <h4 className='font-medium'>Order Summary</h4>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500 font-medium text-sm'>Total MRP (Incl. of GST):</span>
-                  <span className='text-base'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(totalMRP)}</span>
+                <div className='flex justify-between items-center mb-2'>
+                  <span className='text-gray-500 font-medium text-sm'>Total MRP :</span>
+                  <span className='text-gray-600 text-sm'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(totalMRP)}</span>
                 </div>
-                <div className='text-gray-500 font-medium text-sm flex justify-between items-center my-3'>Bag Discount: <span className='text-green-600 text-base'> -{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(savings)}</span></div>
+
+                <div className='flex justify-between items-center mb-2'>
+                  <span className='text-gray-500 font-medium text-sm'>Price :</span>
+                  <span className='text-base'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(subtotal)}</span>
+                </div>
+
+                {/* <div className='flex justify-between items-center mb-2'>
+                  <span className='text-gray-500 font-medium text-sm'>Total MRP :</span>
+                  <span className='text-base'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(totalMRP)}</span>
+                </div> */}
+
+                <div className='flex justify-between items-center'>
+                  <span className='text-gray-500 font-medium text-sm'>CGST ( 9% ) :</span>
+                  <span className='text-gray-600 text-sm'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(CGST)}</span>
+                </div>
+
+                <div className='flex justify-between items-center'>
+                  <span className='text-gray-500 font-medium text-sm'>SGST ( 9% ) :</span>
+                  <span className='text-gray-600 text-sm'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(SGST)}</span>
+                </div>
+                <div className='text-gray-500 font-medium text-sm flex justify-between items-center my-3'>Bag Discount: 
+                  {Number.isFinite(savings) ?
+                  <span className='text-green-600 text-sm'> -{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(savings)}</span>
+                  : '' }
+                  </div>
                 <div className='text-gray-500 font-medium text-sm flex justify-between items-center'>{activeTab === 'cod' ? 'COD Fee:' : 'Delivery Fee:'} <span className='text-green-600'>{activeTab === 'cod' ? '+20' : 'Free'}</span></div>
                 <hr className='my-3' />
                 {!discount ? (

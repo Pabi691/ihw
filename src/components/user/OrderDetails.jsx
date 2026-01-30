@@ -9,6 +9,7 @@ import Skeleton from 'react-loading-skeleton';
 import BankDetails from './BankDetails';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { themeBgColor, themeTextColor } from '../../styles/typography';
+import DownloadInvoiceButton from '../DownloadInvoiceButton';
 
 const OrderDetails = () => {
   const { orderId } = useParams();
@@ -31,7 +32,7 @@ const OrderDetails = () => {
           },
         });
         if (response.data.status) {
-          // console.log('order details:', response.data);
+          console.log('order details:', response.data);
           setOrder(response.data.order);
           setTrackingId(response.data.order.allotment_vehicle[0]?.ref_no);
         }
@@ -239,8 +240,18 @@ const OrderDetails = () => {
                       {/* Summary Section (Always Visible) */}
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-lg font-semibold">₹{order.pay_amt.toFixed(2)}</p>
+                          {/* <p className="text-lg font-semibold">₹{order.pay_amt.toFixed(2)}</p> */}
                           <p className="text-xs text-gray-500">Total Price</p>
+                          <p className="text-xs text-gray-500">
+                            GST @ {order.gst_summary.gst_rate}%  
+                            (CGST {order.gst_summary.cgst} + SGST {order.gst_summary.sgst})
+                          </p>
+
+                          <div className="flex justify-between font-semibold">
+                            <span>Total (incl. GST)</span>
+                            <span>₹{order.shipping_total ? (order.gst_summary.total_with_gst + order.shipping_total) : order.gst_summary.total_with_gst}</span>
+                          </div>
+
                         </div>
                         <div className="text-right">
                           {order.order_payments?.[0]?.payment_status === "completed" ? (
@@ -270,27 +281,51 @@ const OrderDetails = () => {
                       {showBreakup && (
                         <div className="space-y-2 transition-all duration-300">
                           <hr className="my-3" />
+                          {/* orders items */}
+                          {order.order_items.map((item) => (
+                            <div key={item.id} className="p-4 rounded-lg border border-gray-300 my-3 flex justify-between">
+                              <p className="text-gray-700 font-medium text-sm mb-2">{item.product_name}</p>
+                              <p className="text-gray-700 font-medium text-sm mb-2">Price: ₹{item.price} × {item.quantity}</p>
+                              <p className="text-gray-700 font-semibold text-sm mb-2">
+                                Total: ₹{item.total_price}
+                              </p>
+                            </div>
+                          ))}
+                          <hr className="my-3" />
                           <div className="flex justify-between">
-                            <span>Cart Total</span>
+                            <span>Total Price</span>
                             <span>₹{order.net_amt.toFixed(2)}</span>
+                          </div>
+
+                          <div className="flex justify-between">
+                            <span>CGST ( 9% ) :</span>
+                            <span>₹{order.gst_summary.cgst}</span>
+                          </div>
+
+                          <div className="flex justify-between">
+                            <span>SGST ( 9% ) :</span>
+                            <span>₹{order.gst_summary.sgst}</span>
+                          </div>
+                          
+                          <div className="flex justify-between">
+                            <span>COD Fee</span>
+                            <span>₹{order.shipping_total.toFixed(2)}</span>
                           </div>
                           <div className="flex justify-between">
                             <span>Delivery Fee</span>
                             <span className="text-green-600 font-medium">FREE</span>
                           </div>
-                          <div className="flex justify-between">
-                            <span>COD Fee</span>
-                            <span>₹{order.shipping_total.toFixed(2)}</span>
-                          </div>
                           <hr className="my-3" />
                           <div className="flex justify-between font-semibold text-base">
                             <span>Total to be paid</span>
-                            <span>₹{order.pay_amt.toFixed(2)}</span>
+                            <span>₹{order.payable_amount.toFixed(2)}</span>
                           </div>
                         </div>
                       )}
                     </div>
                   )}
+
+                  <DownloadInvoiceButton order={order} />
 
                 </div>
               </div>

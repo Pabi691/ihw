@@ -50,6 +50,7 @@ import VarifyEmail from './components/user/VarifyEmail';
 import Services from './pages/Services';
 import Branches from './pages/Branches';
 import Gallery from './pages/Gallery';
+import ShippingDeliveryPolicy from './pages/ShippingDeliveryPolicy';
 
 
 function App() {
@@ -65,12 +66,13 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path='/services' element={<Services />} />
             <Route path='/branch/:branch' element={<Branches />} />
-            <Route path="/terms-and-conditions" element={<TermsCondition />} />
+            <Route path="/terms-conditions" element={<TermsCondition />} />
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path='/our-gallery' element={<Gallery />} />
             <Route path="/contact-us/page" element={<AnswerPage />} />
-            <Route path="/return-policy" element={<ReturnPolicy />} />
+            <Route path="/return-exchange-policy" element={<ReturnPolicy />} />
+            <Route path='/shipping-and-delivery' element={<ShippingDeliveryPolicy />} />
             <Route path="/search" element={<SearchPage />} />
             
             <Route path="/login" element={<Login />} />
@@ -80,11 +82,11 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/u/profile" element={<Profile />} />
+            <Route path="/u/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/myaccount" element={<ProtectedRoute><Profile section="Overview" /></ProtectedRoute>} />
             <Route path="/myaccount/orders" element={<ProtectedRoute><Profile section="My Orders" /></ProtectedRoute>} />
-            <Route path="/myaccount/order/:orderId" element={<OrderDetails />} />
-            <Route path="/myaccount/return/:orderId" element={<Return />} />
+            <Route path="/myaccount/order/:orderId" element={<ProtectedRoute><OrderDetails /></ProtectedRoute>} />
+            <Route path="/myaccount/return/:orderId" element={<ProtectedRoute><Return /></ProtectedRoute>} />
             <Route path="/myaccount/payments" element={<ProtectedRoute><Profile section="My Payments" /></ProtectedRoute>} />
             <Route path="/myaccount/addresses" element={<ProtectedRoute><Profile section="My Addresses" /></ProtectedRoute>} />
             <Route path="/myaccount/profile" element={<ProtectedRoute><Profile section="My Profile" /></ProtectedRoute>} />

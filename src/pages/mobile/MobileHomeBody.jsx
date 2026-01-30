@@ -9,6 +9,7 @@ import AchievementsSlider from '../../components/home/AchievementsSlider';
 import NonSurgicalHairReplacement from '../../components/home/NonSurgicalHairReplacement';
 import ServiceSlider from '../../components/services/ServiceSlider';
 import WhoWeAre from '../../components/home/WhoWeAre';
+import SingleSlider from '../../components/SingleSlider';
 
 const MobileHomeBody = () => {
   
@@ -26,10 +27,12 @@ const MobileHomeBody = () => {
         }
       />
 
+      <SingleSlider slug_name="get_slug_data/men" title="MEN’S HAIR PRODUCTS" />
+      <SingleSlider slug_name="get_slug_data/women" title="WOMEN’S HAIR PRODUCTS" />
+
       <AchievementsSlider />
       <NonSurgicalHairReplacement />
       <ServiceSlider />
-
       <WhoWeAre />
 
       <div className='ms-2 remove_nav'><AllCatMobile slug="men" /></div>

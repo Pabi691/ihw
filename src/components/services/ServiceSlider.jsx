@@ -10,7 +10,11 @@ const ServiceSlider = () => {
   return (
     <div className="pt-3 max-w-7xl mx-auto px-2">
       <div className="my-4 md:my-8">
-        <h4 className={strokedHeading}>Our <span>Services</span></h4>
+        <h4 className={`${strokedHeading} mb-0`}>OUR POPULAR <span>SERVICES</span></h4>
+        <p className='text-center w-3/5 m-auto'>
+          We specialize in providing the best non-surgical hair replacement solutions such as natural wigs, hair
+          wigs, male hair wigs, female hair wigs, etc. under one roof.
+        </p>
       </div>
 
       <Swiper
@@ -27,31 +31,31 @@ const ServiceSlider = () => {
       >
         {serviceData.length === 0
           ? [...Array(4)].map((_, idx) => (
-              <SwiperSlide key={`skeleton-${idx}`}>
-                <Skeleton width={250} height={300} />
-                <Skeleton width={250} height={80} />
-              </SwiperSlide>
-            ))
+            <SwiperSlide key={`skeleton-${idx}`}>
+              <Skeleton width={250} height={300} />
+              <Skeleton width={250} height={80} />
+            </SwiperSlide>
+          ))
           : serviceData.map((service, index) => (
-              <SwiperSlide key={index}>
-                <div className="bg-white relative h-[250px] md:h-[300px] rounded-sm">
-                  <Link to={service.btnLink}>
-                    <img
-                      src={service.imgSrc}
-                      alt={service.service_name}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover rounded-sm"
-                    />
-                  </Link>
+            <SwiperSlide key={index}>
+              <div className="bg-white relative h-[250px] md:h-[300px] rounded-sm">
+                <Link to={service.btnLink}>
+                  <img
+                    src={service.imgSrc}
+                    alt={service.service_name}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover rounded-sm"
+                  />
+                </Link>
 
-                  <div className="absolute bottom-0 w-full bg-white p-3">
-                    <h4 className="font-semibold text-gray-600">
-                      {service.service_name}
-                    </h4>
-                  </div>
+                <div className="absolute bottom-0 w-full bg-white p-3">
+                  <h4 className="font-semibold text-gray-600">
+                    {service.service_name}
+                  </h4>
                 </div>
-              </SwiperSlide>
-            ))}
+              </div>
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

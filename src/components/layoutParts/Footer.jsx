@@ -9,9 +9,10 @@ const Footer = () => {
   const links = [
     { labelCompany: 'About Us', pathCompany: '/about', labelService: 'Contact Us', pathService: '/contact-us' },
     { labelService: 'Track Order', pathService: '/myaccount/orders' },
-    { labelCompany: 'Terms & Conditions', pathCompany: '/terms-and-conditions', labelService: 'Return Order', pathService: '/myaccount/orders' },
+    { labelCompany: 'Terms & Conditions', pathCompany: '/terms-conditions', labelService: 'Return Order', pathService: '/myaccount/orders' },
     { labelCompany: 'Privacy Policy', pathCompany: '/privacy-policy', labelService: 'Cancel Order', pathService: '/myaccount/orders' },
-    { labelCompany: 'Return/Refund Policy', pathCompany: '/return-policy' }
+    { labelCompany: 'Return & Exchange Policy', pathCompany: '/return-exchange-policy' },
+    { labelCompany: 'Shipping & Delivery', pathCompany: '/shipping-and-delivery' },
   ];
 
 

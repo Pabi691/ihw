@@ -3,11 +3,11 @@ const axios = require('axios');
 const webToken = process.env.REACT_APP_WEB_TOKEN;
 
 const API_URL = "https://server.indianhairworld.com/api/v1/get_data_for_dashboard";
-const BASE_URL = "https://localhost:3000";
+const BASE_URL = "https://ihw.kyleinfotech.co.in";
 
 const staticRoutes = [
-  "/", 
-  "/shop", 
+  "/",
+  "/shop",
   "/about",
   "/contact-us",
 ];

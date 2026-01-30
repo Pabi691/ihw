@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -7,10 +8,13 @@ import "swiper/css/navigation";
 // import { Link } from "react-router-dom";
 import { ImageService } from "../content/image-service";
 import { toast } from "react-toastify";
+import { branchData } from "../content/branchData";
 
 const HeroSection = () => {
   const [bannerImages, setBannerImages] = useState([]);
   // const [imageLoading, setImageLoading] = useState(false);
+  const {branch} = useParams();
+  const branchDetails = branchData[branch];
 
   const fetchBannerImages = useCallback(async () => {
     // setImageLoading(true);
@@ -43,17 +47,15 @@ const HeroSection = () => {
 
                 <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
                   BEST HAIR PATCH
-                </h1>
-                <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
+                  <br />
                   AND HAIR WIG
-                </h1>
-                <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-                  IN KOLKATA
+                  <br />
+                  IN {branchDetails? branchDetails.name : 'KOLKATA'}
                 </h1>
 
                 <p className="text-gray-600 text-base md:text-lg">
                   Transform Your Look with the Best Hair Patch and <br />
-                  Hair Wig in Kolkata
+                  Hair Wig in {branchDetails? branchDetails.name : 'Kolkata'}
                 </p>
 
                 <h5 className="text-xl md:text-2xl font-semibold text-black">

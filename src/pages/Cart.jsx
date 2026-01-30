@@ -13,7 +13,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [openCoupon, setOpenCoupon] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { cart, setCart, token, cartLength, totalMRP, subtotal, savings } = useGlobal();
+  const { cart, setCart, token, cartLength, totalMRP, subtotal, savings, CGST, SGST, totalGST, grandTotal } = useGlobal();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedQuantity, setSelectedQuantity] = useState(null);
   const [currentItem, setCurrentItem] = useState(null);
@@ -31,14 +31,14 @@ const Cart = () => {
 
   const getFinalAmount = () => {
     let discount = 0;
-    if (couponData && subtotal >= couponData.minimum_order_value) {
+    if (couponData && grandTotal >= couponData.minimum_order_value) {
       discount = couponData.discount_type === "Percentage"
-        ? (subtotal * couponData.discount_value) / 100
+        ? (grandTotal * couponData.discount_value) / 100
         : couponData.discount_value;
       discount = Math.min(discount, couponData.maximum_discount || discount); // Avoid NaN
     }
     return {
-      finalAmount: subtotal - discount,
+      finalAmount: grandTotal - discount,
       discount
     };
   }
@@ -220,10 +220,14 @@ const Cart = () => {
                       width={50}
                     />
                   ) : (
-                    <p className="border mb-3 p-3 rounded-lg flex gap-3 items-center font-medium">
-                      <img className='w-6' alt='percentage-image' loading="lazy" src='images/percentage.gif' />
-                      You are saving ₹{savings} on this order
-                    </p>
+                    <>
+                      {Number.isFinite(savings) ?
+
+                        <p className="border mb-3 p-3 rounded-lg flex gap-3 items-center font-medium">
+                          <img className='w-6' alt='percentage-image' loading="lazy" src='images/percentage.gif' />
+                          You are saving ₹ ${savings.toFixed(2)} on this order
+                        </p> : ''}
+                    </>
                   )}
                   {cart.map((item) => (
                     item ? (
@@ -269,7 +273,7 @@ const Cart = () => {
                               <p className="text-gray-600 text-sm">Size: {item.variation_name}</p>
                             )} */}
 
-                            <div className='absolute bottom-4 right-4 text-xs'>
+                            <div className='absolute bottom-14 md:bottom-4 right-4 text-xs'>
                               <div className="flex items-center gap-2 text-sm mb-1 md:my-2">
                                 {item.product_variation?.sale_price && item.product_variation?.regular_price ? (
                                   <>
@@ -278,7 +282,7 @@ const Cart = () => {
                                       ₹{item.product_variation.regular_price * item.quantity}
                                     </p>
                                     {item.product_variation.regular_price > item.product_variation.sale_price && (
-                                      <p className="text-green-800 font-medium">
+                                      <p className="text-green-800 font-medium text-xs">
                                         You saved ₹{(item.product_variation.regular_price - item.product_variation.sale_price) * item.quantity}
                                       </p>
                                     )}
@@ -309,7 +313,7 @@ const Cart = () => {
                                     Size: {item.product_variation?.size}
                                   </button>
                                 </div>
-                              ) : item.product_variations?.find((size) => size.id === item.prod_variation_id)? (
+                              ) : item.product_variations?.find((size) => size.id === item.prod_variation_id) ? (
                                 <div className="flex items-center">
                                   <button
                                     className="my-4 px-2 py-[2px] bg-gray-200 text-black text-[10px]"
@@ -317,7 +321,7 @@ const Cart = () => {
                                     Size: {item.product_variations?.find((size) => size.id === item.prod_variation_id)?.size}
                                   </button>
                                 </div>
-                              ): ''}
+                              ) : ''}
 
                               <div className="flex items-center">
                                 <span>{item.name}</span>
@@ -465,20 +469,32 @@ const Cart = () => {
                     <div className='p-3 rounded-lg border mt-3'>
                       <h3 className="text-sm font-semibold mb-4">PRICE SUMMARY</h3>
                       <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
-                        Total MRP (Incl. of taxes): <span>₹ {totalMRP.toFixed(2)}</span>
+                        Total MRP : <span>₹ {totalMRP.toFixed(2)}</span>
                       </p>
-                      <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">Bag Discount: <span className='text-green-400'>-₹ {savings.toFixed(2)}</span></p>
+                      <div className='flex justify-between items-center mb-2'>
+                        <span className='text-gray-500 font-medium text-sm'>Price :</span>
+                        <span className='text-base'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(subtotal)}</span>
+                      </div>
+                      <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
+                        CGST ( 9% ): <span>₹ {CGST}</span>
+                      </p>
+                      <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
+                        SGST ( 9% ): <span>₹ {SGST}</span>
+                      </p>
+                      {/* <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
+                        Total GST ( 18% ): <span>₹ {totalGST}</span>
+                      </p> */}
+                      <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">Bag Discount: <span className='text-green-400'>{Number.isFinite(savings) ? `-₹ ${savings.toFixed(2)}` : ''}</span></p>
                       <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">Delivery Fee: <span className='text-green-400'>Free</span></p>
                       <p className="font-medium border-dotted border-t text-black text-lg mt-2 flex justify-between my-3">Subtotal:
                         {discount > 0 ? (
                           <div className="text-green-400 text-right">
-                            <span className='text-gray-500 text-[11px] line-through sm:text-sm'>₹ {subtotal.toFixed(2)}</span> ₹ {(finalAmount).toFixed(2)}
+                            <span className='text-gray-500 text-[11px] line-through sm:text-sm'>₹ {grandTotal.toFixed(2)}</span> ₹ {(finalAmount).toFixed(2)}
                             {/* <span className='block text-xs text-gray-400'>Your coupon is applied (-₹ {discount.toFixed(2)})</span> */}
                           </div>
                         ) : (
-                          <span>₹ {subtotal.toFixed(2)}</span>
+                          <span>₹ {grandTotal}</span>
                         )}
-
                       </p>
                       <p className="mt-1 text-xs font-medium text-center">
                         Yayy! You get <span className='text-green-600 font-semibold'>FREE</span> delivery on this order
