@@ -33,20 +33,20 @@ const NavTop = () => {
 
   return (
     <>
-    <MetaData />
+    {/* <MetaData /> */}
       <header className="z-50 w-full sticky top-0">
         <div className="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex flex-wrap justify-between items-center bg-black md:bg-white">
           {/* Mobile Menu Button */}
-          <div className='md:hidden px-2 py-4 flex gap-3'>
+          <div className='md:hidden px-2 flex gap-3'>
             <button className="text-white text-lg" onClick={() => setShowMenu(!showMenu)}>
                 <svg className='text-[#ef7f1a]' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="#ef7f1a" viewBox="0 0 20 20" stroke="none" style={{height: '20px', width: '20px'}}><g stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" clipPath="url(#icon_hamburger_svg__a)"><path d="M2.917 10.046h10.231M2.917 3.75h14.166M2.917 16.343h14.166"></path></g><defs><clipPath id="icon_hamburger_svg__a"><path fill="#fff" d="M0 0h20v20H0z"></path></clipPath></defs></svg>
             </button>
             <span
-              className="text-gray-300 ml-0 md:ml-4 text-lg w-[60px] md:w-[165px] md:h-[25px] overflow-hidden"
+              className="text-gray-300 ml-0 md:ml-4 text-lg w-[100px] md:w-[165px] md:h-[25px] overflow-hidden"
               onClick={() => { window.location.href = process.env.PUBLIC_URL || '/'; }}
             >
               <img
-                src={`${process.env.PUBLIC_URL || ''}/logo.png`}
+                src={`${process.env.PUBLIC_URL || ''}/logo-white.png`}
                 alt="Logo"
                 className="w-full object-cover"
               />
@@ -151,6 +151,8 @@ const NavTop = () => {
                   )}
                 <p className='font-semibold'>Our Services</p>
                 <Link className='text-xs font-medium' to={'/services'}>- Services</Link>
+                <p className='font-semibold'>Our Work</p>
+                <Link className='text-xs font-medium' to={'/our-gallery'}>- Gallery</Link>
                 <p className='font-semibold'>Branches</p>
                 <Link onClick={()=> setShowMenu(false)} className='text-xs font-medium' to={'/branch/kolkata'}>- Lake Gardens, Kolkata</Link>
                 <Link onClick={()=> setShowMenu(false)} className='text-xs font-medium' to={'/branch/salt-lake'}>- Salt lake, Kolkata</Link>

@@ -1,6 +1,7 @@
 import React from 'react';
 import MainLayOut from '../layout/MainLayOut';
 import { DesktopNav } from '../components/Navigation';
+import { Link } from 'react-router-dom';
 
 const TermsCondition = () => {
   return (
@@ -231,7 +232,7 @@ const TermsCondition = () => {
 
             <p>
               Your submission of personal information through the store is governed by our
-              Privacy Policy, which can be viewed here: [LINK TO PRIVACY POLICY]
+              <Link to="/privacy-policy">Privacy Policy</Link>, which can be viewed here:
             </p>
           </section>
 
@@ -400,6 +401,12 @@ const TermsCondition = () => {
               <p className="font-semibold">Durgapur</p>
               <p>City Center, Durgapur, WB 713216</p>
               <p>📞 +91 9875517402 / +91 8910652352</p>
+            </div>
+
+            <div className="mt-4">
+              <p className="font-semibold">Siliguri</p>
+              <p>City Center, Siliguri, WB 734001</p>
+              <p>📞 +91 7439436698</p>
             </div>
           </section>
         </div>

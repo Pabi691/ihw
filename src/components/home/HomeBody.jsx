@@ -9,6 +9,7 @@ import WhoWeAre from './WhoWeAre';
 import ServiceSlider from '../services/ServiceSlider';
 import NonSurgicalHairReplacement from './NonSurgicalHairReplacement';
 import AchievementsSlider from './AchievementsSlider';
+import OurWorks from './OurWorks';
 
 const HomeBody = () => {
   return (
@@ -34,10 +35,10 @@ const HomeBody = () => {
       {/* <SingleSlider slug_name="get_slug_data/hanging-planter" price_filter="699" title="HANGING PLANTER Under Rs 699" /> */}
 
       {/* <SingleSlider slug_name="get_active_products" discountPercentage="10" title="under 10% off" /> */}
-      <AchievementsSlider />
-      <NonSurgicalHairReplacement />
       <ServiceSlider />
-
+      <NonSurgicalHairReplacement />
+      <AchievementsSlider />
+      <OurWorks />
       <WhoWeAre />
 
     </>

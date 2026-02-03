@@ -9,7 +9,6 @@ import Slider from 'react-slick';
 import DeliveryEstimate from '../DeliveryEstimate';
 import Zoom from "react-medium-image-zoom";
 import Skeleton from 'react-loading-skeleton';
-import { Bell } from 'lucide-react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ReviewRatingComments from '../ReviewRatingComments';
 import axios from 'axios';
@@ -17,9 +16,7 @@ import RecentlyViewed from '../RecentlyViewed';
 import { FaBolt } from 'react-icons/fa6';
 import WishlistButton from '../WishlistButton';
 import confetti from 'canvas-confetti';
-import MetaData from '../../layout/MetaData';
 import compressImage from '../../utils/compressImage';
-import MetaContentConfig from '../../content/MetaContentConfig';
 import { hoverScale, themeBgColor, themeBgDark, themeBgGray, themeTextColor } from '../../styles/typography';
 
 function ProductDetailsAll() {
@@ -177,24 +174,6 @@ function ProductDetailsAll() {
 
   return (
     <>
-      {product?.seo_metadata ? (
-        <MetaData
-          title={(product.seo_metadata?.meta_title !== "" ? product.seo_metadata?.meta_title : `${product?.prod_name} | Indian Hair World`) || MetaContentConfig.default.title}
-          description={(product.seo_metadata?.meta_description !== '' ? product.seo_metadata?.meta_description : product?.prod_desc) || MetaContentConfig.default.description}
-          keywords={(product.seo_metadata?.meta_keywords !== '' ? product.seo_metadata?.meta_keywords : product?.product_tag) || MetaContentConfig.default.keywords}
-          image={(product.seo_metadata?.og_image !== '' ? product.seo_metadata?.og_image : product?.primary_img) || MetaContentConfig.default.image}
-          url={(product.seo_metadata?.og_url !== '' ? product.seo_metadata?.og_url : MetaContentConfig.default.url)}
-        />
-      ) : (
-        <MetaData
-          title={`${product?.prod_name} | Indian Hair World` || MetaContentConfig.default.title}
-          description={product?.prod_desc}
-          keywords={product?.product_tag}
-          image={product?.primary_img}
-          url={`https://indianhairworld.com/product/${product?.slug}`}
-        />
-      )}
-
       {(!product) ? (
         <>
           <Skeleton

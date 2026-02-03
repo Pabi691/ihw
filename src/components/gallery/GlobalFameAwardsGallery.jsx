@@ -2,15 +2,15 @@ import React from 'react';
 
 const images = [
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/06/ga-img1.jpg',
+    src: '/images/ga-img1.jpg',
     alt: 'World Global Fame Awards 2024 Image 1',
   },
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/06/ga-img2.jpg',
+    src: '/images/ga-img2.jpg',
     alt: 'World Global Fame Awards 2024 Image 2',
   },
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/06/ga-img7.jpg',
+    src: '/images/ga-img7.jpg',
     alt: 'World Global Fame Awards 2024 Image 3',
   },
 ];

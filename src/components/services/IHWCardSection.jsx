@@ -10,7 +10,7 @@ const IHWCardSection = () => {
           <div className="">
             <img
               className="w-full h-full object-cover rounded-lg"
-              src="images/sec2-img.jpg"
+              src="/images/sec2-img.jpg"
               alt="Hair services"
             />
           </div>
@@ -20,7 +20,7 @@ const IHWCardSection = () => {
             <div className="bg-white shadow-md rounded-lg p-6 mb-4">
               <img
                 className="w-12 mx-auto mb-3"
-                src="images/male-short-hair-wig-shape.png"
+                src="/images/male-short-hair-wig-shape.png"
                 alt="Monofilament patches"
               />
               <h4 className="text-lg font-semibold mb-2">
@@ -45,7 +45,7 @@ const IHWCardSection = () => {
             <div className="bg-white shadow-md rounded-lg p-6 mb-4">
               <img
                 className="w-14 mx-auto mb-3"
-                src="images/lace-patches-removebg-preview.png"
+                src="/images/lace-patches-removebg-preview.png"
                 alt="Front lace patches"
               />
               <h4 className="text-lg font-semibold mb-2">
@@ -70,7 +70,7 @@ const IHWCardSection = () => {
             <div className="bg-white shadow-md rounded-lg p-6">
               <img
                 className="w-14 mx-auto mb-3"
-                src="images/clipboard-test-tube-svgrepo-com.png"
+                src="/images/clipboard-test-tube-svgrepo-com.png"
                 alt="Different methods"
               />
               <h4 className="text-lg font-semibold mb-2">

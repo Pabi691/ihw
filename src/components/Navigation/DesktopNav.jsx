@@ -19,13 +19,13 @@ const DesktopNav = () => {
               {/* Dropdown */}
               <div className="absolute top-full left-0 hidden group-hover:block bg-white shadow-lg border rounded-md min-w-[220px] z-50">
                 {item.children.map((child) => (
-                  <Link
+                  <a
                     key={child.path}
-                    to={child.path}
+                    href={child.path}
                     className="block px-4 py-2 text-sm hover:bg-gray-100"
                   >
                     {child.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
@@ -34,13 +34,13 @@ const DesktopNav = () => {
 
         // NORMAL LINK
         return (
-          <Link
+          <a
             key={item.path}
-            to={item.path}
+            href={item.path}
             className="flex items-center flex-col"
           >
             <span>{item.label}</span>
-          </Link>
+          </a>
         );
       })}
     </div>

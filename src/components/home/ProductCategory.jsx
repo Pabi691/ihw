@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
 import compressImage from "../../utils/compressImage";
 import { cacheManager } from "../../utils/cacheManager";
 import { CategoryService } from "../../content/category-service";
@@ -19,12 +22,10 @@ function ProductCategory({ title }) {
       const cached = cacheManager.get("categories");
       if (cached) {
         setCategories(cached);
-        setLoading(false);
         return;
       }
 
       const response = await CategoryService.getAll();
-
       if (response.status === 200 && response.data?.category_list) {
         const list = Array.isArray(response.data.category_list)
           ? response.data.category_list
@@ -51,54 +52,62 @@ function ProductCategory({ title }) {
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
 
-        {/* Heading */}
-        <h2
-          className={strokedHeading}
-        >
-          {title}
-        </h2>
+        <h2 className={strokedHeading}>{title}</h2>
 
         {error && <p className="text-center text-red-500">{error}</p>}
 
-        {/* Carousel */}
-        <div className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4">
-
+        {/* Swiper */}
+        <Swiper
+          loop
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          spaceBetween={24}
+          modules={[Autoplay]}
+          breakpoints={{
+            360: { slidesPerView: 1.2 },
+            640: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+          }}
+        >
           {loading &&
             Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="min-w-[260px] h-[380px] rounded-lg overflow-hidden"
-              >
+              <SwiperSlide key={i}>
                 <Skeleton height={380} />
-              </div>
+              </SwiperSlide>
             ))}
 
           {!loading &&
             categories.map((cat) => (
-              <Link
-                to={`/${cat.slug}`}
-                key={cat.id}
-                className="group relative min-w-[260px] h-[380px]
-                overflow-hidden rounded-lg shadow-lg snap-start"
-              >
-                {/* Image */}
-                <img
-                  src={compressImage(cat.cat_img, 600, 75, "webp")}
-                  alt={cat.category_name}
-                  className="w-full h-full object-cover
-                  transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
+              <SwiperSlide key={cat.id}>
+                <Link
+                  to={`/${cat.slug}`}
+                  className="group relative block h-[380px] overflow-hidden rounded-lg shadow-lg"
+                >
+                  {/* Image */}
+                  <img
+                    src={compressImage(cat.cat_img, 600, 75, "webp")}
+                    alt={cat.category_name}
+                    loading="lazy"
+                    className="
+                      w-full h-full object-cover
+                      transition-transform duration-700 ease-out
+                      group-hover:scale-[1.3]
+                    "
+                  />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/30 flex items-end justify-center">
-                  <h3 className="mb-6 text-lg font-bold uppercase tracking-wide bg-white/90 px-4 py-2 rounded text-gray-800">
-                    {cat.category_name}
-                  </h3>
-                </div>
-              </Link>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/30 flex items-end justify-center">
+                    <h3 className="mb-6 text-lg font-bold uppercase tracking-wide bg-white/90 px-4 py-2 rounded text-gray-800">
+                      {cat.category_name}
+                    </h3>
+                  </div>
+                </Link>
+              </SwiperSlide>
             ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );

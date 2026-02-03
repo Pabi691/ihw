@@ -4,8 +4,8 @@ const MetaContentConfig = {
       title: "Indian Hair World - Quality Hair Products Online",
       description: "Shop high-quality hair products at Indian Hair World. Explore our wide range of hair care essentials and accessories.",
       keywords: "hair products, hair care, Indian Hair World, online shopping",
-      image: "https://localhost:3000/default.jpg",
-      url: "https://localhost:3000",
+      image: "https://www.indianhairworld.com/logo.png",
+      url: "https://www.indianhairworld.com/",
     },
     about: {
       title: "About Us - Indian Hair World",

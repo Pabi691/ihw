@@ -6,19 +6,19 @@ import 'swiper/css';
 
 const images = [
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/07/our-work-img4.jpg',
+    src: '/images/our-work-img4.jpg',
     alt: 'Hair Weaving Services in Kolkata',
   },
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/07/our-work-img2.jpg',
+    src: '/images/our-work-img2.jpg',
     alt: 'Best Hair Replacement Service Kolkata',
   },
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/07/our-work-img1.jpg',
+    src: '/images/our-work-img1.jpg',
     alt: 'Hair Weaving Services in Salt Lake',
   },
   {
-    src: 'https://indianhairworld.com/wp-content/uploads/2024/07/our-work-img3.jpg',
+    src: '/images/our-work-img3.jpg',
     alt: 'Best Hair Patch Service in Kolkata',
   },
 ];

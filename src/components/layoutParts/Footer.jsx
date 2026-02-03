@@ -3,8 +3,10 @@ import { FaFacebook, FaInstagram, FaPinterest } from 'react-icons/fa';
 import { FaLinkedinIn, FaThreads, FaYoutube } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { branchData } from '../../content/branchData';
+import useGlobalContent from '../../hooks/useGlobalContent';
 
 const Footer = () => {
+  const { globalContentData } = useGlobalContent();
 
   const links = [
     { labelCompany: 'About Us', pathCompany: '/about', labelService: 'Contact Us', pathService: '/contact-us' },
@@ -158,6 +160,12 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div
+        dangerouslySetInnerHTML={{
+            __html: globalContentData?.footer || "",
+        }}
+        />
+       
     </footer>
   );
 };

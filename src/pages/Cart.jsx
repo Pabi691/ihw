@@ -225,7 +225,7 @@ const Cart = () => {
 
                         <p className="border mb-3 p-3 rounded-lg flex gap-3 items-center font-medium">
                           <img className='w-6' alt='percentage-image' loading="lazy" src='images/percentage.gif' />
-                          You are saving ₹ ${savings.toFixed(2)} on this order
+                          You are saving ₹{savings.toFixed(2)} on this order
                         </p> : ''}
                     </>
                   )}
@@ -476,10 +476,10 @@ const Cart = () => {
                         <span className='text-base'>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(subtotal)}</span>
                       </div>
                       <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
-                        CGST ( 9% ): <span>₹ {CGST}</span>
+                        CGST ( 9% ): <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(CGST)}</span>
                       </p>
                       <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
-                        SGST ( 9% ): <span>₹ {SGST}</span>
+                        SGST ( 9% ): <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(SGST)}</span>
                       </p>
                       {/* <p className="text-gray-600 text-sm mb-3 flex justify-between font-medium">
                         Total GST ( 18% ): <span>₹ {totalGST}</span>

@@ -13,8 +13,6 @@ const Branches = () => {
                 <DesktopNav />
                 <HeroSection />
                 <BranchContent />
-                <SingleSlider slug_name="get_slug_data/men" title="MEN’S HAIR PRODUCTS" />
-                <SingleSlider slug_name="get_slug_data/women" title="WOMEN’S HAIR PRODUCTS" />
             </MainLayOut>
         </>
     )

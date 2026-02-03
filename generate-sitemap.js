@@ -3,12 +3,22 @@ const axios = require('axios');
 const webToken = process.env.REACT_APP_WEB_TOKEN;
 
 const API_URL = "https://server.indianhairworld.com/api/v1/get_data_for_dashboard";
-const BASE_URL = "https://ihw.kyleinfotech.co.in";
+const BASE_URL = "https://www.indianhairworld.com";
 
 const staticRoutes = [
   "/",
   "/shop",
   "/about",
+  "/services",
+  "/our-gallery",
+  "/branch/kolkata",
+  "/branch/salt-lake",
+  "/branch/durgapur",
+  "/branch/siliguri",
+  "/terms-conditions",
+  "/privacy-policy",
+  "/return-exchange-policy",
+  "/shipping-and-delivery",
   "/contact-us",
 ];
 
@@ -25,7 +35,6 @@ const fetchDashboardData = async () => {
     return {};
   }
 };
-
 
 const generateSitemap = async () => {
   const data = await fetchDashboardData();

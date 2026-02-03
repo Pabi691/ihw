@@ -19,7 +19,7 @@ const TimesBrandIcons2024 = () => {
           className="block overflow-hidden rounded-md"
         >
           <img
-            src="https://indianhairworld.com/wp-content/uploads/2025/05/timesiconimage-min-1-scaled.jpg"
+            src="/images/timesiconimage-min-1-scaled.jpg"
             alt="Times Brand Icons 2024 Award"
             loading="lazy"
             className="w-full h-auto transition-transform duration-300 hover:scale-105"

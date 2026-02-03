@@ -51,12 +51,15 @@ import Services from './pages/Services';
 import Branches from './pages/Branches';
 import Gallery from './pages/Gallery';
 import ShippingDeliveryPolicy from './pages/ShippingDeliveryPolicy';
-
+import GlobalSeo from './global/GlobalSeo';
+import FloatingContact from './components/FloatingContact';
 
 function App() {
     return (
       <LoadingProvider>
         <AuthProvider>
+        <GlobalSeo />
+        <FloatingContact />
         <Loader />
         <LoadingWrapper>
         <ScrollToTop />

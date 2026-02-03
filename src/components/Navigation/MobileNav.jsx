@@ -8,7 +8,7 @@ const MobileNav = () => {
     <div className="overflow-scroll scrollbar-none md:hidden">
       <div className="justify-start px-4 py-2 flex items-baseline gap-4 w-[1000px]">
         {mobileNavItems.map((item) => (
-          <Link key={item.path} to={item.path} className="text-center">
+          <Link key={item.path} to={item.path} reloadDocument className="text-center">
             {item.image && (
               <img
                 src={item.image}
